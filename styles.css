@@ -87,15 +87,14 @@ p {
   top: 66px;
   width: 218px;
   height: 158px;
-  border-radius: 0 88px 88px 0;
-  background: var(--accent);
+  display: block;
 }
 
 .hero-logo__portrait {
   position: absolute;
   left: 0;
   top: 0;
-  width: 200px;
+  width: 218px;
   height: 224px;
   overflow: hidden;
 }
@@ -205,7 +204,6 @@ p {
     top: 45px;
     width: 150px;
     height: 109px;
-    border-radius: 0 64px 64px 0;
   }
 
   .hero-logo__portrait {
