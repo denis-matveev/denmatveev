@@ -8,3 +8,13 @@
 - Prioritize readability, accessibility, and responsive layout.
 - Avoid unnecessary animations.
 - Use semantic HTML.
+
+# Typography rules
+
+- Use Google Fonts only for typography.
+- Primary font: Karla
+- Secondary font: Climate Crisis
+- Load fonts from Google Fonts, not from local files.
+- Do not substitute fonts unless explicitly asked.
+- Match the Figma typography scale as closely as possible.
+- Expose font families through CSS variables.

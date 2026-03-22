@@ -13,6 +13,8 @@
   --radius-lg: 18px;
   --radius-md: 12px;
   --max-width: 1100px;
+  --font-sans: "Karla";
+  --font-display: "Climate Crisis";
 }
 
 * {
@@ -31,7 +33,7 @@ body {
     radial-gradient(circle at top right, rgba(24, 40, 16, 0.06), transparent 22%),
     var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
 }
 
@@ -123,6 +125,7 @@ a {
 .button {
   background: var(--accent);
   color: white;
+  font-family: var(--font-sans);
 }
 
 .button.secondary,
@@ -130,6 +133,7 @@ a {
   background: var(--surface-strong);
   color: var(--accent);
   border-color: var(--border);
+  font-family: var(--font-sans);
 }
 
 .button:hover,
@@ -255,11 +259,13 @@ h1 {
 
 .hero-portfolio__title {
   margin: 0;
-  font-size: clamp(3rem, 8vw, 5.35rem);
-  line-height: 0.92;
-  letter-spacing: -0.07em;
+  font-size: 64px;
+  letter-spacing: 0em;
+  line-height: 1.1;
   color: var(--accent);
-  font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-variation-settings: "YEAR" 1979;
   text-transform: none;
 }
 
@@ -273,9 +279,11 @@ h1 {
 
 .hero-portfolio__lede {
   max-width: 760px;
-  font-size: clamp(1.55rem, 3vw, 2rem);
-  line-height: 1.16;
+  font-size: 32px;
+  line-height: normal;
   color: var(--text);
+  font-family: var(--font-sans);
+  font-weight: 400;
 }
 
 .hero-action {
@@ -283,9 +291,10 @@ h1 {
   min-height: 48px;
   border-radius: 8px;
   border-color: rgba(24, 40, 16, 0.2);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  font-family: var(--font-sans);
 }
 
 .hero-action svg {
@@ -448,7 +457,7 @@ h1 {
   }
 
   .hero-portfolio__title {
-    font-size: clamp(2.7rem, 10vw, 4rem);
+    font-size: 48px;
   }
 
   .hero-portfolio__title span {
@@ -460,8 +469,8 @@ h1 {
   }
 
   .hero-portfolio__lede {
-    font-size: clamp(1.2rem, 5vw, 1.75rem);
-    max-width: 13ch;
+    font-size: 28px;
+    max-width: 100%;
   }
 
   .site-header {
@@ -485,7 +494,7 @@ h1 {
   }
 
   .hero-action {
-    font-size: 1rem;
+    font-size: 24px;
     min-height: 42px;
     padding: 8px 16px;
   }
