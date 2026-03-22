@@ -6,7 +6,7 @@
     <title>Denis Matveev | Portfolio</title>
     <meta
       name="description"
-      content="Static portfolio site for Denis Matveev with selected work, case studies, about, and contact pages."
+      content="Static portfolio homepage for Denis Matveev."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,9 +15,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script>
   </head>
-  <body data-page="home">
+  <body>
     <div class="site-shell">
       <main class="home-main">
         <section class="hero hero-portfolio">
@@ -36,11 +35,11 @@
               </h1>
               <p class="hero-portfolio__lede">
                 Product &amp; UX/UI Designer with 10+ years of experience designing mobile and web
-                products. I turn raw ideas, and messy prototypes into clear, usable,
+                products. I turn raw ideas and messy prototypes into clear, usable,
                 production-ready interfaces.
               </p>
               <div class="actions hero-portfolio__actions">
-                <a class="button-link hero-action" href="work.html">
+                <span class="button-link hero-action" aria-disabled="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"
@@ -60,8 +59,8 @@
                     />
                   </svg>
                   <span>Resume</span>
-                </a>
-                <a class="button-link hero-action" href="contact.html">
+                </span>
+                <a class="button-link hero-action" href="mailto:denis@example.com">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9Z"
