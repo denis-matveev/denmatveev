@@ -146,6 +146,14 @@ p {
   margin-top: 0;
 }
 
+.hero-portfolio__notice {
+  color: rgba(24, 40, 16, 0.8);
+  font-family: var(--font-sans);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .button-link {
   display: inline-flex;
   align-items: center;
@@ -182,6 +190,13 @@ p {
   width: 24px;
   height: 24px;
   flex: 0 0 24px;
+}
+
+.hero-action__icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: block;
 }
 
 @media (max-width: 900px) {
@@ -222,6 +237,10 @@ p {
   .hero-portfolio__lede {
     font-size: 28px;
     max-width: 100%;
+  }
+
+  .hero-portfolio__notice {
+    font-size: 20px;
   }
 }
 
