@@ -90,9 +90,7 @@ test.describe('homepage assets and accessibility', () => {
 
     const expectedResources = [
       '/styles.css',
-      '/assets/hero-back.svg',
       '/assets/portrait.png',
-      '/assets/behance.svg',
     ].map((assetPath) => new URL(assetPath, baseUrl).href);
 
     for (const resourceUrl of expectedResources) {
@@ -123,7 +121,22 @@ test.describe('homepage assets and accessibility', () => {
       await expect(contact).toBeFocused();
     }
 
-    await expect(page.locator('img[alt=""]')).toHaveCount(3);
+    await expect(page.locator('img[alt=""]')).toHaveCount(1);
+    await expect(page.locator('.hero-logo__mark')).toHaveCount(1);
+    await expect(page.locator('svg.hero-logo__mark')).toHaveCount(1);
+
+    const heroMark = page.locator('.hero-logo__mark');
+    await expect
+      .poll(async () =>
+        heroMark.evaluate((element) => ({
+          tagName: element.tagName,
+          color: window.getComputedStyle(element).color,
+        })),
+      )
+      .toEqual({
+        tagName: 'svg',
+        color: 'rgb(52, 110, 23)',
+      });
 
     const axeResults = await new AxeBuilder({ page }).analyze();
     expect(axeResults.violations).toEqual([]);

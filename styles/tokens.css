@@ -58,17 +58,17 @@
   --figma-type-action-line: 1;
 
   --figma-color-page-light: var(--color-stone-100);
-  --figma-color-page-dark: var(--color-green-700);
+  --figma-color-page-dark: #2b2924;
   --figma-color-text-primary-light: var(--color-green-700);
-  --figma-color-text-primary-dark: var(--color-stone-100);
-  --figma-color-text-secondary-light: rgba(24, 40, 16, 0.8);
-  --figma-color-text-secondary-dark: rgba(233, 232, 230, 0.8);
+  --figma-color-text-primary-dark: var(--color-white);
+  --figma-color-text-secondary-light: #44513e;
+  --figma-color-text-secondary-dark: var(--color-stone-100);
   --figma-color-accent-text-light: var(--color-green-600);
-  --figma-color-accent-text-dark: var(--color-green-600);
+  --figma-color-accent-text-dark: var(--color-green-500);
   --figma-color-accent-fill-light: var(--color-green-600);
   --figma-color-accent-fill-dark: var(--color-green-500);
-  --figma-color-secondary-border-light: rgba(24, 40, 16, 0.2);
-  --figma-color-secondary-border-dark: rgba(233, 232, 230, 0.28);
+  --figma-color-secondary-border-light: #c9ccc7;
+  --figma-color-secondary-border-dark: #44513e;
   --figma-color-secondary-bg-light: rgba(255, 255, 255, 0);
   --figma-color-secondary-bg-dark: rgba(255, 255, 255, 0);
   --figma-color-secondary-text-light: var(--color-green-600);
@@ -124,6 +124,7 @@
   --space-button-block: var(--space-8);
   --space-button-gap: var(--space-8);
   --size-action-icon: var(--space-24);
+  --size-action-icon-brand: var(--size-action-icon);
 }
 
 @media (max-width: 900px) {

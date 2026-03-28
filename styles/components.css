@@ -44,6 +44,19 @@
   transform: translateY(var(--offset-logo-mark-y));
   position: relative;
   z-index: 0;
+  /* Hero backdrop must always be token-driven so light/dark modes stay in sync with Figma. */
+  color: var(--surface-accent);
+}
+
+.hero-logo__mark path {
+  fill: currentColor;
+}
+
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .hero-logo__portrait {
@@ -120,6 +133,7 @@
   border-radius: var(--radius-8);
   background: var(--button-secondary-bg);
   color: var(--button-secondary-text);
+  --button-icon-color: var(--button-secondary-icon);
   font-family: var(--type-action-family);
   font-size: var(--type-action-size);
   font-weight: var(--type-action-weight);
@@ -131,9 +145,13 @@
     color 0.2s ease;
 }
 
-.button-link svg,
-.button-link img {
-  color: var(--button-secondary-icon);
+.button-link .ui-icon {
+  color: var(--button-icon-color);
+}
+
+.button-link .ui-icon--behance path {
+  fill: currentColor;
+  stroke: none;
 }
 
 .button-link:not([aria-disabled="true"]):hover,
@@ -157,17 +175,22 @@
   border-radius: var(--radius-8);
 }
 
-.hero-action svg {
-  width: var(--size-action-icon);
-  height: var(--size-action-icon);
-  flex: 0 0 var(--size-action-icon);
-}
-
-.hero-action__icon {
+.ui-icon {
   width: var(--size-action-icon);
   height: var(--size-action-icon);
   flex: 0 0 var(--size-action-icon);
   display: block;
+  color: inherit;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.ui-icon--behance {
+  --ui-icon-behance-size: var(--size-action-icon-brand);
+  width: var(--ui-icon-behance-size);
+  height: var(--ui-icon-behance-size);
+  flex-basis: var(--ui-icon-behance-size);
+  stroke: none;
 }
 
 @media (max-width: 900px) {
