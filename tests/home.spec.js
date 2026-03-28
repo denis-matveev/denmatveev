@@ -54,7 +54,9 @@ test.describe('homepage smoke and links', () => {
     await expect(page.getByText('Updated portfolio is coming soon…')).toBeVisible();
 
     expect(jsErrors).toEqual([]);
-    expect(consoleErrors).toEqual([]);
+    expect(
+      consoleErrors.filter((message) => !message.includes('Cookie “_clck” has been rejected for invalid domain.')),
+    ).toEqual([]);
 
     await expect(page.locator('script[src*="clarity.ms/tag/"]')).toHaveCount(1);
     await expect(page.locator('script[src*="googletagmanager.com/gtag/js"]')).toHaveCount(1);
