@@ -80,88 +80,98 @@
   },
   "styles": {
     "hero": {
-      "family": "var(--font-family-display)",
+      "family": "var(--typography-font-family-display)",
       "size": {
-        "desktop": "var(--font-size-hero-desktop)",
-        "mobile": "var(--font-size-hero-mobile)"
+        "desktop": "var(--typography-font-size-hero)",
+        "mobile": "var(--typography-font-size-hero)"
       },
-      "weight": "var(--font-weight-light)",
+      "weight": "var(--typography-font-weight-light)",
       "line-height": {
-        "desktop": "var(--font-line-hero-desktop)",
-        "mobile": "var(--font-line-hero-mobile)"
+        "desktop": "var(--typography-font-line-hero)",
+        "mobile": "var(--typography-font-line-hero)"
       },
-      "color": "var(--text-accent)"
+      "color": "var(--color-semantics-text-accent)"
     },
     "title": {
-      "family": "var(--font-family-text)",
+      "family": "var(--typography-font-family-text)",
       "size": {
-        "desktop": "var(--font-size-title-desktop)",
-        "mobile": "var(--font-size-title-mobile)"
+        "desktop": "var(--typography-font-size-title)",
+        "mobile": "var(--typography-font-size-title)"
       },
-      "weight": "var(--font-weight-light)",
+      "weight": "var(--typography-font-weight-light)",
       "line-height": {
-        "desktop": "var(--font-line-title-desktop)",
-        "mobile": "var(--font-line-title-mobile)"
+        "desktop": "var(--typography-font-line-title)",
+        "mobile": "var(--typography-font-line-title)"
       },
-      "color": "var(--text-primary)"
+      "color": "var(--color-semantics-text-primary)"
     },
     "body-lg": {
-      "family": "var(--font-family-text)",
-      "size": "var(--font-size-body-lg)",
-      "weight": "var(--font-weight-light)",
-      "line-height": "var(--font-line-body-lg)",
-      "color": "var(--text-secondary)"
+      "family": "var(--typography-font-family-text)",
+      "size": "var(--typography-font-size-body-lg)",
+      "weight": "var(--typography-font-weight-light)",
+      "line-height": "var(--typography-font-line-body-lg)",
+      "color": "var(--color-semantics-text-secondary)"
     },
     "button": {
-      "family": "var(--font-family-text)",
-      "size": "var(--font-size-button)",
-      "weight": "var(--font-weight-medium)",
-      "line-height": "var(--font-line-button)",
-      "color": "var(--text-secondary)"
+      "family": "var(--typography-font-family-text)",
+      "size": "var(--typography-font-size-button)",
+      "weight": "var(--typography-font-weight-medium)",
+      "line-height": "var(--typography-font-line-button)",
+      "color": "var(--color-semantics-text-secondary)"
     }
   },
   "themes": {
     "light": {
-      "bg-page": "var(--color-beige-50)",
-      "bg-accent": "var(--color-green-700)",
+      "bg-page": "var(--color-primitives-beige-50)",
+      "bg-accent": "var(--color-primitives-green-700)",
       "bg-transparent": "transparent",
-      "text-primary": "var(--color-neutral-900)",
-      "text-secondary": "var(--color-neutral-700)",
-      "text-accent": "var(--color-green-700)",
-      "text-on-accent": "var(--color-neutral-0)",
-      "border-default": "var(--color-neutral-200)",
-      "border-accent": "var(--color-green-700)",
-      "icon-primary": "var(--color-neutral-900)",
-      "icon-secondary": "var(--color-neutral-700)",
-      "icon-accent": "var(--color-green-700)",
-      "icon-on-accent": "var(--color-neutral-0)",
-      "button-secondary-text": "var(--text-accent)",
-      "button-secondary-icon": "var(--icon-accent)",
-      "button-secondary-border": "var(--border-default)",
-      "button-secondary-bg": "var(--bg-transparent)",
-      "button-secondary-hover": "var(--color-neutral-0)",
-      "button-secondary-pressed": "var(--color-green-100)"
+      "text-primary": "var(--color-primitives-neutral-900)",
+      "text-secondary": "var(--color-primitives-neutral-700)",
+      "text-accent": "var(--color-primitives-green-700)",
+      "text-on-accent": "var(--color-primitives-neutral-0)",
+      "border-default": "var(--color-primitives-neutral-200)",
+      "border-accent": "var(--color-primitives-green-700)",
+      "icon-primary": "var(--color-primitives-neutral-900)",
+      "icon-secondary": "var(--color-primitives-neutral-700)",
+      "icon-accent": "var(--color-primitives-green-700)",
+      "icon-on-accent": "var(--color-primitives-neutral-0)"
     },
     "dark": {
-      "bg-page": "var(--color-beige-900)",
-      "bg-accent": "var(--color-green-200)",
+      "bg-page": "var(--color-primitives-beige-900)",
+      "bg-accent": "var(--color-primitives-green-200)",
       "bg-transparent": "transparent",
-      "text-primary": "var(--color-neutral-0)",
-      "text-secondary": "var(--color-neutral-50)",
-      "text-accent": "var(--color-green-200)",
-      "text-on-accent": "var(--color-neutral-900)",
-      "border-default": "var(--color-neutral-700)",
-      "border-accent": "var(--color-green-200)",
-      "icon-primary": "var(--color-neutral-0)",
-      "icon-secondary": "var(--color-neutral-50)",
-      "icon-accent": "var(--color-green-200)",
-      "icon-on-accent": "var(--color-neutral-0)",
-      "button-secondary-text": "var(--text-accent)",
-      "button-secondary-icon": "var(--icon-accent)",
-      "button-secondary-border": "var(--border-default)",
-      "button-secondary-bg": "var(--bg-transparent)",
-      "button-secondary-hover": "var(--color-neutral-0)",
-      "button-secondary-pressed": "var(--color-green-100)"
+      "text-primary": "var(--color-primitives-neutral-0)",
+      "text-secondary": "var(--color-primitives-neutral-50)",
+      "text-accent": "var(--color-primitives-green-200)",
+      "text-on-accent": "var(--color-primitives-neutral-900)",
+      "border-default": "var(--color-primitives-neutral-700)",
+      "border-accent": "var(--color-primitives-green-200)",
+      "icon-primary": "var(--color-primitives-neutral-0)",
+      "icon-secondary": "var(--color-primitives-neutral-50)",
+      "icon-accent": "var(--color-primitives-green-200)",
+      "icon-on-accent": "var(--color-primitives-neutral-0)"
+    }
+  },
+  "buttons": {
+    "light": {
+      "secondary": {
+        "text": "var(--color-semantics-text-accent)",
+        "icon": "var(--color-semantics-icon-accent)",
+        "border": "var(--color-semantics-border-default)",
+        "bg": "var(--color-semantics-bg-transparent)",
+        "bg-hover": "var(--color-primitives-neutral-0)",
+        "bg-pressed": "var(--color-primitives-green-100)"
+      }
+    },
+    "dark": {
+      "secondary": {
+        "text": "var(--color-semantics-text-accent)",
+        "icon": "var(--color-semantics-icon-accent)",
+        "border": "var(--color-semantics-border-default)",
+        "bg": "var(--color-semantics-bg-transparent)",
+        "bg-hover": "var(--color-primitives-neutral-0)",
+        "bg-pressed": "var(--color-primitives-green-100)"
+      }
     }
   }
 }

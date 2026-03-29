@@ -62,17 +62,14 @@ test.describe('figma token sync', () => {
     const declaredVars = [...new Set(allBlocks.flatMap((block) => Object.keys(block)))]
       .filter(
         (name) =>
-          name.startsWith('--color-') ||
-          name.startsWith('--font-') ||
-          name.startsWith('--style-') ||
-          name.startsWith('--bg-') ||
-          name.startsWith('--text-') ||
-          name.startsWith('--border-') ||
-          name.startsWith('--icon-') ||
-          name.startsWith('--button-secondary-') ||
-          name.startsWith('--space-') ||
-          name.startsWith('--radius-') ||
-          name.startsWith('--size-'),
+          name.startsWith('--color-primitives-') ||
+          name.startsWith('--color-semantics-') ||
+          name.startsWith('--buttons-') ||
+          name.startsWith('--typography-font-') ||
+          name.startsWith('--typography-styles-') ||
+          name.startsWith('--sizes-space-') ||
+          name.startsWith('--sizes-radius-') ||
+          name.startsWith('--sizes-size-'),
       )
       .sort();
 

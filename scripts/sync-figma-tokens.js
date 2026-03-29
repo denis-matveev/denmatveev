@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { mkdirSync, readFileSync, writeFileSync } = require('node:fs');
-const { resolve, dirname } = require('node:path');
+const { dirname, resolve } = require('node:path');
 
 const rootDir = process.cwd();
 const sourcePath = resolve(rootDir, 'design/figma-tokens.source.json');
@@ -10,6 +10,11 @@ const themeCssPath = resolve(rootDir, 'styles/theme.css');
 const fixturePath = resolve(rootDir, 'tests/fixtures/figma-tokens.json');
 
 const source = JSON.parse(readFileSync(sourcePath, 'utf8'));
+
+function writeFile(filePath, contents) {
+  mkdirSync(dirname(filePath), { recursive: true });
+  writeFileSync(filePath, contents);
+}
 
 function linesToCssBlock(selector, lines) {
   return `${selector} {\n${lines.map((line) => (line ? `  ${line}` : '')).join('\n')}\n}\n`;
@@ -23,84 +28,75 @@ function indentBlock(block, prefix) {
     .join('\n');
 }
 
-function mapEntries(object, toLine) {
-  return Object.entries(object).map(([key, value]) => toLine(key, value));
-}
-
-function writeFile(filePath, contents) {
-  mkdirSync(dirname(filePath), { recursive: true });
-  writeFileSync(filePath, contents);
+function tokenName(collection, group, name) {
+  return `--${collection}-${group}-${name}`;
 }
 
 function buildTokensCss(data) {
   const rootLines = [
-    ...mapEntries(data.space, (key, value) => `--space-${key}: ${value};`),
+    ...Object.entries(data.space).map(([name, value]) => `${tokenName('sizes', 'space', name)}: ${value};`),
     '',
-    ...mapEntries(data.radius, (key, value) => `--radius-${key}: ${value};`),
+    ...Object.entries(data.radius).map(([name, value]) => `${tokenName('sizes', 'radius', name)}: ${value};`),
     '',
-    `--size-max-content: ${data.size['max-content']};`,
-    `--size-max-page: ${data.size['max-page']};`,
-    `--size-logo-width: ${data.size['logo-width'].desktop};`,
-    `--size-logo-mark-width: ${data.size['logo-mark-width'].desktop};`,
-    `--size-logo-mark-height: ${data.size['logo-mark-height'].desktop};`,
-    `--size-button-min-height: ${data.size['button-min-height']};`,
-    `--size-action-icon: ${data.size['action-icon']};`,
-    `--size-action-icon-brand: ${data.size['action-icon-brand']};`,
+    `${tokenName('sizes', 'size', 'max-content')}: ${data.size['max-content']};`,
+    `${tokenName('sizes', 'size', 'max-page')}: ${data.size['max-page']};`,
+    `${tokenName('sizes', 'size', 'logo-width')}: ${data.size['logo-width'].desktop};`,
+    `${tokenName('sizes', 'size', 'logo-mark-width')}: ${data.size['logo-mark-width'].desktop};`,
+    `${tokenName('sizes', 'size', 'logo-mark-height')}: ${data.size['logo-mark-height'].desktop};`,
+    `${tokenName('sizes', 'size', 'button-min-height')}: ${data.size['button-min-height']};`,
+    `${tokenName('sizes', 'size', 'action-icon')}: ${data.size['action-icon']};`,
+    `${tokenName('sizes', 'size', 'action-icon-brand')}: ${data.size['action-icon-brand']};`,
     '',
-    ...mapEntries(data.colors, (key, value) => `--color-${key}: ${value};`),
+    ...Object.entries(data.colors).map(([name, value]) => `${tokenName('color-primitives', name.split('-')[0], name.split('-').slice(1).join('-'))}: ${value};`),
     '',
-    `--font-family-display: ${data.fonts['family-display']};`,
-    `--font-family-text: ${data.fonts['family-text']};`,
-    `--font-size-hero-desktop: ${data.fonts['size-hero'].desktop};`,
-    `--font-size-hero-mobile: ${data.fonts['size-hero'].mobile};`,
-    `--font-size-title-desktop: ${data.fonts['size-title'].desktop};`,
-    `--font-size-title-mobile: ${data.fonts['size-title'].mobile};`,
-    `--font-size-body-lg: ${data.fonts['size-body-lg']};`,
-    `--font-size-button: ${data.fonts['size-button']};`,
-    `--font-line-hero-desktop: ${data.fonts['line-hero'].desktop};`,
-    `--font-line-hero-mobile: ${data.fonts['line-hero'].mobile};`,
-    `--font-line-title-desktop: ${data.fonts['line-title'].desktop};`,
-    `--font-line-title-mobile: ${data.fonts['line-title'].mobile};`,
-    `--font-line-body-lg: ${data.fonts['line-body-lg']};`,
-    `--font-line-button: ${data.fonts['line-button']};`,
-    `--font-weight-light: ${data.fonts['weight-light']};`,
-    `--font-weight-regular: ${data.fonts['weight-regular']};`,
-    `--font-weight-medium: ${data.fonts['weight-medium']};`,
+    `${tokenName('typography', 'font', 'family-display')}: ${data.fonts['family-display']};`,
+    `${tokenName('typography', 'font', 'family-text')}: ${data.fonts['family-text']};`,
+    `${tokenName('typography', 'font', 'size-hero')}: ${data.fonts['size-hero'].desktop};`,
+    `${tokenName('typography', 'font', 'size-title')}: ${data.fonts['size-title'].desktop};`,
+    `${tokenName('typography', 'font', 'size-body-lg')}: ${data.fonts['size-body-lg']};`,
+    `${tokenName('typography', 'font', 'size-button')}: ${data.fonts['size-button']};`,
+    `${tokenName('typography', 'font', 'line-hero')}: ${data.fonts['line-hero'].desktop};`,
+    `${tokenName('typography', 'font', 'line-title')}: ${data.fonts['line-title'].desktop};`,
+    `${tokenName('typography', 'font', 'line-body-lg')}: ${data.fonts['line-body-lg']};`,
+    `${tokenName('typography', 'font', 'line-button')}: ${data.fonts['line-button']};`,
+    `${tokenName('typography', 'font', 'weight-light')}: ${data.fonts['weight-light']};`,
+    `${tokenName('typography', 'font', 'weight-regular')}: ${data.fonts['weight-regular']};`,
+    `${tokenName('typography', 'font', 'weight-medium')}: ${data.fonts['weight-medium']};`,
     '',
-    `--style-hero-family: ${data.styles.hero.family};`,
-    `--style-hero-size: ${data.styles.hero.size.desktop};`,
-    `--style-hero-weight: ${data.styles.hero.weight};`,
-    `--style-hero-line-height: ${data.styles.hero['line-height'].desktop};`,
-    `--style-hero-color: ${data.styles.hero.color};`,
+    `${tokenName('typography', 'styles', 'hero-family')}: ${data.styles.hero.family};`,
+    `${tokenName('typography', 'styles', 'hero-size')}: ${data.styles.hero.size.desktop};`,
+    `${tokenName('typography', 'styles', 'hero-weight')}: ${data.styles.hero.weight};`,
+    `${tokenName('typography', 'styles', 'hero-line-height')}: ${data.styles.hero['line-height'].desktop};`,
+    `${tokenName('typography', 'styles', 'hero-color')}: ${data.styles.hero.color};`,
     '',
-    `--style-title-family: ${data.styles.title.family};`,
-    `--style-title-size: ${data.styles.title.size.desktop};`,
-    `--style-title-weight: ${data.styles.title.weight};`,
-    `--style-title-line-height: ${data.styles.title['line-height'].desktop};`,
-    `--style-title-color: ${data.styles.title.color};`,
+    `${tokenName('typography', 'styles', 'title-family')}: ${data.styles.title.family};`,
+    `${tokenName('typography', 'styles', 'title-size')}: ${data.styles.title.size.desktop};`,
+    `${tokenName('typography', 'styles', 'title-weight')}: ${data.styles.title.weight};`,
+    `${tokenName('typography', 'styles', 'title-line-height')}: ${data.styles.title['line-height'].desktop};`,
+    `${tokenName('typography', 'styles', 'title-color')}: ${data.styles.title.color};`,
     '',
-    `--style-body-lg-family: ${data.styles['body-lg'].family};`,
-    `--style-body-lg-size: ${data.styles['body-lg'].size};`,
-    `--style-body-lg-weight: ${data.styles['body-lg'].weight};`,
-    `--style-body-lg-line-height: ${data.styles['body-lg']['line-height']};`,
-    `--style-body-lg-color: ${data.styles['body-lg'].color};`,
+    `${tokenName('typography', 'styles', 'body-lg-family')}: ${data.styles['body-lg'].family};`,
+    `${tokenName('typography', 'styles', 'body-lg-size')}: ${data.styles['body-lg'].size};`,
+    `${tokenName('typography', 'styles', 'body-lg-weight')}: ${data.styles['body-lg'].weight};`,
+    `${tokenName('typography', 'styles', 'body-lg-line-height')}: ${data.styles['body-lg']['line-height']};`,
+    `${tokenName('typography', 'styles', 'body-lg-color')}: ${data.styles['body-lg'].color};`,
     '',
-    `--style-button-family: ${data.styles.button.family};`,
-    `--style-button-size: ${data.styles.button.size};`,
-    `--style-button-weight: ${data.styles.button.weight};`,
-    `--style-button-line-height: ${data.styles.button['line-height']};`,
-    `--style-button-color: ${data.styles.button.color};`,
+    `${tokenName('typography', 'styles', 'button-family')}: ${data.styles.button.family};`,
+    `${tokenName('typography', 'styles', 'button-size')}: ${data.styles.button.size};`,
+    `${tokenName('typography', 'styles', 'button-weight')}: ${data.styles.button.weight};`,
+    `${tokenName('typography', 'styles', 'button-line-height')}: ${data.styles.button['line-height']};`,
+    `${tokenName('typography', 'styles', 'button-color')}: ${data.styles.button.color};`,
   ];
 
   const mobileLines = [
-    `--size-logo-width: ${data.size['logo-width'].mobile};`,
-    `--size-logo-mark-width: ${data.size['logo-mark-width'].mobile};`,
-    `--size-logo-mark-height: ${data.size['logo-mark-height'].mobile};`,
+    `${tokenName('sizes', 'size', 'logo-width')}: ${data.size['logo-width'].mobile};`,
+    `${tokenName('sizes', 'size', 'logo-mark-width')}: ${data.size['logo-mark-width'].mobile};`,
+    `${tokenName('sizes', 'size', 'logo-mark-height')}: ${data.size['logo-mark-height'].mobile};`,
     '',
-    `--style-hero-size: ${data.styles.hero.size.mobile};`,
-    `--style-hero-line-height: ${data.styles.hero['line-height'].mobile};`,
-    `--style-title-size: ${data.styles.title.size.mobile};`,
-    `--style-title-line-height: ${data.styles.title['line-height'].mobile};`,
+    `${tokenName('typography', 'font', 'size-hero')}: ${data.fonts['size-hero'].mobile};`,
+    `${tokenName('typography', 'font', 'size-title')}: ${data.fonts['size-title'].mobile};`,
+    `${tokenName('typography', 'font', 'line-hero')}: ${data.fonts['line-hero'].mobile};`,
+    `${tokenName('typography', 'font', 'line-title')}: ${data.fonts['line-title'].mobile};`,
   ];
 
   return [
@@ -114,22 +110,39 @@ function buildTokensCss(data) {
 }
 
 function buildThemeCss(data) {
-  const lightLines = [
-    'color-scheme: light;',
-    '',
-    ...mapEntries(data.themes.light, (key, value) => `--${key}: ${value};`),
-  ];
+  const buildLines = (themeName) => {
+    const theme = data.themes[themeName];
+    const buttonTheme = data.buttons[themeName].secondary;
 
-  const darkLines = [
-    'color-scheme: dark;',
-    '',
-    ...mapEntries(data.themes.dark, (key, value) => `--${key}: ${value};`),
-  ];
+    return [
+      `color-scheme: ${themeName};`,
+      '',
+      `${tokenName('color-semantics', 'bg', 'page')}: ${theme['bg-page']};`,
+      `${tokenName('color-semantics', 'bg', 'accent')}: ${theme['bg-accent']};`,
+      `${tokenName('color-semantics', 'bg', 'transparent')}: ${theme['bg-transparent']};`,
+      `${tokenName('color-semantics', 'text', 'primary')}: ${theme['text-primary']};`,
+      `${tokenName('color-semantics', 'text', 'secondary')}: ${theme['text-secondary']};`,
+      `${tokenName('color-semantics', 'text', 'accent')}: ${theme['text-accent']};`,
+      `${tokenName('color-semantics', 'text', 'on-accent')}: ${theme['text-on-accent']};`,
+      `${tokenName('color-semantics', 'border', 'default')}: ${theme['border-default']};`,
+      `${tokenName('color-semantics', 'border', 'accent')}: ${theme['border-accent']};`,
+      `${tokenName('color-semantics', 'icon', 'primary')}: ${theme['icon-primary']};`,
+      `${tokenName('color-semantics', 'icon', 'secondary')}: ${theme['icon-secondary']};`,
+      `${tokenName('color-semantics', 'icon', 'accent')}: ${theme['icon-accent']};`,
+      `${tokenName('color-semantics', 'icon', 'on-accent')}: ${theme['icon-on-accent']};`,
+      `${tokenName('buttons', 'secondary', 'text')}: ${buttonTheme.text};`,
+      `${tokenName('buttons', 'secondary', 'icon')}: ${buttonTheme.icon};`,
+      `${tokenName('buttons', 'secondary', 'border')}: ${buttonTheme.border};`,
+      `${tokenName('buttons', 'secondary', 'bg')}: ${buttonTheme.bg};`,
+      `${tokenName('buttons', 'secondary', 'bg-hover')}: ${buttonTheme['bg-hover']};`,
+      `${tokenName('buttons', 'secondary', 'bg-pressed')}: ${buttonTheme['bg-pressed']};`,
+    ];
+  };
 
   return [
     '/* Auto-generated by scripts/sync-figma-tokens.js. Do not edit manually. */',
-    linesToCssBlock(':root,\n:root[data-theme="light"]', lightLines),
-    linesToCssBlock(':root[data-theme="dark"]', darkLines),
+    linesToCssBlock(':root,\n:root[data-theme="light"]', buildLines('light')),
+    linesToCssBlock(':root[data-theme="dark"]', buildLines('dark')),
   ].join('\n');
 }
 
@@ -140,107 +153,118 @@ function buildFixture(data) {
   const themeLight = {};
   const themeDark = {};
 
-  for (const [key, value] of Object.entries(data.space)) {
-    const name = `--space-${key}`;
-    declaredTokenVars.push(name);
-    tokensRoot[name] = value;
+  for (const [name, value] of Object.entries(data.space)) {
+    const token = tokenName('sizes', 'space', name);
+    declaredTokenVars.push(token);
+    tokensRoot[token] = value;
   }
 
-  for (const [key, value] of Object.entries(data.radius)) {
-    const name = `--radius-${key}`;
-    declaredTokenVars.push(name);
-    tokensRoot[name] = value;
+  for (const [name, value] of Object.entries(data.radius)) {
+    const token = tokenName('sizes', 'radius', name);
+    declaredTokenVars.push(token);
+    tokensRoot[token] = value;
   }
 
   const sizeRootMap = {
-    '--size-max-content': data.size['max-content'],
-    '--size-max-page': data.size['max-page'],
-    '--size-logo-width': data.size['logo-width'].desktop,
-    '--size-logo-mark-width': data.size['logo-mark-width'].desktop,
-    '--size-logo-mark-height': data.size['logo-mark-height'].desktop,
-    '--size-button-min-height': data.size['button-min-height'],
-    '--size-action-icon': data.size['action-icon'],
-    '--size-action-icon-brand': data.size['action-icon-brand'],
+    [tokenName('sizes', 'size', 'max-content')]: data.size['max-content'],
+    [tokenName('sizes', 'size', 'max-page')]: data.size['max-page'],
+    [tokenName('sizes', 'size', 'logo-width')]: data.size['logo-width'].desktop,
+    [tokenName('sizes', 'size', 'logo-mark-width')]: data.size['logo-mark-width'].desktop,
+    [tokenName('sizes', 'size', 'logo-mark-height')]: data.size['logo-mark-height'].desktop,
+    [tokenName('sizes', 'size', 'button-min-height')]: data.size['button-min-height'],
+    [tokenName('sizes', 'size', 'action-icon')]: data.size['action-icon'],
+    [tokenName('sizes', 'size', 'action-icon-brand')]: data.size['action-icon-brand'],
   };
-
   Object.assign(tokensRoot, sizeRootMap);
   declaredTokenVars.push(...Object.keys(sizeRootMap));
 
-  for (const key of Object.keys(data.colors)) {
-    const name = `--color-${key}`;
-    declaredTokenVars.push(name);
-    tokensRoot[name] = data.colors[key];
+  for (const [name, value] of Object.entries(data.colors)) {
+    const [group, ...rest] = name.split('-');
+    const token = tokenName('color-primitives', group, rest.join('-'));
+    declaredTokenVars.push(token);
+    tokensRoot[token] = value;
   }
 
   const fontMap = {
-    '--font-family-display': data.fonts['family-display'],
-    '--font-family-text': data.fonts['family-text'],
-    '--font-size-hero-desktop': data.fonts['size-hero'].desktop,
-    '--font-size-hero-mobile': data.fonts['size-hero'].mobile,
-    '--font-size-title-desktop': data.fonts['size-title'].desktop,
-    '--font-size-title-mobile': data.fonts['size-title'].mobile,
-    '--font-size-body-lg': data.fonts['size-body-lg'],
-    '--font-size-button': data.fonts['size-button'],
-    '--font-line-hero-desktop': data.fonts['line-hero'].desktop,
-    '--font-line-hero-mobile': data.fonts['line-hero'].mobile,
-    '--font-line-title-desktop': data.fonts['line-title'].desktop,
-    '--font-line-title-mobile': data.fonts['line-title'].mobile,
-    '--font-line-body-lg': data.fonts['line-body-lg'],
-    '--font-line-button': data.fonts['line-button'],
-    '--font-weight-light': data.fonts['weight-light'],
-    '--font-weight-regular': data.fonts['weight-regular'],
-    '--font-weight-medium': data.fonts['weight-medium'],
+    [tokenName('typography', 'font', 'family-display')]: data.fonts['family-display'],
+    [tokenName('typography', 'font', 'family-text')]: data.fonts['family-text'],
+    [tokenName('typography', 'font', 'size-hero')]: data.fonts['size-hero'].desktop,
+    [tokenName('typography', 'font', 'size-title')]: data.fonts['size-title'].desktop,
+    [tokenName('typography', 'font', 'size-body-lg')]: data.fonts['size-body-lg'],
+    [tokenName('typography', 'font', 'size-button')]: data.fonts['size-button'],
+    [tokenName('typography', 'font', 'line-hero')]: data.fonts['line-hero'].desktop,
+    [tokenName('typography', 'font', 'line-title')]: data.fonts['line-title'].desktop,
+    [tokenName('typography', 'font', 'line-body-lg')]: data.fonts['line-body-lg'],
+    [tokenName('typography', 'font', 'line-button')]: data.fonts['line-button'],
+    [tokenName('typography', 'font', 'weight-light')]: data.fonts['weight-light'],
+    [tokenName('typography', 'font', 'weight-regular')]: data.fonts['weight-regular'],
+    [tokenName('typography', 'font', 'weight-medium')]: data.fonts['weight-medium'],
   };
-
   Object.assign(tokensRoot, fontMap);
   declaredTokenVars.push(...Object.keys(fontMap));
 
-  const styleRootMap = {
-    '--style-hero-family': data.styles.hero.family,
-    '--style-hero-size': data.styles.hero.size.desktop,
-    '--style-hero-weight': data.styles.hero.weight,
-    '--style-hero-line-height': data.styles.hero['line-height'].desktop,
-    '--style-hero-color': data.styles.hero.color,
-    '--style-title-family': data.styles.title.family,
-    '--style-title-size': data.styles.title.size.desktop,
-    '--style-title-weight': data.styles.title.weight,
-    '--style-title-line-height': data.styles.title['line-height'].desktop,
-    '--style-title-color': data.styles.title.color,
-    '--style-body-lg-family': data.styles['body-lg'].family,
-    '--style-body-lg-size': data.styles['body-lg'].size,
-    '--style-body-lg-weight': data.styles['body-lg'].weight,
-    '--style-body-lg-line-height': data.styles['body-lg']['line-height'],
-    '--style-body-lg-color': data.styles['body-lg'].color,
-    '--style-button-family': data.styles.button.family,
-    '--style-button-size': data.styles.button.size,
-    '--style-button-weight': data.styles.button.weight,
-    '--style-button-line-height': data.styles.button['line-height'],
-    '--style-button-color': data.styles.button.color,
+  const styleMap = {
+    [tokenName('typography', 'styles', 'hero-family')]: data.styles.hero.family,
+    [tokenName('typography', 'styles', 'hero-size')]: data.styles.hero.size.desktop,
+    [tokenName('typography', 'styles', 'hero-weight')]: data.styles.hero.weight,
+    [tokenName('typography', 'styles', 'hero-line-height')]: data.styles.hero['line-height'].desktop,
+    [tokenName('typography', 'styles', 'hero-color')]: data.styles.hero.color,
+    [tokenName('typography', 'styles', 'title-family')]: data.styles.title.family,
+    [tokenName('typography', 'styles', 'title-size')]: data.styles.title.size.desktop,
+    [tokenName('typography', 'styles', 'title-weight')]: data.styles.title.weight,
+    [tokenName('typography', 'styles', 'title-line-height')]: data.styles.title['line-height'].desktop,
+    [tokenName('typography', 'styles', 'title-color')]: data.styles.title.color,
+    [tokenName('typography', 'styles', 'body-lg-family')]: data.styles['body-lg'].family,
+    [tokenName('typography', 'styles', 'body-lg-size')]: data.styles['body-lg'].size,
+    [tokenName('typography', 'styles', 'body-lg-weight')]: data.styles['body-lg'].weight,
+    [tokenName('typography', 'styles', 'body-lg-line-height')]: data.styles['body-lg']['line-height'],
+    [tokenName('typography', 'styles', 'body-lg-color')]: data.styles['body-lg'].color,
+    [tokenName('typography', 'styles', 'button-family')]: data.styles.button.family,
+    [tokenName('typography', 'styles', 'button-size')]: data.styles.button.size,
+    [tokenName('typography', 'styles', 'button-weight')]: data.styles.button.weight,
+    [tokenName('typography', 'styles', 'button-line-height')]: data.styles.button['line-height'],
+    [tokenName('typography', 'styles', 'button-color')]: data.styles.button.color,
   };
-
-  Object.assign(tokensRoot, styleRootMap);
-  declaredTokenVars.push(...Object.keys(styleRootMap));
+  Object.assign(tokensRoot, styleMap);
+  declaredTokenVars.push(...Object.keys(styleMap));
 
   Object.assign(tokensMobile, {
-    '--size-logo-width': data.size['logo-width'].mobile,
-    '--size-logo-mark-width': data.size['logo-mark-width'].mobile,
-    '--size-logo-mark-height': data.size['logo-mark-height'].mobile,
-    '--style-hero-size': data.styles.hero.size.mobile,
-    '--style-hero-line-height': data.styles.hero['line-height'].mobile,
-    '--style-title-size': data.styles.title.size.mobile,
-    '--style-title-line-height': data.styles.title['line-height'].mobile,
+    [tokenName('sizes', 'size', 'logo-width')]: data.size['logo-width'].mobile,
+    [tokenName('sizes', 'size', 'logo-mark-width')]: data.size['logo-mark-width'].mobile,
+    [tokenName('sizes', 'size', 'logo-mark-height')]: data.size['logo-mark-height'].mobile,
+    [tokenName('typography', 'font', 'size-hero')]: data.fonts['size-hero'].mobile,
+    [tokenName('typography', 'font', 'size-title')]: data.fonts['size-title'].mobile,
+    [tokenName('typography', 'font', 'line-hero')]: data.fonts['line-hero'].mobile,
+    [tokenName('typography', 'font', 'line-title')]: data.fonts['line-title'].mobile,
   });
 
-  for (const [key, value] of Object.entries(data.themes.light)) {
-    const name = `--${key}`;
-    themeLight[name] = value;
-    declaredTokenVars.push(name);
-  }
+  for (const [themeName, bucket] of Object.entries({ light: themeLight, dark: themeDark })) {
+    const theme = data.themes[themeName];
+    const buttonTheme = data.buttons[themeName].secondary;
+    const themeMap = {
+      [tokenName('color-semantics', 'bg', 'page')]: theme['bg-page'],
+      [tokenName('color-semantics', 'bg', 'accent')]: theme['bg-accent'],
+      [tokenName('color-semantics', 'bg', 'transparent')]: theme['bg-transparent'],
+      [tokenName('color-semantics', 'text', 'primary')]: theme['text-primary'],
+      [tokenName('color-semantics', 'text', 'secondary')]: theme['text-secondary'],
+      [tokenName('color-semantics', 'text', 'accent')]: theme['text-accent'],
+      [tokenName('color-semantics', 'text', 'on-accent')]: theme['text-on-accent'],
+      [tokenName('color-semantics', 'border', 'default')]: theme['border-default'],
+      [tokenName('color-semantics', 'border', 'accent')]: theme['border-accent'],
+      [tokenName('color-semantics', 'icon', 'primary')]: theme['icon-primary'],
+      [tokenName('color-semantics', 'icon', 'secondary')]: theme['icon-secondary'],
+      [tokenName('color-semantics', 'icon', 'accent')]: theme['icon-accent'],
+      [tokenName('color-semantics', 'icon', 'on-accent')]: theme['icon-on-accent'],
+      [tokenName('buttons', 'secondary', 'text')]: buttonTheme.text,
+      [tokenName('buttons', 'secondary', 'icon')]: buttonTheme.icon,
+      [tokenName('buttons', 'secondary', 'border')]: buttonTheme.border,
+      [tokenName('buttons', 'secondary', 'bg')]: buttonTheme.bg,
+      [tokenName('buttons', 'secondary', 'bg-hover')]: buttonTheme['bg-hover'],
+      [tokenName('buttons', 'secondary', 'bg-pressed')]: buttonTheme['bg-pressed'],
+    };
 
-  for (const [key, value] of Object.entries(data.themes.dark)) {
-    const name = `--${key}`;
-    themeDark[name] = value;
-    declaredTokenVars.push(name);
+    Object.assign(bucket, themeMap);
+    declaredTokenVars.push(...Object.keys(themeMap));
   }
 
   return JSON.stringify(
