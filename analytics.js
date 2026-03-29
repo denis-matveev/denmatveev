@@ -1,4 +1,13 @@
 (function() {
+  var analyticsConfig = window.__portfolioAnalyticsConfig || {};
+  var qualifiedVisitDelayMs = typeof analyticsConfig.qualifiedVisitDelayMs === "number"
+    ? analyticsConfig.qualifiedVisitDelayMs
+    : 10000;
+  var pageLoadTime = Date.now();
+  var hasRealInteraction = false;
+  var qualifiedVisitSent = false;
+  var qualifiedVisitDelayReached = false;
+  var qualifiedReason = "";
   var scrollMilestones = {
     50: false,
     90: false
@@ -23,6 +32,20 @@
 
   function getLinkText(link) {
     return (link.textContent || "").replace(/\s+/g, " ").trim();
+  }
+
+  function getEngagementTimeBucket() {
+    var elapsedMs = Date.now() - pageLoadTime;
+
+    if (elapsedMs < 30000) {
+      return "10_to_29s";
+    }
+
+    if (elapsedMs < 60000) {
+      return "30_to_59s";
+    }
+
+    return "60s_plus";
   }
 
   function getSectionName(element) {
@@ -72,9 +95,34 @@
     return "external";
   }
 
+  function registerInteraction() {
+    hasRealInteraction = true;
+  }
+
+  function maybeSendQualifiedVisit() {
+    if (qualifiedVisitSent || !qualifiedVisitDelayReached || !hasRealInteraction || !qualifiedReason) {
+      return;
+    }
+
+    qualifiedVisitSent = true;
+    trackEvent("qualified_visit", Object.assign({}, getPageParams(), {
+      qualified_reason: qualifiedReason,
+      engagement_time_bucket: getEngagementTimeBucket()
+    }));
+  }
+
+  function registerQualifiedReason(reason) {
+    if (!qualifiedReason) {
+      qualifiedReason = reason;
+    }
+
+    maybeSendQualifiedVisit();
+  }
+
   function handlePortfolioCtaClick(event) {
     var link = event.currentTarget;
 
+    registerInteraction();
     trackEvent("portfolio_cta_click", Object.assign({}, getPageParams(), {
       link_url: normalizeUrl(link.getAttribute("href")),
       link_text: getLinkText(link),
@@ -85,17 +133,20 @@
   function handleContactClick(event) {
     var link = event.currentTarget;
 
+    registerInteraction();
     trackEvent("contact_click", Object.assign({}, getPageParams(), {
       link_url: normalizeUrl(link.getAttribute("href")),
       link_text: getLinkText(link),
       contact_type: getContactType(link),
       section_name: getSectionName(link)
     }));
+    registerQualifiedReason("contact_click");
   }
 
   function handlePortfolioClick(event) {
     var link = event.currentTarget;
 
+    registerInteraction();
     trackEvent("portfolio_click", Object.assign({}, getPageParams(), {
       link_url: normalizeUrl(link.getAttribute("href")),
       link_text: getLinkText(link),
@@ -123,6 +174,7 @@
       trackEvent("scroll_50", Object.assign({}, getPageParams(), {
         percent_scrolled: 50
       }));
+      registerQualifiedReason("scroll_50");
     }
 
     if (!scrollMilestones[90] && percentScrolled >= 90) {
@@ -130,6 +182,7 @@
       trackEvent("scroll_90", Object.assign({}, getPageParams(), {
         percent_scrolled: 90
       }));
+      registerQualifiedReason("scroll_90");
     }
 
     if (scrollMilestones[50] && scrollMilestones[90]) {
@@ -139,6 +192,7 @@
 
   function onScroll() {
     scrollTrackingStarted = true;
+    registerInteraction();
 
     if (ticking) {
       return;
@@ -177,6 +231,16 @@
 
       checkScrollMilestones();
     });
+
+    window.addEventListener("pointerdown", registerInteraction, { passive: true });
+    window.addEventListener("keydown", registerInteraction);
+    window.addEventListener("touchstart", registerInteraction, { passive: true });
+    window.addEventListener("wheel", registerInteraction, { passive: true });
+
+    window.setTimeout(function() {
+      qualifiedVisitDelayReached = true;
+      maybeSendQualifiedVisit();
+    }, qualifiedVisitDelayMs);
   }
 
   window.trackEvent = trackEvent;

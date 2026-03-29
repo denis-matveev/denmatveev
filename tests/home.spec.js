@@ -287,6 +287,36 @@ test.describe('homepage analytics and responsive layout', () => {
     expect(scrollEvents.filter((entry) => entry.name === 'scroll_90')).toHaveLength(1);
   });
 
+  test('qualified visit fires once after delay and meaningful engagement', async ({ page }) => {
+    await page.addInitScript(() => {
+      window.__portfolioAnalyticsConfig = {
+        qualifiedVisitDelayMs: 25,
+      };
+    });
+
+    await page.setViewportSize({ width: 390, height: 500 });
+    await openHome(page);
+
+    await page.evaluate(() => {
+      window.scrollTo(0, document.documentElement.scrollHeight);
+      window.dispatchEvent(new Event('scroll'));
+    });
+
+    await expect
+      .poll(async () => readAnalyticsEvents(page, ['qualified_visit']))
+      .toEqual([
+        expect.objectContaining({
+          name: 'qualified_visit',
+          params: expect.objectContaining({
+            page_path: '/',
+            page_title: 'Denis Matveev | Portfolio',
+            qualified_reason: expect.stringMatching(/scroll_50|scroll_90/),
+            engagement_time_bucket: '10_to_29s',
+          }),
+        }),
+      ]);
+  });
+
   test('desktop layout does not overflow', async ({ page }) => {
     await page.setViewportSize({ width: viewportWidth, height: 1024 });
     await openHome(page);
