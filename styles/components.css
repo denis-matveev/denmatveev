@@ -1,30 +1,30 @@
 .site-shell {
   width: min(100%, var(--size-max-page));
   margin: 0 auto;
-  padding: var(--layout-page-block) var(--layout-page-inline);
+  padding: var(--space-24) var(--space-24);
 }
 
 .home-main {
-  min-height: calc(100vh - (var(--layout-page-block) * 2));
+  min-height: calc(100vh - (var(--space-24) * 2));
   display: grid;
   place-items: center;
 }
 
 .hero {
   display: grid;
-  gap: var(--layout-hero-gap);
+  gap: var(--space-24);
 }
 
 .hero-portfolio {
   grid-template-columns: 1fr;
   justify-items: center;
-  padding: var(--layout-section-top) 0 var(--layout-section-bottom);
+  padding: var(--space-62) 0 var(--space-42);
 }
 
 .hero-portfolio__inner {
   width: min(100%, var(--size-max-content));
   display: grid;
-  gap: var(--layout-content-gap);
+  gap: var(--space-16);
 }
 
 .hero-logo {
@@ -41,11 +41,10 @@
   width: var(--size-logo-mark-width);
   height: var(--size-logo-mark-height);
   display: block;
-  transform: translateY(var(--offset-logo-mark-y));
+  transform: translateY(var(--space-66));
   position: relative;
   z-index: 0;
-  /* Hero backdrop must always be token-driven so light/dark modes stay in sync with Figma. */
-  color: var(--surface-accent);
+  color: var(--figma-bg-accent);
 }
 
 .hero-logo__mark path {
@@ -76,15 +75,15 @@
 
 .hero-portfolio__copy {
   display: grid;
-  gap: var(--layout-content-gap);
+  gap: var(--space-16);
 }
 
 .hero-portfolio__title {
-  color: var(--text-display);
-  font-family: var(--type-hero-family);
-  font-size: var(--type-hero-size);
-  font-weight: var(--type-hero-weight);
-  line-height: var(--type-hero-line);
+  color: var(--figma-style-hero-color);
+  font-family: var(--figma-style-hero-family);
+  font-size: var(--figma-style-hero-size);
+  font-weight: var(--figma-style-hero-weight);
+  line-height: var(--figma-style-hero-line-height);
   letter-spacing: 0;
   font-variation-settings: "YEAR" 1979;
 }
@@ -95,19 +94,19 @@
 
 .hero-portfolio__lede {
   max-width: var(--size-max-content);
-  color: var(--text-default);
-  font-family: var(--type-title-family);
-  font-size: var(--type-title-size);
-  font-weight: var(--type-title-weight);
-  line-height: var(--type-title-line);
+  color: var(--figma-style-title-color);
+  font-family: var(--figma-style-title-family);
+  font-size: var(--figma-style-title-size);
+  font-weight: var(--figma-style-title-weight);
+  line-height: var(--figma-style-title-line-height);
   letter-spacing: 0;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--layout-actions-gap);
-  margin-top: var(--layout-actions-margin-top);
+  gap: var(--space-16);
+  margin-top: var(--space-24);
 }
 
 .hero-portfolio__actions {
@@ -115,29 +114,28 @@
 }
 
 .hero-portfolio__notice {
-  color: var(--text-muted);
-  font-family: var(--type-caption-family);
-  font-size: var(--type-caption-size);
-  font-weight: var(--type-caption-weight);
-  line-height: var(--type-caption-line);
+  color: var(--figma-text-secondary);
+  font-family: var(--figma-style-body-lg-family);
+  font-size: var(--figma-style-body-lg-size);
+  font-weight: var(--figma-style-body-lg-weight);
+  line-height: var(--figma-style-body-lg-line-height);
 }
 
 .button-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-button-gap);
+  gap: var(--space-8);
   min-height: var(--size-button-min-height);
-  padding: var(--space-button-block) var(--space-button-inline);
-  border: 1px solid var(--button-secondary-border);
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--figma-button-secondary-border);
   border-radius: var(--radius-8);
-  background: var(--button-secondary-bg);
-  color: var(--button-secondary-text);
-  --button-icon-color: var(--button-secondary-icon);
-  font-family: var(--type-action-family);
-  font-size: var(--type-action-size);
-  font-weight: var(--type-action-weight);
-  line-height: var(--type-action-line);
+  background: var(--figma-button-secondary-bg);
+  color: var(--figma-button-secondary-text);
+  font-family: var(--figma-style-button-family);
+  font-size: var(--figma-style-button-size);
+  font-weight: var(--figma-style-button-weight);
+  line-height: var(--figma-style-button-line-height);
   cursor: pointer;
   transition:
     background-color 0.2s ease,
@@ -146,7 +144,7 @@
 }
 
 .button-link .ui-icon {
-  color: var(--button-icon-color);
+  color: var(--figma-button-secondary-icon);
 }
 
 .button-link .ui-icon--behance path {
@@ -156,13 +154,13 @@
 
 .button-link:not([aria-disabled="true"]):hover,
 .button-link:not([aria-disabled="true"]):focus-visible {
-  border-color: var(--button-secondary-text);
-  background: var(--button-secondary-hover);
+  border-color: var(--figma-button-secondary-border);
+  background: var(--figma-button-secondary-hover);
 }
 
 .button-link:not([aria-disabled="true"]):active {
-  border-color: var(--button-secondary-text);
-  background: var(--button-secondary-active);
+  border-color: var(--figma-button-secondary-border);
+  background: var(--figma-button-secondary-pressed);
 }
 
 .button-link[aria-disabled="true"] {
@@ -186,20 +184,29 @@
 }
 
 .ui-icon--behance {
-  --ui-icon-behance-size: var(--size-action-icon-brand);
-  width: var(--ui-icon-behance-size);
-  height: var(--ui-icon-behance-size);
-  flex-basis: var(--ui-icon-behance-size);
+  width: var(--size-action-icon-brand);
+  height: var(--size-action-icon-brand);
+  flex-basis: var(--size-action-icon-brand);
   stroke: none;
 }
 
 @media (max-width: 900px) {
+  .site-shell {
+    padding: var(--space-24) var(--space-24);
+  }
+
   .hero-portfolio {
     justify-items: start;
+    padding-top: var(--space-36);
+    padding-bottom: 34px;
   }
 
   .hero-portfolio__inner {
     width: 100%;
+  }
+
+  .hero-logo__mark {
+    transform: translateY(var(--space-45));
   }
 
   .hero-portfolio__title span {
@@ -208,5 +215,17 @@
 
   .hero-portfolio__lede {
     max-width: 100%;
+  }
+
+  .actions {
+    gap: var(--space-12);
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    padding-right: var(--space-16);
+    padding-left: var(--space-16);
   }
 }

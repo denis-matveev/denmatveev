@@ -1,10 +1,4 @@
 :root {
-  --font-family-sans: "Karla", sans-serif;
-  --font-family-display: "Climate Crisis", sans-serif;
-
-  --size-max-content: 760px;
-  --size-max-page: 1024px;
-
   --space-0: 0;
   --space-2: 2px;
   --space-4: 4px;
@@ -23,131 +17,79 @@
   --radius-8: 8px;
   --radius-pill: 999px;
 
-  --color-green-700: #182810;
-  --color-green-600: #346e17;
-  --color-green-500: #6acf37;
-  --color-stone-100: #e9e8e6;
-  --color-white: #ffffff;
-  --color-transparent: transparent;
-
-  /* Figma exposes typography as composite variables like h1/title/text-lg.
-     In CSS we split them into discrete properties so desktop/mobile modes
-     can switch by breakpoint without repeating font declarations in components. */
-  --figma-type-hero-family: var(--font-family-display);
-  --figma-type-hero-weight: 400;
-  --figma-type-hero-size-desktop: 64px;
-  --figma-type-hero-line-desktop: 70px;
-  --figma-type-hero-size-mobile: 48px;
-  --figma-type-hero-line-mobile: 53px;
-
-  --figma-type-title-family: var(--font-family-sans);
-  --figma-type-title-weight: 300;
-  --figma-type-title-size-desktop: 32px;
-  --figma-type-title-line-desktop: 37px;
-  --figma-type-title-size-mobile: 28px;
-  --figma-type-title-line-mobile: 33px;
-
-  --figma-type-body-lg-family: var(--font-family-sans);
-  --figma-type-body-lg-weight: 300;
-  --figma-type-body-lg-size: 20px;
-  --figma-type-body-lg-line: 23px;
-
-  --figma-type-action-family: var(--font-family-sans);
-  --figma-type-action-weight: 600;
-  --figma-type-action-size: 24px;
-  --figma-type-action-line: 1;
-
-  --figma-color-page-light: var(--color-stone-100);
-  --figma-color-page-dark: #2b2924;
-  --figma-color-text-primary-light: var(--color-green-700);
-  --figma-color-text-primary-dark: var(--color-white);
-  --figma-color-text-secondary-light: #44513e;
-  --figma-color-text-secondary-dark: var(--color-stone-100);
-  --figma-color-accent-text-light: var(--color-green-600);
-  --figma-color-accent-text-dark: var(--color-green-500);
-  --figma-color-accent-fill-light: var(--color-green-600);
-  --figma-color-accent-fill-dark: var(--color-green-500);
-  --figma-color-secondary-border-light: #c9ccc7;
-  --figma-color-secondary-border-dark: #44513e;
-  --figma-color-secondary-bg-light: rgba(255, 255, 255, 0);
-  --figma-color-secondary-bg-dark: rgba(255, 255, 255, 0);
-  --figma-color-secondary-text-light: var(--color-green-600);
-  --figma-color-secondary-text-dark: var(--color-green-500);
-  --figma-color-secondary-icon-light: var(--color-green-600);
-  --figma-color-secondary-icon-dark: var(--color-green-500);
-  --figma-color-button-hover-light: rgba(255, 255, 255, 0.72);
-  --figma-color-button-hover-dark: rgba(255, 255, 255, 0.08);
-  --figma-color-button-active-light: rgba(52, 110, 23, 0.12);
-  --figma-color-button-active-dark: rgba(106, 207, 55, 0.16);
-
-  --type-hero-family: var(--figma-type-hero-family);
-  --type-hero-weight: var(--figma-type-hero-weight);
-  --type-hero-size: var(--figma-type-hero-size-desktop);
-  --type-hero-line: var(--figma-type-hero-line-desktop);
-
-  --type-title-family: var(--figma-type-title-family);
-  --type-title-weight: var(--figma-type-title-weight);
-  --type-title-size: var(--figma-type-title-size-desktop);
-  --type-title-line: var(--figma-type-title-line-desktop);
-
-  --type-body-family: var(--figma-type-body-lg-family);
-  --type-body-weight: var(--figma-type-body-lg-weight);
-  --type-body-size: var(--figma-type-body-lg-size);
-  --type-body-line: var(--figma-type-body-lg-line);
-
-  --type-caption-family: var(--figma-type-body-lg-family);
-  --type-caption-weight: var(--figma-type-body-lg-weight);
-  --type-caption-size: var(--figma-type-body-lg-size);
-  --type-caption-line: var(--figma-type-body-lg-line);
-
-  --type-action-family: var(--figma-type-action-family);
-  --type-action-weight: var(--figma-type-action-weight);
-  --type-action-size: var(--figma-type-action-size);
-  --type-action-line: var(--figma-type-action-line);
-
-  --layout-page-inline: var(--space-24);
-  --layout-page-block: var(--space-24);
-  --layout-section-top: var(--space-62);
-  --layout-section-bottom: var(--space-42);
-  --layout-hero-gap: var(--space-24);
-  --layout-content-gap: var(--space-16);
-  --layout-actions-gap: var(--space-16);
-  --layout-actions-margin-top: var(--space-24);
-
+  --size-max-content: 760px;
+  --size-max-page: 1024px;
   --size-logo-width: 218px;
   --size-logo-mark-width: 218px;
   --size-logo-mark-height: 158px;
-  --offset-logo-mark-y: var(--space-66);
+  --size-button-min-height: 44px;
+  --size-action-icon: 24px;
+  --size-action-icon-brand: 24px;
 
-  --size-button-min-height: var(--space-44);
-  --space-button-inline: var(--space-16);
-  --space-button-block: var(--space-8);
-  --space-button-gap: var(--space-8);
-  --size-action-icon: var(--space-24);
-  --size-action-icon-brand: var(--size-action-icon);
+  --figma-color-neutral-0: #ffffff;
+  --figma-color-neutral-50: #e9e8e6;
+  --figma-color-neutral-200: #c9ccc7;
+  --figma-color-neutral-700: #44513e;
+  --figma-color-neutral-900: #182810;
+  --figma-color-green-100: rgba(52, 110, 23, 0.2);
+  --figma-color-green-200: #6acf37;
+  --figma-color-green-700: #346e17;
+  --figma-color-green-800: #245c0c;
+  --figma-color-beige-50: #e9e8e6;
+  --figma-color-beige-900: #2b2924;
+
+  --figma-font-family-display: "Climate Crisis", sans-serif;
+  --figma-font-family-text: "Karla", sans-serif;
+  --figma-font-size-hero-desktop: 64px;
+  --figma-font-size-hero-mobile: 48px;
+  --figma-font-size-title-desktop: 32px;
+  --figma-font-size-title-mobile: 28px;
+  --figma-font-size-body-lg: 20px;
+  --figma-font-size-button: 24px;
+  --figma-font-line-hero-desktop: 70px;
+  --figma-font-line-hero-mobile: 53px;
+  --figma-font-line-title-desktop: 37px;
+  --figma-font-line-title-mobile: 33px;
+  --figma-font-line-body-lg: 23px;
+  --figma-font-line-button: 28px;
+  --figma-font-weight-light: 300;
+  --figma-font-weight-regular: 400;
+  --figma-font-weight-medium: 500;
+
+  --figma-style-hero-family: var(--figma-font-family-display);
+  --figma-style-hero-size: var(--figma-font-size-hero-desktop);
+  --figma-style-hero-weight: var(--figma-font-weight-light);
+  --figma-style-hero-line-height: var(--figma-font-line-hero-desktop);
+  --figma-style-hero-color: var(--figma-text-accent);
+
+  --figma-style-title-family: var(--figma-font-family-text);
+  --figma-style-title-size: var(--figma-font-size-title-desktop);
+  --figma-style-title-weight: var(--figma-font-weight-light);
+  --figma-style-title-line-height: var(--figma-font-line-title-desktop);
+  --figma-style-title-color: var(--figma-text-primary);
+
+  --figma-style-body-lg-family: var(--figma-font-family-text);
+  --figma-style-body-lg-size: var(--figma-font-size-body-lg);
+  --figma-style-body-lg-weight: var(--figma-font-weight-light);
+  --figma-style-body-lg-line-height: var(--figma-font-line-body-lg);
+  --figma-style-body-lg-color: var(--figma-text-secondary);
+
+  --figma-style-button-family: var(--figma-font-family-text);
+  --figma-style-button-size: var(--figma-font-size-button);
+  --figma-style-button-weight: var(--figma-font-weight-medium);
+  --figma-style-button-line-height: var(--figma-font-line-button);
+  --figma-style-button-color: var(--figma-text-secondary);
 }
 
 @media (max-width: 900px) {
   :root {
-    --type-hero-size: var(--figma-type-hero-size-mobile);
-    --type-hero-line: var(--figma-type-hero-line-mobile);
-    --type-title-size: var(--figma-type-title-size-mobile);
-    --type-title-line: var(--figma-type-title-line-mobile);
-
-    --layout-section-top: var(--space-36);
-    --layout-section-bottom: 34px;
-    --layout-actions-gap: var(--space-12);
-    --layout-actions-margin-top: 0;
-
     --size-logo-width: 150px;
     --size-logo-mark-width: 150px;
     --size-logo-mark-height: 109px;
-    --offset-logo-mark-y: var(--space-45);
-  }
-}
 
-@media (max-width: 640px) {
-  :root {
-    --layout-page-inline: var(--space-16);
+    --figma-style-hero-size: var(--figma-font-size-hero-mobile);
+    --figma-style-hero-line-height: var(--figma-font-line-hero-mobile);
+    --figma-style-title-size: var(--figma-font-size-title-mobile);
+    --figma-style-title-line-height: var(--figma-font-line-title-mobile);
   }
 }

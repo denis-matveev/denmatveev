@@ -2,65 +2,55 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  --color-bg-page: var(--figma-color-page-light);
-  --color-bg-surface: var(--figma-color-secondary-bg-light);
-  --color-bg-accent: var(--figma-color-accent-fill-light);
+  --figma-bg-page: var(--figma-color-beige-50);
+  --figma-bg-accent: var(--figma-color-green-700);
+  --figma-bg-transparent: transparent;
 
-  --color-text-primary: var(--figma-color-text-primary-light);
-  --color-text-secondary: var(--figma-color-text-secondary-light);
-  --color-text-accent: var(--figma-color-accent-text-light);
+  --figma-text-primary: var(--figma-color-neutral-900);
+  --figma-text-secondary: var(--figma-color-neutral-700);
+  --figma-text-accent: var(--figma-color-green-700);
+  --figma-text-on-accent: var(--figma-color-neutral-0);
 
-  --color-border-subtle: var(--figma-color-secondary-border-light);
-  --color-icon-primary: var(--figma-color-secondary-icon-light);
-  --color-icon-accent: var(--figma-color-secondary-icon-light);
+  --figma-border-default: var(--figma-color-neutral-200);
+  --figma-border-accent: var(--figma-color-green-700);
 
-  --color-button-secondary-text: var(--figma-color-secondary-text-light);
-  --color-button-secondary-icon: var(--figma-color-secondary-icon-light);
-  --color-button-secondary-border: var(--figma-color-secondary-border-light);
-  --color-button-secondary-bg: var(--figma-color-secondary-bg-light);
-  --color-button-secondary-hover: var(--figma-color-button-hover-light);
-  --color-button-secondary-active: var(--figma-color-button-active-light);
+  --figma-icon-primary: var(--figma-color-neutral-900);
+  --figma-icon-secondary: var(--figma-color-neutral-700);
+  --figma-icon-accent: var(--figma-color-green-700);
+  --figma-icon-on-accent: var(--figma-color-neutral-0);
+
+  --figma-button-secondary-text: var(--figma-text-accent);
+  --figma-button-secondary-icon: var(--figma-icon-accent);
+  --figma-button-secondary-border: var(--figma-border-default);
+  --figma-button-secondary-bg: var(--figma-bg-transparent);
+  --figma-button-secondary-hover: var(--figma-color-neutral-0);
+  --figma-button-secondary-pressed: var(--figma-color-green-100);
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --color-bg-page: var(--figma-color-page-dark);
-  --color-bg-surface: var(--figma-color-secondary-bg-dark);
-  --color-bg-accent: var(--figma-color-accent-fill-dark);
+  --figma-bg-page: var(--figma-color-beige-900);
+  --figma-bg-accent: var(--figma-color-green-200);
+  --figma-bg-transparent: transparent;
 
-  --color-text-primary: var(--figma-color-text-primary-dark);
-  --color-text-secondary: var(--figma-color-text-secondary-dark);
-  --color-text-accent: var(--figma-color-accent-text-dark);
+  --figma-text-primary: var(--figma-color-neutral-0);
+  --figma-text-secondary: var(--figma-color-neutral-50);
+  --figma-text-accent: var(--figma-color-green-200);
+  --figma-text-on-accent: var(--figma-color-neutral-900);
 
-  --color-border-subtle: var(--figma-color-secondary-border-dark);
-  --color-icon-primary: var(--figma-color-secondary-icon-dark);
-  --color-icon-accent: var(--figma-color-secondary-icon-dark);
+  --figma-border-default: var(--figma-color-neutral-700);
+  --figma-border-accent: var(--figma-color-green-200);
 
-  --color-button-secondary-text: var(--figma-color-secondary-text-dark);
-  --color-button-secondary-icon: var(--figma-color-secondary-icon-dark);
-  --color-button-secondary-border: var(--figma-color-secondary-border-dark);
-  --color-button-secondary-bg: var(--figma-color-secondary-bg-dark);
-  --color-button-secondary-hover: var(--figma-color-button-hover-dark);
-  --color-button-secondary-active: var(--figma-color-button-active-dark);
-}
+  --figma-icon-primary: var(--figma-color-neutral-0);
+  --figma-icon-secondary: var(--figma-color-neutral-50);
+  --figma-icon-accent: var(--figma-color-green-200);
+  --figma-icon-on-accent: var(--figma-color-neutral-0);
 
-:root {
-  --surface-page: var(--color-bg-page);
-  --surface-accent: var(--color-bg-accent);
-
-  --text-default: var(--color-text-primary);
-  --text-muted: var(--color-text-secondary);
-  --text-display: var(--color-text-accent);
-
-  --border-default: var(--color-border-subtle);
-  --icon-default: var(--color-icon-primary);
-  --icon-accent: var(--color-icon-accent);
-
-  --button-secondary-text: var(--color-button-secondary-text);
-  --button-secondary-icon: var(--color-button-secondary-icon);
-  --button-secondary-border: var(--color-button-secondary-border);
-  --button-secondary-bg: var(--color-button-secondary-bg);
-  --button-secondary-hover: var(--color-button-secondary-hover);
-  --button-secondary-active: var(--color-button-secondary-active);
+  --figma-button-secondary-text: var(--figma-text-accent);
+  --figma-button-secondary-icon: var(--figma-icon-accent);
+  --figma-button-secondary-border: var(--figma-border-default);
+  --figma-button-secondary-bg: var(--figma-bg-transparent);
+  --figma-button-secondary-hover: var(--figma-color-neutral-0);
+  --figma-button-secondary-pressed: var(--figma-color-green-100);
 }
