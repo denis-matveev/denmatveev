@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "sync:figma-tokens": "node scripts/sync-figma-tokens.js",
     "test": "playwright test",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots"

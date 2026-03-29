@@ -51,7 +51,7 @@ function expectProps(actual, expectedProps) {
 }
 
 test.describe('figma token sync', () => {
-  test('declares exactly the tracked figma variables', () => {
+  test('declares exactly the tracked synced tokens', () => {
     const allBlocks = [
       parseCustomProps(extractBlock(tokensCss, ':root')),
       parseCustomProps(extractBlock(tokensCss, '@media (max-width: 900px)')),
@@ -60,18 +60,31 @@ test.describe('figma token sync', () => {
     ];
 
     const declaredVars = [...new Set(allBlocks.flatMap((block) => Object.keys(block)))]
-      .filter((name) => name.startsWith('--figma-'))
+      .filter(
+        (name) =>
+          name.startsWith('--color-') ||
+          name.startsWith('--font-') ||
+          name.startsWith('--style-') ||
+          name.startsWith('--bg-') ||
+          name.startsWith('--text-') ||
+          name.startsWith('--border-') ||
+          name.startsWith('--icon-') ||
+          name.startsWith('--button-secondary-') ||
+          name.startsWith('--space-') ||
+          name.startsWith('--radius-') ||
+          name.startsWith('--size-'),
+      )
       .sort();
 
-    expect(declaredVars).toEqual([...expected.declaredFigmaVars].sort());
+    expect(declaredVars).toEqual([...expected.declaredTokenVars].sort());
   });
 
-  test('matches figma primitive and typography token values', () => {
+  test('matches synced root token values', () => {
     const rootProps = parseCustomProps(extractBlock(tokensCss, ':root'));
     expectProps(rootProps, expected.tokensRoot);
   });
 
-  test('matches figma mobile typography overrides', () => {
+  test('matches synced mobile token overrides', () => {
     const mobileProps = parseCustomProps(extractBlock(tokensCss, '@media (max-width: 900px)'));
     expectProps(mobileProps, expected.tokensMobile);
   });

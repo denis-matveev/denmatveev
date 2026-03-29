@@ -44,7 +44,7 @@
   transform: translateY(var(--space-66));
   position: relative;
   z-index: 0;
-  color: var(--figma-bg-accent);
+  color: var(--bg-accent);
 }
 
 .hero-logo__mark path {
@@ -79,11 +79,11 @@
 }
 
 .hero-portfolio__title {
-  color: var(--figma-style-hero-color);
-  font-family: var(--figma-style-hero-family);
-  font-size: var(--figma-style-hero-size);
-  font-weight: var(--figma-style-hero-weight);
-  line-height: var(--figma-style-hero-line-height);
+  color: var(--style-hero-color);
+  font-family: var(--style-hero-family);
+  font-size: var(--style-hero-size);
+  font-weight: var(--style-hero-weight);
+  line-height: var(--style-hero-line-height);
   letter-spacing: 0;
   font-variation-settings: "YEAR" 1979;
 }
@@ -94,11 +94,11 @@
 
 .hero-portfolio__lede {
   max-width: var(--size-max-content);
-  color: var(--figma-style-title-color);
-  font-family: var(--figma-style-title-family);
-  font-size: var(--figma-style-title-size);
-  font-weight: var(--figma-style-title-weight);
-  line-height: var(--figma-style-title-line-height);
+  color: var(--style-title-color);
+  font-family: var(--style-title-family);
+  font-size: var(--style-title-size);
+  font-weight: var(--style-title-weight);
+  line-height: var(--style-title-line-height);
   letter-spacing: 0;
 }
 
@@ -114,11 +114,11 @@
 }
 
 .hero-portfolio__notice {
-  color: var(--figma-text-secondary);
-  font-family: var(--figma-style-body-lg-family);
-  font-size: var(--figma-style-body-lg-size);
-  font-weight: var(--figma-style-body-lg-weight);
-  line-height: var(--figma-style-body-lg-line-height);
+  color: var(--text-secondary);
+  font-family: var(--style-body-lg-family);
+  font-size: var(--style-body-lg-size);
+  font-weight: var(--style-body-lg-weight);
+  line-height: var(--style-body-lg-line-height);
 }
 
 .button-link {
@@ -128,14 +128,14 @@
   gap: var(--space-8);
   min-height: var(--size-button-min-height);
   padding: var(--space-8) var(--space-16);
-  border: 1px solid var(--figma-button-secondary-border);
+  border: 1px solid var(--button-secondary-border);
   border-radius: var(--radius-8);
-  background: var(--figma-button-secondary-bg);
-  color: var(--figma-button-secondary-text);
-  font-family: var(--figma-style-button-family);
-  font-size: var(--figma-style-button-size);
-  font-weight: var(--figma-style-button-weight);
-  line-height: var(--figma-style-button-line-height);
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  font-family: var(--style-button-family);
+  font-size: var(--style-button-size);
+  font-weight: var(--style-button-weight);
+  line-height: var(--style-button-line-height);
   cursor: pointer;
   transition:
     background-color 0.2s ease,
@@ -144,7 +144,7 @@
 }
 
 .button-link .ui-icon {
-  color: var(--figma-button-secondary-icon);
+  color: var(--button-secondary-icon);
 }
 
 .button-link .ui-icon--behance path {
@@ -154,13 +154,13 @@
 
 .button-link:not([aria-disabled="true"]):hover,
 .button-link:not([aria-disabled="true"]):focus-visible {
-  border-color: var(--figma-button-secondary-border);
-  background: var(--figma-button-secondary-hover);
+  border-color: var(--button-secondary-border);
+  background: var(--button-secondary-hover);
 }
 
 .button-link:not([aria-disabled="true"]):active {
-  border-color: var(--figma-button-secondary-border);
-  background: var(--figma-button-secondary-pressed);
+  border-color: var(--button-secondary-border);
+  background: var(--button-secondary-pressed);
 }
 
 .button-link[aria-disabled="true"] {
