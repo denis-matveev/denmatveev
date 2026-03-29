@@ -81,7 +81,7 @@
     </svg>
     <div class="site-shell">
       <main class="home-main">
-        <section class="hero hero-portfolio">
+        <section class="hero hero-portfolio" data-section-name="hero">
           <div class="hero-portfolio__inner">
             <div class="hero-logo" aria-hidden="true">
               <svg class="hero-logo__mark" viewBox="0 0 218 158" aria-hidden="true">
@@ -106,7 +106,12 @@
                 real implementation constraints.
               </p>
               <div class="actions hero-portfolio__actions">
-                <a class="button-link hero-action" href="assets/CV_Denis_Matveev.pdf" download>
+                <a
+                  class="button-link hero-action"
+                  href="assets/CV_Denis_Matveev.pdf"
+                  download
+                  data-analytics="portfolio-cta"
+                >
                   <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <use href="#icon-download"></use>
                   </svg>
@@ -117,6 +122,7 @@
                   href="https://www.behance.net/denmatveev"
                   target="_blank"
                   rel="noreferrer"
+                  data-analytics="portfolio-link"
                 >
                   <svg class="ui-icon ui-icon--behance" viewBox="0 0 16 16" aria-hidden="true">
                     <g clip-path="url(#clip0_60_169)">
@@ -137,7 +143,11 @@
                   </svg>
                   <span>Portfolio</span>
                 </a>
-                <a class="button-link hero-action" href="mailto:denis.vic.matveev@gmail.com">
+                <a
+                  class="button-link hero-action"
+                  href="mailto:denis.vic.matveev@gmail.com"
+                  data-analytics="contact-link"
+                >
                   <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <use href="#icon-mail"></use>
                   </svg>
@@ -150,5 +160,6 @@
         </section>
       </main>
     </div>
+    <script src="analytics.js"></script>
   </body>
 </html>

@@ -38,6 +38,20 @@ async function openHome(page) {
   return { response, jsErrors, consoleErrors };
 }
 
+async function readAnalyticsEvents(page, eventNames) {
+  return page.evaluate(
+    (names) =>
+      window.dataLayer
+        .map((entry) => Array.from(entry))
+        .filter((entry) => entry[0] === 'event' && names.includes(entry[1]))
+        .map((entry) => ({
+          name: entry[1],
+          params: entry[2],
+        })),
+    eventNames,
+  );
+}
+
 test.describe('homepage smoke and links', () => {
   test('page loads and key content is visible', async ({ page }) => {
     const { response, jsErrors, consoleErrors } = await openHome(page);
@@ -144,6 +158,135 @@ test.describe('homepage assets and accessibility', () => {
 });
 
 test.describe('homepage analytics and responsive layout', () => {
+  test('custom analytics hooks are attached to CTA, portfolio and contact links', async ({ page }) => {
+    await openHome(page);
+
+    await expect(page.locator('script[src="analytics.js"]')).toHaveCount(1);
+    await expect(page.getByRole('link', { name: 'Resume' })).toHaveAttribute(
+      'data-analytics',
+      'portfolio-cta',
+    );
+    await expect(page.getByRole('link', { name: 'Portfolio' })).toHaveAttribute(
+      'data-analytics',
+      'portfolio-link',
+    );
+    await expect(page.getByRole('link', { name: 'Contact' })).toHaveAttribute(
+      'data-analytics',
+      'contact-link',
+    );
+  });
+
+  test('CTA, portfolio and contact clicks send GA4 custom events into dataLayer', async ({ page }) => {
+    await openHome(page);
+
+    await page.getByRole('link', { name: 'Resume' }).click();
+    await page.getByRole('link', { name: 'Portfolio' }).click();
+    await page.getByRole('link', { name: 'Contact' }).dispatchEvent('click');
+
+    const analyticsEvents = await readAnalyticsEvents(page, [
+      'portfolio_cta_click',
+      'portfolio_click',
+      'contact_click',
+    ]);
+
+    expect(analyticsEvents).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'portfolio_cta_click',
+          params: expect.objectContaining({
+            page_path: '/',
+            page_title: 'Denis Matveev | Portfolio',
+            link_url: expect.stringContaining('/assets/CV_Denis_Matveev.pdf'),
+            link_text: 'Resume',
+            section_name: 'hero',
+          }),
+        }),
+        expect.objectContaining({
+          name: 'portfolio_click',
+          params: expect.objectContaining({
+            page_path: '/',
+            page_title: 'Denis Matveev | Portfolio',
+            link_url: 'https://www.behance.net/denmatveev',
+            link_text: 'Portfolio',
+            section_name: 'hero',
+          }),
+        }),
+        expect.objectContaining({
+          name: 'contact_click',
+          params: expect.objectContaining({
+            page_path: '/',
+            page_title: 'Denis Matveev | Portfolio',
+            link_url: 'mailto:denis.vic.matveev@gmail.com',
+            link_text: 'Contact',
+            contact_type: 'email',
+            section_name: 'hero',
+          }),
+        }),
+      ]),
+    );
+  });
+
+  test('scroll milestones fire once per page load', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 500 });
+    await openHome(page);
+
+    await expect
+      .poll(async () => {
+        await page.evaluate(() => {
+          window.scrollTo(0, document.documentElement.scrollHeight);
+          window.dispatchEvent(new Event('scroll'));
+        });
+
+        return readAnalyticsEvents(page, ['scroll_50', 'scroll_90']);
+      })
+      .toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            name: 'scroll_50',
+            params: expect.objectContaining({
+              page_path: '/',
+              page_title: 'Denis Matveev | Portfolio',
+              percent_scrolled: 50,
+            }),
+          }),
+          expect.objectContaining({
+            name: 'scroll_90',
+            params: expect.objectContaining({
+              page_path: '/',
+              page_title: 'Denis Matveev | Portfolio',
+              percent_scrolled: 90,
+            }),
+          }),
+        ]),
+      );
+
+    const scrollEvents = await readAnalyticsEvents(page, ['scroll_50', 'scroll_90']);
+
+    expect(scrollEvents).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: 'scroll_50',
+          params: expect.objectContaining({
+            page_path: '/',
+            page_title: 'Denis Matveev | Portfolio',
+            percent_scrolled: 50,
+          }),
+        }),
+        expect.objectContaining({
+          name: 'scroll_90',
+          params: expect.objectContaining({
+            page_path: '/',
+            page_title: 'Denis Matveev | Portfolio',
+            percent_scrolled: 90,
+          }),
+        }),
+      ]),
+    );
+
+    expect(scrollEvents.filter((entry) => entry.name === 'scroll_50')).toHaveLength(1);
+    expect(scrollEvents.filter((entry) => entry.name === 'scroll_90')).toHaveLength(1);
+  });
+
   test('desktop layout does not overflow', async ({ page }) => {
     await page.setViewportSize({ width: viewportWidth, height: 1024 });
     await openHome(page);
