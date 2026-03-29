@@ -181,7 +181,16 @@ test.describe('homepage analytics and responsive layout', () => {
 
     await page.getByRole('link', { name: 'Resume' }).click();
     await page.getByRole('link', { name: 'Portfolio' }).click();
-    await page.getByRole('link', { name: 'Contact' }).dispatchEvent('click');
+    await page.getByRole('link', { name: 'Contact' }).evaluate((link) => {
+      link.addEventListener(
+        'click',
+        (event) => {
+          event.preventDefault();
+        },
+        { capture: true },
+      );
+    });
+    await page.getByRole('link', { name: 'Contact' }).click();
 
     const analyticsEvents = await readAnalyticsEvents(page, [
       'portfolio_cta_click',
