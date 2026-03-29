@@ -119,6 +119,7 @@ function buildThemeCss(data) {
       '',
       `${tokenName('color-semantics', 'bg', 'page')}: ${theme['bg-page']};`,
       `${tokenName('color-semantics', 'bg', 'accent')}: ${theme['bg-accent']};`,
+      `${tokenName('color-semantics', 'bg', 'container-prominent')}: ${theme['bg-container-prominent']};`,
       `${tokenName('color-semantics', 'bg', 'transparent')}: ${theme['bg-transparent']};`,
       `${tokenName('color-semantics', 'text', 'primary')}: ${theme['text-primary']};`,
       `${tokenName('color-semantics', 'text', 'secondary')}: ${theme['text-secondary']};`,
@@ -244,6 +245,7 @@ function buildFixture(data) {
     const themeMap = {
       [tokenName('color-semantics', 'bg', 'page')]: theme['bg-page'],
       [tokenName('color-semantics', 'bg', 'accent')]: theme['bg-accent'],
+      [tokenName('color-semantics', 'bg', 'container-prominent')]: theme['bg-container-prominent'],
       [tokenName('color-semantics', 'bg', 'transparent')]: theme['bg-transparent'],
       [tokenName('color-semantics', 'text', 'primary')]: theme['text-primary'],
       [tokenName('color-semantics', 'text', 'secondary')]: theme['text-secondary'],

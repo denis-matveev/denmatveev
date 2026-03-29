@@ -49,6 +49,7 @@
     "green-700": "#346e17",
     "green-800": "#245c0c",
     "beige-50": "#e9e8e6",
+    "beige-800": "#3a3731",
     "beige-900": "#2b2924"
   },
   "fonts": {
@@ -124,6 +125,7 @@
     "light": {
       "bg-page": "var(--color-primitives-beige-50)",
       "bg-accent": "var(--color-primitives-green-700)",
+      "bg-container-prominent": "var(--color-primitives-neutral-0)",
       "bg-transparent": "transparent",
       "text-primary": "var(--color-primitives-neutral-900)",
       "text-secondary": "var(--color-primitives-neutral-700)",
@@ -139,6 +141,7 @@
     "dark": {
       "bg-page": "var(--color-primitives-beige-900)",
       "bg-accent": "var(--color-primitives-green-200)",
+      "bg-container-prominent": "var(--color-primitives-beige-800)",
       "bg-transparent": "transparent",
       "text-primary": "var(--color-primitives-neutral-0)",
       "text-secondary": "var(--color-primitives-neutral-50)",
@@ -159,7 +162,7 @@
         "icon": "var(--color-semantics-icon-accent)",
         "border": "var(--color-semantics-border-default)",
         "bg": "var(--color-semantics-bg-transparent)",
-        "bg-hover": "var(--color-primitives-neutral-0)",
+        "bg-hover": "var(--color-semantics-bg-container-prominent)",
         "bg-pressed": "var(--color-primitives-green-100)"
       }
     },
@@ -169,7 +172,7 @@
         "icon": "var(--color-semantics-icon-accent)",
         "border": "var(--color-semantics-border-default)",
         "bg": "var(--color-semantics-bg-transparent)",
-        "bg-hover": "var(--color-primitives-neutral-0)",
+        "bg-hover": "var(--color-semantics-bg-container-prominent)",
         "bg-pressed": "var(--color-primitives-green-100)"
       }
     }

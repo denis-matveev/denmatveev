@@ -7,6 +7,7 @@
     "--buttons-secondary-icon",
     "--buttons-secondary-text",
     "--color-primitives-beige-50",
+    "--color-primitives-beige-800",
     "--color-primitives-beige-900",
     "--color-primitives-green-100",
     "--color-primitives-green-200",
@@ -18,6 +19,7 @@
     "--color-primitives-neutral-700",
     "--color-primitives-neutral-900",
     "--color-semantics-bg-accent",
+    "--color-semantics-bg-container-prominent",
     "--color-semantics-bg-page",
     "--color-semantics-bg-transparent",
     "--color-semantics-border-accent",
@@ -123,6 +125,7 @@
     "--color-primitives-green-700": "#346e17",
     "--color-primitives-green-800": "#245c0c",
     "--color-primitives-beige-50": "#e9e8e6",
+    "--color-primitives-beige-800": "#3a3731",
     "--color-primitives-beige-900": "#2b2924",
     "--typography-font-family-display": "\"Climate Crisis\", sans-serif",
     "--typography-font-family-text": "\"Karla\", sans-serif",
@@ -170,6 +173,7 @@
   "themeLight": {
     "--color-semantics-bg-page": "var(--color-primitives-beige-50)",
     "--color-semantics-bg-accent": "var(--color-primitives-green-700)",
+    "--color-semantics-bg-container-prominent": "var(--color-primitives-neutral-0)",
     "--color-semantics-bg-transparent": "transparent",
     "--color-semantics-text-primary": "var(--color-primitives-neutral-900)",
     "--color-semantics-text-secondary": "var(--color-primitives-neutral-700)",
@@ -185,12 +189,13 @@
     "--buttons-secondary-icon": "var(--color-semantics-icon-accent)",
     "--buttons-secondary-border": "var(--color-semantics-border-default)",
     "--buttons-secondary-bg": "var(--color-semantics-bg-transparent)",
-    "--buttons-secondary-bg-hover": "var(--color-primitives-neutral-0)",
+    "--buttons-secondary-bg-hover": "var(--color-semantics-bg-container-prominent)",
     "--buttons-secondary-bg-pressed": "var(--color-primitives-green-100)"
   },
   "themeDark": {
     "--color-semantics-bg-page": "var(--color-primitives-beige-900)",
     "--color-semantics-bg-accent": "var(--color-primitives-green-200)",
+    "--color-semantics-bg-container-prominent": "var(--color-primitives-beige-800)",
     "--color-semantics-bg-transparent": "transparent",
     "--color-semantics-text-primary": "var(--color-primitives-neutral-0)",
     "--color-semantics-text-secondary": "var(--color-primitives-neutral-50)",
@@ -206,7 +211,7 @@
     "--buttons-secondary-icon": "var(--color-semantics-icon-accent)",
     "--buttons-secondary-border": "var(--color-semantics-border-default)",
     "--buttons-secondary-bg": "var(--color-semantics-bg-transparent)",
-    "--buttons-secondary-bg-hover": "var(--color-primitives-neutral-0)",
+    "--buttons-secondary-bg-hover": "var(--color-semantics-bg-container-prominent)",
     "--buttons-secondary-bg-pressed": "var(--color-primitives-green-100)"
   }
 }
