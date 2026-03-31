@@ -32,6 +32,11 @@ function tokenName(collection, group, name) {
   return `--${collection}-${group}-${name}`;
 }
 
+function tokenFromCompound(collection, compoundName) {
+  const [group, ...rest] = compoundName.split('-');
+  return tokenName(collection, group, rest.join('-'));
+}
+
 function buildTokensCss(data) {
   const rootLines = [
     ...Object.entries(data.space).map(([name, value]) => `${tokenName('sizes', 'space', name)}: ${value};`),
@@ -113,24 +118,14 @@ function buildThemeCss(data) {
   const buildLines = (themeName) => {
     const theme = data.themes[themeName];
     const buttonTheme = data.buttons[themeName].secondary;
+    const themeLines = Object.entries(theme).map(
+      ([name, value]) => `${tokenFromCompound('color-semantics', name)}: ${value};`,
+    );
 
     return [
       `color-scheme: ${themeName};`,
       '',
-      `${tokenName('color-semantics', 'bg', 'page')}: ${theme['bg-page']};`,
-      `${tokenName('color-semantics', 'bg', 'accent')}: ${theme['bg-accent']};`,
-      `${tokenName('color-semantics', 'bg', 'container-prominent')}: ${theme['bg-container-prominent']};`,
-      `${tokenName('color-semantics', 'bg', 'transparent')}: ${theme['bg-transparent']};`,
-      `${tokenName('color-semantics', 'text', 'primary')}: ${theme['text-primary']};`,
-      `${tokenName('color-semantics', 'text', 'secondary')}: ${theme['text-secondary']};`,
-      `${tokenName('color-semantics', 'text', 'accent')}: ${theme['text-accent']};`,
-      `${tokenName('color-semantics', 'text', 'on-accent')}: ${theme['text-on-accent']};`,
-      `${tokenName('color-semantics', 'border', 'default')}: ${theme['border-default']};`,
-      `${tokenName('color-semantics', 'border', 'accent')}: ${theme['border-accent']};`,
-      `${tokenName('color-semantics', 'icon', 'primary')}: ${theme['icon-primary']};`,
-      `${tokenName('color-semantics', 'icon', 'secondary')}: ${theme['icon-secondary']};`,
-      `${tokenName('color-semantics', 'icon', 'accent')}: ${theme['icon-accent']};`,
-      `${tokenName('color-semantics', 'icon', 'on-accent')}: ${theme['icon-on-accent']};`,
+      ...themeLines,
       `${tokenName('buttons', 'secondary', 'text')}: ${buttonTheme.text};`,
       `${tokenName('buttons', 'secondary', 'icon')}: ${buttonTheme.icon};`,
       `${tokenName('buttons', 'secondary', 'border')}: ${buttonTheme.border};`,
@@ -243,20 +238,9 @@ function buildFixture(data) {
     const theme = data.themes[themeName];
     const buttonTheme = data.buttons[themeName].secondary;
     const themeMap = {
-      [tokenName('color-semantics', 'bg', 'page')]: theme['bg-page'],
-      [tokenName('color-semantics', 'bg', 'accent')]: theme['bg-accent'],
-      [tokenName('color-semantics', 'bg', 'container-prominent')]: theme['bg-container-prominent'],
-      [tokenName('color-semantics', 'bg', 'transparent')]: theme['bg-transparent'],
-      [tokenName('color-semantics', 'text', 'primary')]: theme['text-primary'],
-      [tokenName('color-semantics', 'text', 'secondary')]: theme['text-secondary'],
-      [tokenName('color-semantics', 'text', 'accent')]: theme['text-accent'],
-      [tokenName('color-semantics', 'text', 'on-accent')]: theme['text-on-accent'],
-      [tokenName('color-semantics', 'border', 'default')]: theme['border-default'],
-      [tokenName('color-semantics', 'border', 'accent')]: theme['border-accent'],
-      [tokenName('color-semantics', 'icon', 'primary')]: theme['icon-primary'],
-      [tokenName('color-semantics', 'icon', 'secondary')]: theme['icon-secondary'],
-      [tokenName('color-semantics', 'icon', 'accent')]: theme['icon-accent'],
-      [tokenName('color-semantics', 'icon', 'on-accent')]: theme['icon-on-accent'],
+      ...Object.fromEntries(
+        Object.entries(theme).map(([name, value]) => [tokenFromCompound('color-semantics', name), value]),
+      ),
       [tokenName('buttons', 'secondary', 'text')]: buttonTheme.text,
       [tokenName('buttons', 'secondary', 'icon')]: buttonTheme.icon,
       [tokenName('buttons', 'secondary', 'border')]: buttonTheme.border,

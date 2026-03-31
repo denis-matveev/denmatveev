@@ -154,12 +154,12 @@
 
 .button-link:not([aria-disabled="true"]):hover,
 .button-link:not([aria-disabled="true"]):focus-visible {
-  border-color: var(--buttons-secondary-border);
+  border-color: var(--color-semantics-border-accent);
   background: var(--buttons-secondary-bg-hover);
 }
 
 .button-link:not([aria-disabled="true"]):active {
-  border-color: var(--buttons-secondary-border);
+  border-color: var(--color-semantics-border-accent);
   background: var(--buttons-secondary-bg-pressed);
 }
 
