@@ -5,14 +5,20 @@
     return;
   }
 
-  function createArrow() {
+  function createArrow(direction) {
     var button = document.createElement('button');
+    var isPrevious = direction === 'previous';
+
     button.type = 'button';
-    button.className = 'case-mockups__arrow case-mockups__arrow--next';
-    button.setAttribute('aria-label', 'Show next mockups');
+    button.className =
+      'case-mockups__arrow case-mockups__arrow--' +
+      (isPrevious ? 'previous' : 'next');
+    button.setAttribute(
+      'aria-label',
+      isPrevious ? 'Show previous mockups' : 'Show next mockups',
+    );
     button.hidden = true;
-    button.innerHTML =
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>';
+    button.innerHTML = '<span class="case-mockups__arrow-icon" aria-hidden="true"></span>';
     return button;
   }
 
@@ -23,7 +29,8 @@
       return;
     }
 
-    var next = createArrow();
+    var previous = createArrow('previous');
+    var next = createArrow('next');
     var viewport = document.createElement('div');
     var regionLabel = 'Mockup presentation ' + (index + 1);
 
@@ -33,15 +40,26 @@
     viewport.setAttribute('tabindex', '0');
     presentation.insertBefore(viewport, track);
     viewport.appendChild(track);
+    presentation.append(previous);
     presentation.append(next);
 
     function updateControls() {
       var maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
       var hasOverflow = maxScroll > 1;
       var scrollLeft = viewport.scrollLeft;
+      var hidePrevious = !hasOverflow || scrollLeft <= 1;
+      var hideNext = !hasOverflow || scrollLeft >= maxScroll - 1;
 
       presentation.classList.toggle('case-mockups--overflow', hasOverflow);
-      next.hidden = !hasOverflow || scrollLeft >= maxScroll - 1;
+
+      if (document.activeElement === previous && hidePrevious && !hideNext) {
+        next.focus();
+      } else if (document.activeElement === next && hideNext && !hidePrevious) {
+        previous.focus();
+      }
+
+      previous.hidden = hidePrevious;
+      next.hidden = hideNext;
     }
 
     function scrollByPage(direction) {
@@ -50,6 +68,10 @@
         behavior: 'smooth',
       });
     }
+
+    previous.addEventListener('click', function () {
+      scrollByPage(-1);
+    });
 
     next.addEventListener('click', function () {
       scrollByPage(1);

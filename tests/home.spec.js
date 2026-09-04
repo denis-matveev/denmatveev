@@ -255,13 +255,17 @@ test.describe('Lakku case study', () => {
 
     const presentation = page.locator('.case-mockups').nth(1);
     const viewport = presentation.locator('.case-mockups__viewport');
+    const previous = presentation.getByRole('button', { name: 'Show previous mockups' });
     const next = presentation.getByRole('button', { name: 'Show next mockups' });
 
     await expect(viewport).toHaveAttribute('role', 'region');
     await expect(viewport).toHaveCSS('overflow-x', 'auto');
     await expect(next).toBeVisible();
     await expect(next).toHaveCSS('opacity', '0');
-    await expect(presentation.getByRole('button', { name: 'Show previous mockups' })).toHaveCount(0);
+    await expect(previous).toBeHidden();
+    await expect(next).toHaveCSS('width', '40px');
+    await expect(next).toHaveCSS('height', '40px');
+    await expect(next.locator('.case-mockups__arrow-icon')).toHaveCSS('width', '24px');
 
     const dimensions = await viewport.evaluate((element) => ({
       clientWidth: element.clientWidth,
@@ -274,6 +278,8 @@ test.describe('Lakku case study', () => {
     await expect
       .poll(() => viewport.evaluate((element) => element.scrollLeft))
       .toBeGreaterThan(0);
+    await expect(previous).toBeVisible();
+    await expect(previous).toBeFocused();
   });
 
   test('the final mockup aligns with the right edge of the text column', async ({ page }) => {

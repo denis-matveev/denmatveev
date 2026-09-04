@@ -24,11 +24,10 @@
 - At the initial scroll position, align the left edge of the first mockup with the left edge of the text content column.
 - Provide enough trailing scroll space for the right edge of the final mockup to align with the right edge of the text content column at the end of the scroll range.
 - Keep mockup shadows fully visible within the component's vertical overflow area; do not clip them at the bottom or sides.
-- Provide only a forward/right navigation arrow. Backward navigation remains available through touch and trackpad scrolling; do not add a left arrow.
-- Show the right arrow only while the presentation is hovered or contains keyboard focus, and only while additional content is available to the right.
-- Position the right arrow 24px from the right edge of the viewport. Use a 56px circular button with a solid white background and the site's shared color, border, icon, and interaction-state tokens.
+- Provide previous/left and next/right navigation arrows whenever content is available in the corresponding scroll direction.
+- Show navigation arrows only while the presentation is hovered or contains keyboard focus. Hide the left arrow at the initial scroll position and the right arrow at the end of the scroll range.
+- Position each arrow 24px from its corresponding viewport edge. Match the Figma `Button` component at node `300:28355`: 40px circular size, 24px Untitled UI arrow icon, `bg/container-shallow` background, `secondary/border` 1px border, pill radius, `icon-primary` icon color, and shared interaction-state tokens.
 - Hide mockup presentation navigation arrows entirely on mobile viewports (640px and below); mobile navigation must rely on touch scrolling.
-- Hide the right arrow once the presentation reaches the end of its scroll range.
 - Keep the overflow behavior scoped to the mockup presentation so the page itself does not acquire unintended horizontal scrolling.
 
 # Case media viewer rules
