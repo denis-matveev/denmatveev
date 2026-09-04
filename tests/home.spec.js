@@ -173,6 +173,17 @@ test.describe('homepage smoke and links', () => {
           .evaluate((element) => window.getComputedStyle(element).backgroundColor),
       )
       .toBe('rgb(255, 255, 255)');
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await openHome(page);
+    await page.getByRole('button', { name: 'Open navigation menu' }).click();
+    await expect
+      .poll(() =>
+        page
+          .locator('#primary-navigation')
+          .evaluate((element) => window.getComputedStyle(element).boxShadow),
+      )
+      .toBe('none');
   });
 });
 
@@ -236,7 +247,7 @@ test.describe('Lakku case study', () => {
   });
 
   test('mockup presentations scroll locally and expose arrow navigation when needed', async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
+    await page.setViewportSize({ width: 768, height: 1024 });
     await page.goto(new URL('/lakku.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
 
     const presentation = page.locator('.case-mockups').nth(1);
@@ -282,6 +293,139 @@ test.describe('Lakku case study', () => {
     });
 
     expect(alignment).toBe(0);
+  });
+
+  test('case study adapts without page-level horizontal scrolling', async ({ page }) => {
+    for (const viewport of [
+      { width: 768, height: 1024 },
+      { width: 390, height: 844 },
+      { width: 320, height: 700 },
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto(new URL('/lakku.html', baseUrl).href, {
+        waitUntil: 'domcontentloaded',
+      });
+
+      const geometry = await page.evaluate(() => {
+        const bounds = (selector) => {
+          const rect = document.querySelector(selector).getBoundingClientRect();
+          return {
+            left: Math.round(rect.left),
+            right: Math.round(rect.right),
+            width: Math.round(rect.width),
+          };
+        };
+        const firstPresentation = document.querySelector('.case-mockups');
+        const viewportElement = firstPresentation.querySelector('.case-mockups__viewport');
+
+        return {
+          pageWidth: document.documentElement.scrollWidth,
+          main: bounds('.case-main'),
+          hero: bounds('.case-hero-image'),
+          summary: bounds('.case-summary'),
+          text: bounds('.case-content > p'),
+          firstMockup: bounds('.case-mockups img'),
+          mockupOverflow: viewportElement.scrollWidth > viewportElement.clientWidth,
+          arrowDisplay: window.getComputedStyle(
+            firstPresentation.querySelector('.case-mockups__arrow'),
+          ).display,
+        };
+      });
+
+      expect(geometry.pageWidth).toBe(viewport.width);
+      expect(geometry.main.width).toBe(viewport.width);
+      expect(geometry.hero.left).toBeGreaterThanOrEqual(16);
+      expect(geometry.hero.right).toBeLessThanOrEqual(viewport.width - 16);
+      expect(geometry.summary.left).toBe(geometry.hero.left);
+      expect(geometry.summary.right).toBe(geometry.hero.right);
+      expect(geometry.text.width).toBeLessThanOrEqual(680);
+      expect(geometry.firstMockup.left).toBe(geometry.text.left);
+      expect(geometry.mockupOverflow).toBe(true);
+      if (viewport.width <= 640) {
+        expect(geometry.arrowDisplay).toBe('none');
+      }
+    }
+  });
+
+  test('mobile viewer handles media and keeps each mockup presentation in its own gallery', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(new URL('/lakku.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+
+    const mediaImages = page.locator('.case-media img');
+    const mockupImage = page.locator('.screen-mockup img').first();
+    const viewer = page.getByRole('dialog', { name: 'Image viewer' });
+
+    await expect(mediaImages).toHaveCount(5);
+    await expect(mediaImages.first()).toHaveAttribute('role', 'button');
+    await expect(mockupImage).toHaveAttribute('role', 'button');
+
+    await mediaImages.first().click();
+    await expect(viewer).toBeVisible();
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('1 / 5');
+
+    const viewerIconAssets = await viewer.locator('.media-viewer__icon').evaluateAll((icons) =>
+      icons.map((icon) => window.getComputedStyle(icon).maskImage),
+    );
+    expect(viewerIconAssets).toEqual([
+      expect.stringContaining('/assets/icons/untitled-ui/minus.svg'),
+      expect.stringContaining('/assets/icons/untitled-ui/plus.svg'),
+      expect.stringContaining('/assets/icons/untitled-ui/x-close.svg'),
+      expect.stringContaining('/assets/icons/untitled-ui/arrow-left.svg'),
+      expect.stringContaining('/assets/icons/untitled-ui/arrow-right.svg'),
+    ]);
+
+    await viewer.getByRole('button', { name: 'Zoom in' }).click();
+    await expect(viewer.locator('.media-viewer__zoom-value')).toHaveText('150%');
+    await viewer.getByRole('button', { name: 'Zoom out' }).click();
+
+    const imageBox = await viewer.locator('.media-viewer__image').boundingBox();
+    if (!imageBox) {
+      throw new Error('Viewer image is not visible');
+    }
+    await page.mouse.move(imageBox.x + imageBox.width * 0.75, imageBox.y + imageBox.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(imageBox.x + imageBox.width * 0.25, imageBox.y + imageBox.height / 2);
+    await page.mouse.up();
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('2 / 5');
+
+    await viewer.locator('.media-viewer__stage').click({ position: { x: 4, y: 4 } });
+    await expect(viewer).toBeHidden();
+
+    await mediaImages.first().click();
+    const dismissImageBox = await viewer.locator('.media-viewer__image').boundingBox();
+    if (!dismissImageBox) {
+      throw new Error('Viewer image is not visible for dismiss gesture');
+    }
+    await page.mouse.move(
+      dismissImageBox.x + dismissImageBox.width / 2,
+      dismissImageBox.y + dismissImageBox.height / 2,
+    );
+    await page.mouse.down();
+    await page.mouse.move(
+      dismissImageBox.x + dismissImageBox.width / 2,
+      dismissImageBox.y + dismissImageBox.height / 2 + 120,
+    );
+    await page.mouse.up();
+    await expect(viewer).toBeHidden();
+
+    await mediaImages.first().click();
+    await viewer.getByRole('button', { name: 'Close image viewer' }).click();
+    await expect(viewer).toBeHidden();
+
+    await mockupImage.click();
+    await expect(viewer).toBeVisible();
+    await expect(viewer.locator('.media-viewer__caption')).toHaveText('Product');
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('1 / 3');
+    await viewer.getByRole('button', { name: 'Next image' }).click();
+    await viewer.getByRole('button', { name: 'Next image' }).click();
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('3 / 3');
+    await expect(viewer.getByRole('button', { name: 'Next image' })).toBeDisabled();
+    await viewer.getByRole('button', { name: 'Close image viewer' }).click();
+
+    await page.locator('.case-mockups').nth(1).locator('.screen-mockup img').first().click();
+    await expect(viewer.locator('.media-viewer__caption')).toHaveText('Feed');
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('1 / 4');
+    await viewer.getByRole('button', { name: 'Close image viewer' }).click();
   });
 });
 

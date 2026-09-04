@@ -19,8 +19,26 @@
 - Provide only a forward/right navigation arrow. Backward navigation remains available through touch and trackpad scrolling; do not add a left arrow.
 - Show the right arrow only while the presentation is hovered or contains keyboard focus, and only while additional content is available to the right.
 - Position the right arrow 24px from the right edge of the viewport. Use a 56px circular button with a solid white background and the site's shared color, border, icon, and interaction-state tokens.
+- Hide mockup presentation navigation arrows entirely on mobile viewports (640px and below); mobile navigation must rely on touch scrolling.
 - Hide the right arrow once the presentation reaches the end of its scroll range.
 - Keep the overflow behavior scoped to the mockup presentation so the page itself does not acquire unintended horizontal scrolling.
+
+# Case media viewer rules
+
+- Use the shared `media-viewer.js` component on every case-study page; do not build page-specific lightboxes.
+- On mobile viewports (640px and below), tapping an image in a `Media` component or a screen inside a `mockup presentation` must open it in the shared full-screen viewer.
+- Do not enable the full-screen viewer on wider viewports unless explicitly requested.
+- Treat all `Media` components on the current case-study page as one viewer sequence.
+- Treat each `mockup presentation` as its own viewer sequence. Navigation must never continue into a neighboring mockup presentation.
+- Opening the viewer must not interfere with horizontal touch or trackpad scrolling inside a mockup presentation; a drag used for scrolling must not be treated as a tap.
+- Support horizontal swipes and previous/next controls for moving through the active viewer sequence.
+- Support pinch zoom, double-tap zoom, and explicit zoom controls. Keep zoom between 100% and 400%, and allow panning while zoomed.
+- At 100% zoom, allow a downward swipe to dismiss the viewer. The image should follow the gesture and the backdrop and controls should fade; short gestures must return the image to its resting position.
+- Allow closing through the Untitled UI `x-close` control, the `Escape` key, or a tap on empty backdrop space.
+- Use the exact exported 24px Untitled UI assets in `assets/icons/untitled-ui/` for close, zoom, and previous/next controls. Render them through `currentColor` so semantic theme tokens control their color.
+- Lock page scrolling while the viewer is open and restore it when the viewer closes.
+- Expose the viewer as an accessible modal dialog, label every control, support keyboard navigation, and return focus to the image that opened it.
+- Keep the current image caption and sequence position visible in the viewer.
 
 # Figma asset export rules
 

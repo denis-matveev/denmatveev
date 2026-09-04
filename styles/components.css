@@ -28,6 +28,10 @@
   align-items: center;
 }
 
+:root[data-theme="dark"] .topbar__nav {
+  box-shadow: none;
+}
+
 .menu-toggle {
   width: var(--sizes-size-button-min-height);
   height: var(--sizes-size-button-min-height);
