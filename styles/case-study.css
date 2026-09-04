@@ -353,23 +353,13 @@
   height: 627px;
 }
 
-.case-media--crosscom-search .case-media__row {
-  width: 100%;
-  justify-content: center;
-  gap: 10px;
+.case-media--crosscom-search > div {
+  flex: 0 0 auto;
+  aspect-ratio: 1200 / 570;
 }
 
-.case-media--crosscom-search .case-media__row img:first-child {
-  width: 392px;
-  height: 398px;
-  align-self: flex-start;
-  object-fit: cover;
-}
-
-.case-media--crosscom-search .case-media__row img:last-child {
-  width: 760px;
-  height: 570px;
-  object-fit: cover;
+.case-media--crosscom-search img {
+  object-fit: contain;
 }
 
 .case-media--crosscom-tags {
