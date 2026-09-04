@@ -448,8 +448,10 @@ test.describe('CrossCom case study', () => {
     expect(response?.ok()).toBeTruthy();
     await expect(page.getByRole('heading', { level: 1, name: 'CrossCom' })).toBeVisible();
     await expect(page.getByRole('heading', { level: 2, name: 'What I learned' })).toBeAttached();
-    await expect(page.locator('.case-media')).toHaveCount(14);
-    await expect(page.locator('.case-media img')).toHaveCount(17);
+    await expect(page.locator('.case-media')).toHaveCount(12);
+    await expect(page.locator('.case-media img')).toHaveCount(13);
+    await expect(page.locator('.case-mockups--desktop')).toHaveCount(2);
+    await expect(page.locator('.case-mockups--desktop .screen-mockup img')).toHaveCount(4);
 
     const geometry = await page.evaluate(() => {
       const rect = (selector) => {
@@ -475,6 +477,93 @@ test.describe('CrossCom case study', () => {
     expect(geometry.summary.width).toBe(760);
     expect(geometry.text.width).toBe(760);
     expect(geometry.brokenImages).toBe(0);
+  });
+
+  test('desktop mockup presentations reuse the shared scrolling behavior', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 1000 });
+    await page.goto(new URL('/crosscom.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+
+    const presentations = page.locator('.case-mockups--desktop');
+    const first = presentations.first();
+    const second = presentations.nth(1);
+    const firstViewport = first.locator('.case-mockups__viewport');
+    const next = first.getByRole('button', { name: 'Show next mockups' });
+    const previous = first.getByRole('button', { name: 'Show previous mockups' });
+
+    const geometry = await page.evaluate(() => {
+      const text = document.querySelector('.case-content > p').getBoundingClientRect();
+      const presentations = document.querySelectorAll('.case-mockups--desktop');
+      const firstImages = presentations[0].querySelectorAll('.screen-mockup img');
+      const secondImages = presentations[1].querySelectorAll('.screen-mockup img');
+
+      return {
+        pageWidth: document.documentElement.scrollWidth,
+        firstLeft: firstImages[0].getBoundingClientRect().left,
+        textLeft: text.left,
+        firstSizes: Array.from(firstImages).map((image) => ({
+          width: image.getBoundingClientRect().width,
+          height: image.getBoundingClientRect().height,
+        })),
+        secondSizes: Array.from(secondImages).map((image) => ({
+          width: image.getBoundingClientRect().width,
+          height: image.getBoundingClientRect().height,
+        })),
+      };
+    });
+
+    expect(geometry.pageWidth).toBe(1400);
+    expect(geometry.firstLeft).toBe(geometry.textLeft);
+    expect(geometry.firstSizes).toEqual([
+      { width: 760, height: 570 },
+      { width: 760, height: 570 },
+    ]);
+    expect(geometry.secondSizes).toEqual([
+      { width: 1011, height: 575 },
+      { width: 760, height: 575 },
+    ]);
+    await expect(firstViewport).toHaveCSS('overflow-x', 'auto');
+    await expect(previous).toBeHidden();
+    await expect(next).toBeVisible();
+
+    await next.click({ force: true });
+    await expect.poll(() => firstViewport.evaluate((element) => element.scrollLeft)).toBeGreaterThan(0);
+    await expect(previous).toBeVisible();
+
+    const secondViewport = second.locator('.case-mockups__viewport');
+    await secondViewport.evaluate((element) => {
+      element.scrollLeft = element.scrollWidth;
+    });
+    const endAlignment = await second.evaluate((element) => {
+      const text = document.querySelector('.case-content > p');
+      const images = element.querySelectorAll('.screen-mockup img');
+      return images[images.length - 1].getBoundingClientRect().right - text.getBoundingClientRect().right;
+    });
+
+    expect(endAlignment).toBe(0);
+  });
+
+  test('desktop mockups use isolated mobile viewer sequences', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(new URL('/crosscom.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+
+    const viewer = page.getByRole('dialog', { name: 'Image viewer' });
+    const presentations = page.locator('.case-mockups--desktop');
+    const firstImage = presentations.first().locator('.screen-mockup img').first();
+    const secondGroupImage = presentations.nth(1).locator('.screen-mockup img').first();
+
+    await expect(firstImage).toHaveAttribute('role', 'button');
+    await firstImage.click();
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('1 / 2');
+    await expect(viewer.locator('.media-viewer__caption')).toHaveText(
+      'Starting a new report from scratch, a previous report, or a template.',
+    );
+    await viewer.getByRole('button', { name: 'Close image viewer' }).click();
+
+    await secondGroupImage.click();
+    await expect(viewer.locator('.media-viewer__position')).toHaveText('1 / 2');
+    await expect(viewer.locator('.media-viewer__caption')).toHaveText(
+      'Reacting to a full report or selected text with quick responses, emoji, and stickers.',
+    );
   });
 
   test('callout uses the same shared component styles as Lakku', async ({ page }) => {

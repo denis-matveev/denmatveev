@@ -12,7 +12,7 @@
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="stylesheet" href="styles.css?v=4" />
-    <link rel="stylesheet" href="styles/case-study.css?v=9" />
+    <link rel="stylesheet" href="styles/case-study.css?v=10" />
     <script src="theme.js"></script>
     <script type="text/javascript">
       (function(c, l, a, r, i, t, y) {
@@ -141,7 +141,18 @@
         <h2>Designing the core experience</h2>
         <h3>1. Easier report writing</h3>
         <p>Writing a report is the main action in CrossCom. Employees can start from scratch, reuse a previous report, choose a date, or use a template. The editor supports sections, lists, links, mentions, files, and images, while drafts are saved automatically.</p>
-        <figure class="case-media case-media--crosscom-overflow"><div class="case-media__row"><img src="assets/projects/crosscom/content-07@2x.png" alt="CrossCom report editor" loading="lazy" /><img src="assets/projects/crosscom/content-08@2x.png" alt="Formatting options in the report editor" loading="lazy" /></div><figcaption>The report editor gives employees a clear structure, autosave, and visible publication controls.</figcaption></figure>
+        <figure class="case-mockups case-mockups--strip case-mockups--desktop">
+          <div class="case-mockups__track">
+            <figure class="screen-mockup screen-mockup--desktop">
+              <img src="assets/projects/crosscom/mockup-report-start@2x.png" alt="CrossCom screen for starting a new report" loading="lazy" />
+              <figcaption>Starting a new report from scratch, a previous report, or a template.</figcaption>
+            </figure>
+            <figure class="screen-mockup screen-mockup--desktop">
+              <img src="assets/projects/crosscom/mockup-report-editor@2x.png" alt="CrossCom structured report editor" loading="lazy" />
+              <figcaption>Writing a structured report with sections, lists, mentions, and attachments.</figcaption>
+            </figure>
+          </div>
+        </figure>
         <p>Research showed that completing a report was not always easy. The Good News / Appreciation section was the most difficult part for 48% of survey participants. People often knew what had happened during the day but found it hard to turn those events into a clear summary.</p>
         <p>I designed AI assistance directly inside the report editor. The system analyzes the employee’s previous reports together with the current draft. It then suggests possible achievements, positive events, and moments of appreciation that may be worth adding.</p>
         <p>Some suggestions contain placeholders for details the AI cannot know, such as a colleague or customer name. Before publication, CrossCom asks the employee to complete them and takes them directly to the first unfinished placeholder.</p>
@@ -149,7 +160,18 @@
 
         <h3>2. Faster and more precise feedback</h3>
         <p>Employees can react to a full report, selected text, or a comment. They can reply, join an existing reaction, use a quick response, emoji, or sticker, and attach an image to a comment. Text-level reactions keep feedback close to the exact work being discussed.</p>
-        <figure class="case-media case-media--crosscom-overflow case-media--crosscom-reactions"><div class="case-media__row"><img src="assets/projects/crosscom/content-11@2x.png" alt="Reaction selector in a CrossCom report" loading="lazy" /><img src="assets/projects/crosscom/content-12@2x.png" alt="Inline reply in a CrossCom report" loading="lazy" /></div><figcaption>Reaction and reply states for feedback on reports, selected text, and comments.</figcaption></figure>
+        <figure class="case-mockups case-mockups--strip case-mockups--desktop" style="--desktop-mockup-image-height: 575px">
+          <div class="case-mockups__track">
+            <figure class="screen-mockup screen-mockup--desktop" style="--desktop-mockup-width: 1011px">
+              <img src="assets/projects/crosscom/mockup-reactions@2x.png" alt="Reaction selector for a CrossCom report" loading="lazy" />
+              <figcaption>Reacting to a full report or selected text with quick responses, emoji, and stickers.</figcaption>
+            </figure>
+            <figure class="screen-mockup screen-mockup--desktop">
+              <img src="assets/projects/crosscom/mockup-inline-comment@2x.png" alt="Inline comment in a CrossCom report" loading="lazy" />
+              <figcaption>Adding an inline comment to a specific part of the report.</figcaption>
+            </figure>
+          </div>
+        </figure>
 
         <h3>3. Search across company knowledge</h3>
         <p>Search connects reports, posts, people, teams, and tags. Filters cover date, content type, author, team, mentioned person, and sorting. This helps employees find both the right document and the colleague who knows the subject.</p>
@@ -199,6 +221,7 @@
     </footer>
     <script src="analytics.js"></script>
     <script src="navigation.js"></script>
+    <script src="mockup-presentation.js?v=2"></script>
     <script src="media-viewer.js?v=4"></script>
   </body>
 </html>
