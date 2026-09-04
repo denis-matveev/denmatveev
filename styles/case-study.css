@@ -909,6 +909,31 @@
     padding-left: var(--sizes-space-16);
   }
 
+  /* Keep desktop mockups readable on phones while preserving a peek at the next one. */
+  .case-mockups--desktop {
+    height: auto;
+  }
+
+  .case-mockups--desktop .case-mockups__viewport {
+    height: auto;
+  }
+
+  .case-mockups--desktop .case-mockups__track {
+    height: auto;
+    align-items: flex-start;
+  }
+
+  .case-mockups--desktop .screen-mockup {
+    width: calc(100vw - 72px);
+    height: auto;
+    flex-basis: calc(100vw - 72px);
+  }
+
+  .case-mockups--desktop .screen-mockup img {
+    height: auto;
+    aspect-ratio: auto;
+  }
+
   .case-mockups__arrow {
     display: none;
   }
