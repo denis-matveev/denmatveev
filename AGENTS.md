@@ -9,6 +9,14 @@
 - Avoid unnecessary animations.
 - Use semantic HTML.
 
+# Shared case-study component rules
+
+- Reuse the same semantic HTML structure and base CSS class for the same Figma component across every case-study page.
+- Do not add case-specific visual modifiers to a shared component unless the linked Figma component defines a corresponding variant or the user explicitly requests a deviation.
+- Keep content and layout-specific sizing outside the shared component's visual contract whenever possible.
+- The shared `Callout` component uses `bg/container-prominent`, a 4px gap, 16px vertical and 24px horizontal padding, and an 8px radius.
+- The `Callout` label uses the 16px/23px semibold body style with `text/accent`; its body uses the 24px/28px regular button style with `text/primary`.
+
 # Mockup presentation rules
 
 - The `mockup presentation` component may extend beyond the viewport when its mockups exceed the available width.

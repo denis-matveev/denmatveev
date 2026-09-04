@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CrossCom case study | Denis Matveev</title>
+    <meta name="description" content="CrossCom — modernizing an internal company network from legacy-product research to detailed design." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Karla:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml" sizes="any" />
+    <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css?v=4" />
+    <link rel="stylesheet" href="styles/case-study.css?v=8" />
+    <script src="theme.js"></script>
+    <script type="text/javascript">
+      (function(c, l, a, r, i, t, y) {
+        c[a] = c[a] || function() { (c[a].q = c[a].q || []).push(arguments); };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "w10dumi6ht");
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJW8ZLRV99"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag("js", new Date()); gtag("config", "G-JJW8ZLRV99");
+    </script>
+  </head>
+  <body class="case-page crosscom-page">
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Denis Matveev — home"><span>Denis</span><span>Matveev</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+        <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <nav id="primary-navigation" class="topbar__nav" aria-label="Primary navigation">
+        <a class="nav-item nav-item--active" href="/" aria-current="page"><span class="nav-item__label">Works</span></a>
+        <span class="nav-item"><span class="nav-item__label">About</span></span>
+        <a class="nav-item" href="assets/CV_Denis_Matveev.pdf" download data-analytics="portfolio-cta"><span class="nav-item__icon nav-item__icon--file" aria-hidden="true"></span><span class="nav-item__label">Resume</span></a>
+        <a class="nav-item" href="mailto:denis.vic.matveev@gmail.com" data-analytics="contact-link"><span class="nav-item__icon nav-item__icon--mail" aria-hidden="true"></span><span class="nav-item__label">Contact</span></a>
+      </nav>
+    </header>
+
+    <main class="case-main">
+      <header class="case-header">
+        <div class="case-heading">
+          <h1>CrossCom</h1>
+          <p>Modernizing an internal company network: from research on a legacy product to detailed design.</p>
+        </div>
+        <ul class="case-tags" aria-label="Project tags">
+          <li>internal product</li><li>enterprise</li><li>product research</li><li>cross-platform</li>
+        </ul>
+        <img class="case-hero-image" src="assets/projects/crosscom/hero@2x.png" alt="CrossCom interface shown across desktop and mobile screens" />
+        <div class="case-summary-wrap">
+          <section class="case-summary case-summary--compact" aria-label="Case study summary">
+            <div class="case-summary__copy">
+              <p>CrossCom is an internal e-Jan Networks product for daily reports, feedback, and shared company knowledge. I led the design process from a 44-person employee survey through information architecture, a 110-item user story map, wireframes, desktop and mobile design, and implementation review. The core experience is now being gradually released to selected employees.</p>
+            </div>
+            <dl class="case-facts">
+              <div><dt>Role</dt><dd>Product Designer</dd></div>
+              <div><dt>Duration</dt><dd>May 2025 — January 2026</dd></div>
+              <div><dt>Team</dt><dd>4 people</dd></div>
+            </dl>
+          </section>
+        </div>
+      </header>
+
+      <article class="case-content">
+        <h2>Project overview</h2>
+        <p>CrossCom is an internal product used by e-Jan Networks. Employees use it to publish daily reports, read updates from colleagues, receive feedback, and find information about projects and teams.</p>
+        <p>When I joined the project, CrossCom had already been used inside the company for many years. It was an important part of the company culture, but its interface and technical experience had become outdated. We needed to modernize it without losing the value employees already saw in it.</p>
+        <p>I was responsible for research on the old version. I prepared the questions, analyzed the answers, formed the conclusions, and created the research presentation. I then designed the information architecture, user story map, and wireframes. After that, I designed the new desktop and mobile experience, prepared the main product states, and took part in implementation review.</p>
+
+        <figure class="case-media case-media--crosscom-legacy">
+          <div><img src="assets/projects/crosscom/content-01@2x.png" alt="Previous CrossCom daily reporting interface" loading="lazy" /></div>
+          <figcaption>The previous CrossCom UI used for daily reporting</figcaption>
+        </figure>
+
+        <h2>Why daily reports mattered</h2>
+        <p>CrossCom is built around a simple habit. At the end of the working day, an employee writes what they completed, what they plan to do next, what problems they faced, and who they want to thank.</p>
+        <p>These reports served several purposes:</p>
+        <ul class="case-list">
+          <li>employees could see that their work was noticed;</li>
+          <li>managers could understand what was happening in their teams;</li>
+          <li>colleagues could follow each other’s work;</li>
+          <li>the company could keep knowledge about projects and decisions;</li>
+          <li>good news and appreciation helped people stay connected.</li>
+        </ul>
+        <p>Our task was not only to create a more modern interface. We needed to protect a useful company habit while removing the problems around it.</p>
+
+        <h2>The problem</h2>
+        <p>The old version worked, but it was becoming harder to use.</p>
+        <p>Employees had problems with speed, login, and the mobile experience. The report format did not always match the way people worked. Good News / Appreciation was often the most difficult section to complete. Feedback was useful, but it was not consistent. Finding information in old reports also took too much effort.</p>
+        <p>The project had five goals:</p>
+        <ul class="case-list">
+          <li>make daily reports faster and easier to write;</li>
+          <li>make feedback more visible and easier to give;</li>
+          <li>help people find reports, projects, and experts;</li>
+          <li>make the product work well on mobile devices;</li>
+          <li>build a foundation for future development.</li>
+        </ul>
+        <aside class="case-callout"><span>Design challenge</span><strong>Modernize the experience without breaking a habit employees already trusted.</strong></aside>
+
+        <h2>Research</h2>
+        <p>I prepared and ran research on the old version of CrossCom. I wrote the questions, analyzed the answers, formed the conclusions, and created the final presentation. I then turned the findings into product requirements and design decisions.</p>
+        <p>The survey included 44 employees from Japan and India and 20 questions about writing and reading reports, feedback, search, mobile use, and overall satisfaction.</p>
+        <p>The strongest findings were:</p>
+        <ul class="case-list">
+          <li>89% considered daily reporting important;</li>
+          <li>68% valued feedback on their reports;</li>
+          <li>61% valued reading reports from colleagues;</li>
+          <li>60% wanted better speed and login reliability;</li>
+          <li>45% wanted a better report format;</li>
+          <li>40% wanted a better mobile experience.</li>
+        </ul>
+        <p>The old version was not a failed product. Employees already understood its value. The goal was to keep that value while removing the reasons people delayed or skipped their reports.</p>
+
+        <figure class="case-media case-media--crosscom-survey"><div><img src="assets/projects/crosscom/content-02@2x.png" alt="Employee survey finding about feedback usefulness" loading="lazy" /></div><figcaption>One finding from a 20-question employee survey</figcaption></figure>
+        <figure class="case-media case-media--crosscom-survey"><div><img src="assets/projects/crosscom/content-03@2x.png" alt="Employee survey finding about reporting difficulty" loading="lazy" /></div><figcaption>Another finding from the survey</figcaption></figure>
+
+        <h2>What we wanted to keep</h2>
+        <p>After the research, I defined three core product values.</p>
+        <h3>Visibility of work</h3>
+        <p>Employees need to know that their work has been seen. Views, reactions, comments, and clear feedback support this.</p>
+        <h3>Connection between people</h3>
+        <p>Reports show more than tasks. They also show problems, wins, and appreciation across teams and countries.</p>
+        <h3>Shared company memory</h3>
+        <p>Past reports contain knowledge about projects, people, and decisions. Good search turns this archive into a working tool.</p>
+
+        <h2>From research to product structure</h2>
+        <p>I created the information architecture for the feed, search, teams, notifications, profiles, settings, posts, and report writing. I then built a 110-item user story map to connect the main journeys with detailed states.</p>
+        <figure class="case-media case-media--crosscom-structure"><div><img src="assets/projects/crosscom/content-04@2x.png" alt="CrossCom information architecture" loading="lazy" /></div><figcaption>Information architecture</figcaption></figure>
+        <p>The map covered several report entry points, leave and holiday cases, drafts and autosave, comments and reactions, search filters, settings, errors, empty states, and connection problems. This helped the team agree on scope before detailed interface design.</p>
+        <figure class="case-media case-media--crosscom-story-map"><div><img src="assets/projects/crosscom/content-05@2x.png" alt="CrossCom user story map" loading="lazy" /></div><figcaption>A section of the user story map used to define flows, states, and scope.</figcaption></figure>
+
+        <h2>Wireframes before visual design</h2>
+        <p>I used wireframes to test the main flows quickly: feeds, report details, report creation, reactions, search, profiles, and settings. Report creation received the most attention because employees needed several ways to start, including a blank report, a previous report, or a template.</p>
+        <figure class="case-media case-media--crosscom-wireframes"><div><img src="assets/projects/crosscom/content-06@2x.png" alt="Early CrossCom feed wireframes" loading="lazy" /></div><figcaption>Early wireframes: feed navigation</figcaption></figure>
+
+        <h2>Designing the core experience</h2>
+        <h3>1. Easier report writing</h3>
+        <p>Writing a report is the main action in CrossCom. Employees can start from scratch, reuse a previous report, choose a date, or use a template. The editor supports sections, lists, links, mentions, files, and images, while drafts are saved automatically.</p>
+        <figure class="case-media case-media--crosscom-overflow"><div class="case-media__row"><img src="assets/projects/crosscom/content-07@2x.png" alt="CrossCom report editor" loading="lazy" /><img src="assets/projects/crosscom/content-08@2x.png" alt="Formatting options in the report editor" loading="lazy" /></div><figcaption>The report editor gives employees a clear structure, autosave, and visible publication controls.</figcaption></figure>
+        <p>Research showed that completing a report was not always easy. The Good News / Appreciation section was the most difficult part for 48% of survey participants. People often knew what had happened during the day but found it hard to turn those events into a clear summary.</p>
+        <p>I designed AI assistance directly inside the report editor. The system analyzes the employee’s previous reports together with the current draft. It then suggests possible achievements, positive events, and moments of appreciation that may be worth adding.</p>
+        <p>Some suggestions contain placeholders for details the AI cannot know, such as a colleague or customer name. Before publication, CrossCom asks the employee to complete them and takes them directly to the first unfinished placeholder.</p>
+        <figure class="case-media case-media--crosscom-wide"><div><img src="assets/projects/crosscom/content-10@2x.png" alt="AI suggestion inside the report editor" loading="lazy" /></div><figcaption>An AI suggestion for the Good News / Appreciation section.</figcaption></figure>
+
+        <h3>2. Faster and more precise feedback</h3>
+        <p>Employees can react to a full report, selected text, or a comment. They can reply, join an existing reaction, use a quick response, emoji, or sticker, and attach an image to a comment. Text-level reactions keep feedback close to the exact work being discussed.</p>
+        <figure class="case-media case-media--crosscom-overflow case-media--crosscom-reactions"><div class="case-media__row"><img src="assets/projects/crosscom/content-11@2x.png" alt="Reaction selector in a CrossCom report" loading="lazy" /><img src="assets/projects/crosscom/content-12@2x.png" alt="Inline reply in a CrossCom report" loading="lazy" /></div><figcaption>Reaction and reply states for feedback on reports, selected text, and comments.</figcaption></figure>
+
+        <h3>3. Search across company knowledge</h3>
+        <p>Search connects reports, posts, people, teams, and tags. Filters cover date, content type, author, team, mentioned person, and sorting. This helps employees find both the right document and the colleague who knows the subject.</p>
+        <figure class="case-media case-media--crosscom-search"><div class="case-media__row"><img src="assets/projects/crosscom/content-13@2x.png" alt="CrossCom quick search results" loading="lazy" /><img src="assets/projects/crosscom/content-14@2x.png" alt="CrossCom search results page" loading="lazy" /></div><figcaption>Search results combine reports and people, with filters for date, type, team, and relevance.</figcaption></figure>
+
+        <h3>4. Tracking projects through automatic tags</h3>
+        <p>Research showed that many employees used reports to follow project progress. However, finding all updates about one project required manual search and depended on how people described their work.</p>
+        <p>I proposed using automatic tags to connect related reports. After an employee publishes a report, AI detects the projects and main work topics mentioned in the text and adds relevant tags.</p>
+        <p>Each tag works as a project page. Employees can open it to see related reports in chronological order and understand how the project has developed over time. The same tags also appear in the feed and search filters.</p>
+        <figure class="case-media case-media--crosscom-tags"><div><img src="assets/projects/crosscom/content-15@2x.png" alt="Reports connected through an automatically generated project tag" loading="lazy" /></div><figcaption>AI-generated tags connect separate daily reports into a continuous project history.</figcaption></figure>
+
+        <h3>5. A dedicated mobile experience</h3>
+        <p>41% of survey participants used CrossCom on their phones. Instead of shrinking the desktop version, I designed mobile cards, bottom navigation, larger tap targets, and long-report layouts for one-handed use.</p>
+        <figure class="case-media case-media--crosscom-mobile"><div><img src="assets/projects/crosscom/content-16@2x.png" alt="CrossCom mobile report, editor, search, and profile screens" loading="lazy" /></div><figcaption>Mobile report details keep long content, reactions, and comments readable on a small screen.</figcaption></figure>
+
+        <h2>A system, not a collection of screens</h2>
+        <p>The design covers desktop and mobile, English and Japanese, loading, empty and error states, narrow layouts, connection problems, file-upload failures, publication states, settings, and reusable components. The main file grew to 32 content pages with separate component and screen-template libraries.</p>
+
+        <h2>Outcome</h2>
+        <p>The new CrossCom version is available to a selected group of employees and is gradually replacing the legacy product.</p>
+        <p>The current release includes:</p>
+        <ul class="case-list"><li>viewing and publishing daily reports;</li><li>the report feed;</li><li>reactions and comments;</li><li>notifications.</li></ul>
+        <figure class="case-media case-media--crosscom-current"><div><img src="assets/projects/crosscom/content-09@2x.png" alt="Current CrossCom feed interface" loading="lazy" /></div><figcaption>The current state</figcaption></figure>
+        <p>The team is collecting usage experience. A follow-up survey has not been completed yet, so there are no confirmed post-release metrics or design changes based on later testing.</p>
+
+        <h2>Separate concept: AI for managers</h2>
+        <p>After the employee experience, we explored a manager direction for team workload, activity, report topics, important changes, and people who might need support. It included team overviews, project signals, alerts, short AI summaries, and movement from a company view to a team or person.</p>
+        <p>We set an ethical boundary: report text may support careful signals about long-term workload, but it cannot diagnose mental health. The interface must use neutral language, confidence levels, and context. Product activity must not become a public employee score.</p>
+        <figure class="case-media case-media--crosscom-manager"><div><img src="assets/projects/crosscom/content-17@2x.png" alt="CrossCom manager dashboard concept" loading="lazy" /></div><figcaption>Manager dashboard concept — not included in the current release.</figcaption></figure>
+
+        <h2>What I learned</h2>
+        <p>CrossCom taught me how to modernize a product that could not be redesigned from a blank page. The old version had problems, but it also had an important role in company culture, so I first had to understand what people valued.</p>
+        <p>The project also showed that research matters only when it changes the product. Problems with report format, feedback, search, and mobile use became specific flows, states, and interface decisions.</p>
+        <p>Finally, large internal products depend on details: languages, errors, empty states, special workdays, mobile layouts, and implementation limits. These details turn an attractive design into a product people can use every day.</p>
+        <aside class="case-callout"><span>From research to release</span><strong>My main contribution was a connected product system, not a single screen.</strong></aside>
+      </article>
+    </main>
+
+    <footer class="footer" data-section-name="footer">
+      <div class="footer__wordmark" aria-hidden="true"><span>Denis</span><span>Matveev</span></div>
+      <div class="footer__links">
+        <a href="https://www.linkedin.com/in/denmatveev/" target="_blank" rel="noreferrer" data-analytics="contact-link">LinkedIn</a>
+        <a href="assets/CV_Denis_Matveev.pdf" download data-analytics="portfolio-cta">Download resume</a>
+        <a href="mailto:denis.vic.matveev@gmail.com" data-analytics="contact-link">denis.vic.matveev@gmail.com</a>
+      </div>
+      <p>© 2026 Denis Matveev</p>
+    </footer>
+    <script src="analytics.js"></script>
+    <script src="navigation.js"></script>
+    <script src="media-viewer.js?v=4"></script>
+  </body>
+</html>

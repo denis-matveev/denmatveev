@@ -102,6 +102,9 @@ test.describe('homepage smoke and links', () => {
 
     const lakkuCase = page.getByRole('link', { name: 'Read the Lakku.ai case study' });
     await expect(lakkuCase).toHaveAttribute('href', 'lakku.html');
+
+    const crossComCase = page.getByRole('link', { name: 'Read the CrossCom case study' });
+    await expect(crossComCase).toHaveAttribute('href', 'crosscom.html');
   });
 
   test('menu items match the Figma selected, hover and pressed states', async ({ page }) => {
@@ -426,6 +429,89 @@ test.describe('Lakku case study', () => {
     await expect(viewer.locator('.media-viewer__caption')).toHaveText('Feed');
     await expect(viewer.locator('.media-viewer__position')).toHaveText('1 / 4');
     await viewer.getByRole('button', { name: 'Close image viewer' }).click();
+  });
+});
+
+test.describe('CrossCom case study', () => {
+  test('desktop page follows the shared case-study geometry and loads every image', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 1000 });
+    const response = await page.goto(new URL('/crosscom.html', baseUrl).href, {
+      waitUntil: 'domcontentloaded',
+    });
+
+    expect(response?.ok()).toBeTruthy();
+    await expect(page.getByRole('heading', { level: 1, name: 'CrossCom' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 2, name: 'What I learned' })).toBeAttached();
+    await expect(page.locator('.case-media')).toHaveCount(14);
+    await expect(page.locator('.case-media img')).toHaveCount(17);
+
+    const geometry = await page.evaluate(() => {
+      const rect = (selector) => {
+        const bounds = document.querySelector(selector).getBoundingClientRect();
+        return { width: bounds.width, height: bounds.height };
+      };
+
+      return {
+        scrollWidth: document.documentElement.scrollWidth,
+        main: rect('.case-main'),
+        hero: rect('.case-hero-image'),
+        summary: rect('.case-summary'),
+        text: rect('.case-content > p'),
+        brokenImages: Array.from(document.querySelectorAll('.case-main img')).filter(
+          (image) => !image.complete || image.naturalWidth === 0,
+        ).length,
+      };
+    });
+
+    expect(geometry.scrollWidth).toBe(1400);
+    expect(geometry.main.width).toBe(1200);
+    expect(geometry.hero).toEqual({ width: 1200, height: 543 });
+    expect(geometry.summary.width).toBe(760);
+    expect(geometry.text.width).toBe(760);
+    expect(geometry.brokenImages).toBe(0);
+  });
+
+  test('callout uses the same shared component styles as Lakku', async ({ page }) => {
+    const readCalloutStyles = () =>
+      page.locator('.case-callout').first().evaluate((element) => {
+        const callout = window.getComputedStyle(element);
+        const label = window.getComputedStyle(element.querySelector('span'));
+        const body = window.getComputedStyle(element.querySelector('strong'));
+
+        return {
+          background: callout.backgroundColor,
+          radius: callout.borderRadius,
+          padding: callout.padding,
+          gap: callout.gap,
+          label: {
+            color: label.color,
+            size: label.fontSize,
+            weight: label.fontWeight,
+            lineHeight: label.lineHeight,
+          },
+          body: {
+            size: body.fontSize,
+            weight: body.fontWeight,
+            lineHeight: body.lineHeight,
+          },
+        };
+      });
+
+    await page.setViewportSize({ width: 1400, height: 1000 });
+    await page.goto(new URL('/lakku.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+    const lakkuStyles = await readCalloutStyles();
+
+    await page.goto(new URL('/crosscom.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+    const crossComStyles = await readCalloutStyles();
+
+    expect(crossComStyles).toEqual(lakkuStyles);
+    expect(crossComStyles).toMatchObject({
+      radius: '8px',
+      padding: '16px 24px',
+      gap: '4px',
+      label: { size: '16px', weight: '600', lineHeight: '23px' },
+      body: { size: '24px', weight: '400', lineHeight: '28px' },
+    });
   });
 });
 
