@@ -104,7 +104,8 @@ test.describe('homepage smoke and links', () => {
   test('menu items match the Figma selected, hover and pressed states', async ({ page }) => {
     await openHome(page);
 
-    const selected = page.locator('.nav-item--active');
+    const selected = page.locator('.nav-item--active > .nav-item__label');
+    const selectedItem = page.locator('.nav-item--active');
     const resume = page.getByRole('link', { name: 'Resume', exact: true });
 
     await expect
@@ -125,6 +126,11 @@ test.describe('homepage smoke and links', () => {
     await resume.hover();
     await expect
       .poll(() => resume.evaluate((element) => window.getComputedStyle(element).backgroundColor))
+      .toBe('rgb(246, 246, 245)');
+
+    await selectedItem.hover();
+    await expect
+      .poll(() => selectedItem.evaluate((element) => window.getComputedStyle(element).backgroundColor))
       .toBe('rgb(246, 246, 245)');
 
     const box = await resume.boundingBox();
@@ -401,12 +407,21 @@ test.describe('homepage analytics and responsive layout', () => {
     expect(contentTop - topbarBottom).toBe(10);
   });
 
-  test('mobile layout keeps actions separated and avoids horizontal scroll', async ({ page }) => {
+  test('mobile layout uses an accessible expandable menu and avoids horizontal scroll', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await openHome(page);
 
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(scrollWidth).toBeLessThanOrEqual(390);
+
+    const menuToggle = page.getByRole('button', { name: 'Open navigation menu' });
+    await expect(menuToggle).toBeVisible();
+    await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.topbar__nav')).toBeHidden();
+
+    await menuToggle.click();
+    await expect(menuToggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('.topbar__nav')).toBeVisible();
 
     const boxes = await page.locator('.nav-item').evaluateAll((elements) =>
       elements.map((element) => {
@@ -433,5 +448,75 @@ test.describe('homepage analytics and responsive layout', () => {
         expect(overlaps, `buttons ${index} and ${next} overlap`).toBeFalsy();
       }
     }
+
+    await page.keyboard.press('Escape');
+    await expect(menuToggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('.topbar__nav')).toBeHidden();
+
+    const caseBoxes = await page.locator('.case-card').evaluateAll((elements) =>
+      elements.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+      }),
+    );
+
+    expect(caseBoxes).toHaveLength(2);
+    expect(caseBoxes[0].left).toBe(16);
+    expect(caseBoxes[0].right).toBe(374);
+    expect(caseBoxes[1].top).toBeGreaterThan(caseBoxes[0].bottom);
+
+    const factBoxes = await page.locator('.fact').evaluateAll((elements) =>
+      elements.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+      }),
+    );
+
+    expect(factBoxes).toHaveLength(3);
+    expect(factBoxes[0].left).toBe(16);
+    expect(factBoxes[0].right).toBe(374);
+    expect(factBoxes[1].top).toBeGreaterThan(factBoxes[0].bottom);
+    expect(factBoxes[2].top).toBeGreaterThan(factBoxes[1].bottom);
+    await expect(page.locator('.intro__image')).toHaveCSS('width', '160px');
+
+    const archiveAlignment = await page.locator('.archive-link').evaluate((element) => {
+      const link = element.getBoundingClientRect();
+      const preview = element.querySelector('.archive-link__previews').getBoundingClientRect();
+      return { linkHeight: link.height, linkBottom: link.bottom, previewBottom: preview.bottom };
+    });
+
+    expect(archiveAlignment.linkHeight).toBe(64);
+    expect(archiveAlignment.previewBottom).toBeCloseTo(archiveAlignment.linkBottom, 4);
+  });
+
+  test('tablet layout uses stacked cases and a two-column facts grid', async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await openHome(page);
+
+    const caseBoxes = await page.locator('.case-card').evaluateAll((elements) =>
+      elements.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { width: rect.width, top: rect.top, bottom: rect.bottom };
+      }),
+    );
+
+    expect(caseBoxes).toHaveLength(2);
+    expect(caseBoxes[0].width).toBe(720);
+    expect(caseBoxes[1].top).toBeGreaterThan(caseBoxes[0].bottom);
+
+    const factBoxes = await page.locator('.fact').evaluateAll((elements) =>
+      elements.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { left: rect.left, top: rect.top };
+      }),
+    );
+
+    expect(factBoxes).toHaveLength(3);
+    expect(factBoxes[0].top).toBe(factBoxes[1].top);
+    expect(factBoxes[1].left).toBeGreaterThan(factBoxes[0].left);
+    expect(factBoxes[2].top).toBeGreaterThan(factBoxes[0].top);
+
+    await expect(page.getByRole('button', { name: 'Open navigation menu' })).toBeHidden();
+    await expect(page.locator('.topbar__nav')).toBeVisible();
   });
 });

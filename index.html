@@ -46,9 +46,27 @@
         <span>Matveev</span>
       </a>
 
-      <nav class="topbar__nav" aria-label="Primary navigation">
-        <span class="nav-item nav-item--active">Works</span>
-        <span class="nav-item">About</span>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation menu"
+      >
+        <span class="menu-toggle__icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <nav id="primary-navigation" class="topbar__nav" aria-label="Primary navigation">
+        <a
+          class="nav-item nav-item--active"
+          href="/"
+          aria-current="page"
+        ><span class="nav-item__label">Works</span></a>
+        <span class="nav-item"><span class="nav-item__label">About</span></span>
         <a
           class="nav-item"
           href="assets/CV_Denis_Matveev.pdf"
@@ -56,7 +74,7 @@
           data-analytics="portfolio-cta"
         >
           <img src="assets/icons/file.svg" alt="" />
-          Resume
+          <span class="nav-item__label">Resume</span>
         </a>
         <a
           class="nav-item"
@@ -64,7 +82,7 @@
           data-analytics="contact-link"
         >
           <img src="assets/icons/mail.svg" alt="" />
-          Contact
+          <span class="nav-item__label">Contact</span>
         </a>
       </nav>
     </header>
@@ -179,5 +197,6 @@
     </footer>
 
     <script src="analytics.js"></script>
+    <script src="navigation.js"></script>
   </body>
 </html>
