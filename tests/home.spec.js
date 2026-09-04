@@ -465,6 +465,9 @@ test.describe('CrossCom case study', () => {
         hero: rect('.case-hero-image'),
         summary: rect('.case-summary'),
         text: rect('.case-content > p'),
+        mobileCompositeFit: window.getComputedStyle(
+          document.querySelector('.case-media--crosscom-mobile img'),
+        ).objectFit,
         brokenImages: Array.from(document.querySelectorAll('.case-main img')).filter(
           (image) => !image.complete || image.naturalWidth === 0,
         ).length,
@@ -476,6 +479,7 @@ test.describe('CrossCom case study', () => {
     expect(geometry.hero).toEqual({ width: 1200, height: 543 });
     expect(geometry.summary.width).toBe(760);
     expect(geometry.text.width).toBe(760);
+    expect(geometry.mobileCompositeFit).toBe('contain');
     expect(geometry.brokenImages).toBe(0);
   });
 

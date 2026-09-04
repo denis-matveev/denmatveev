@@ -382,7 +382,7 @@
 
 .case-media--crosscom-tags img,
 .case-media--crosscom-mobile img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .case-media--crosscom-manager {
