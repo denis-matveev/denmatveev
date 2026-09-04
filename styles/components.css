@@ -44,7 +44,7 @@
 
 .menu-toggle:hover,
 .menu-toggle:focus-visible {
-  background: var(--color-primitives-beige-75);
+  background: var(--color-semantics-bg-container-shallow);
 }
 
 .menu-toggle:active {
@@ -84,9 +84,28 @@
   cursor: pointer;
 }
 
-.nav-item img {
+.nav-item__icon {
   width: 16px;
   height: 16px;
+  flex: 0 0 16px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.nav-item__icon--file {
+  -webkit-mask-image: url("../assets/icons/file.svg");
+  mask-image: url("../assets/icons/file.svg");
+}
+
+.nav-item__icon--mail {
+  -webkit-mask-image: url("../assets/icons/mail.svg");
+  mask-image: url("../assets/icons/mail.svg");
 }
 
 .nav-item__label {
@@ -106,7 +125,7 @@
 .topbar a.nav-item:not(.nav-item--active):hover,
 .topbar a.nav-item:not(.nav-item--active):focus-visible {
   border-radius: var(--sizes-radius-8);
-  background: var(--color-primitives-beige-75);
+  background: var(--color-semantics-bg-container-shallow);
   text-decoration: none;
 }
 
@@ -118,7 +137,7 @@
 .topbar a.nav-item--active:hover,
 .topbar a.nav-item--active:focus-visible {
   border-radius: var(--sizes-radius-8);
-  background: var(--color-primitives-beige-75);
+  background: var(--color-semantics-bg-container-shallow);
   text-decoration: none;
 }
 
@@ -191,6 +210,10 @@
   min-width: 0;
 }
 
+.case-card__link {
+  display: block;
+}
+
 .case-card__visual {
   position: relative;
   width: 100%;
@@ -248,7 +271,7 @@
   gap: var(--sizes-space-12);
   padding: var(--sizes-space-16);
   border-radius: var(--sizes-radius-8);
-  background: var(--color-primitives-beige-75);
+  background: var(--color-semantics-bg-container-shallow);
   overflow: hidden;
   color: var(--color-semantics-text-primary);
   font-size: 18px;
@@ -275,6 +298,11 @@
 .archive-link__icon {
   width: 16px;
   height: 16px;
+  flex: 0 0 16px;
+  display: block;
+  background-color: currentColor;
+  -webkit-mask: url("../assets/icons/share.svg") center / contain no-repeat;
+  mask: url("../assets/icons/share.svg") center / contain no-repeat;
 }
 
 .facts {
@@ -420,9 +448,10 @@
     line-height: 32px;
   }
 
-  .topbar__nav .nav-item img {
+  .topbar__nav .nav-item__icon {
     width: 24px;
     height: 24px;
+    flex-basis: 24px;
   }
 
   .nav-item {

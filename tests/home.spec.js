@@ -99,6 +99,9 @@ test.describe('homepage smoke and links', () => {
     await expect(linkedIn).toHaveAttribute('href', 'https://www.linkedin.com/in/denmatveev/');
     await expect(linkedIn).toHaveAttribute('target', '_blank');
     await expect(linkedIn).toHaveAttribute('rel', /noreferrer/);
+
+    const lakkuCase = page.getByRole('link', { name: 'Read the Lakku.ai case study' });
+    await expect(lakkuCase).toHaveAttribute('href', 'lakku.html');
   });
 
   test('menu items match the Figma selected, hover and pressed states', async ({ page }) => {
@@ -144,6 +147,141 @@ test.describe('homepage smoke and links', () => {
       .poll(() => resume.evaluate((element) => window.getComputedStyle(element).backgroundColor))
       .toBe('rgb(255, 255, 255)');
     await page.mouse.up();
+  });
+
+  test('container shallow uses the dark theme surface', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' });
+    await openHome(page);
+
+    const archive = page.getByRole('link', { name: 'More archive work on Behance' });
+    await expect
+      .poll(() => archive.evaluate((element) => window.getComputedStyle(element).backgroundColor))
+      .toBe('rgb(51, 51, 49)');
+
+    await expect
+      .poll(() =>
+        page
+          .locator('.nav-item__icon--file')
+          .evaluate((element) => window.getComputedStyle(element).backgroundColor),
+      )
+      .toBe('rgb(53, 210, 0)');
+
+    await expect
+      .poll(() =>
+        page
+          .locator('.archive-link__icon')
+          .evaluate((element) => window.getComputedStyle(element).backgroundColor),
+      )
+      .toBe('rgb(255, 255, 255)');
+  });
+});
+
+test.describe('Lakku case study', () => {
+  test('desktop page matches the main Figma geometry and loads its content', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 1000 });
+    const response = await page.goto(new URL('/lakku.html', baseUrl).href, {
+      waitUntil: 'domcontentloaded',
+    });
+
+    expect(response?.ok()).toBeTruthy();
+    await expect(page.getByRole('heading', { level: 1, name: 'Lakku.ai' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 2, name: 'Outcome' })).toBeAttached();
+    await expect(page.getByRole('link', { name: 'Download on Google Play' })).toHaveAttribute(
+      'href',
+      'https://play.google.com/store/apps/details?id=id.dashku.lakku',
+    );
+
+    const geometry = await page.evaluate(() => {
+      const rect = (selector) => {
+        const bounds = document.querySelector(selector).getBoundingClientRect();
+        return { width: bounds.width, height: bounds.height };
+      };
+
+      return {
+        scrollWidth: document.documentElement.scrollWidth,
+        main: rect('.case-main'),
+        header: rect('.case-header'),
+        hero: rect('.case-hero-image'),
+        summary: rect('.case-summary'),
+        stripTextAlignment: (() => {
+          const text = document.querySelector('.case-content > p');
+          const image = document.querySelector('.case-mockups--strip img');
+          return image.getBoundingClientRect().left - text.getBoundingClientRect().left;
+        })(),
+        stripRightEdge:
+          window.innerWidth -
+          document.querySelector('.case-mockups--strip').getBoundingClientRect().right,
+        stripLeftEdge: document
+          .querySelector('.case-mockups--strip')
+          .getBoundingClientRect().left,
+        stripShadowRoom: (() => {
+          const strip = document.querySelector('.case-mockups--strip');
+          const viewport = strip.querySelector('.case-mockups__viewport');
+          const image = strip.querySelector('img');
+          return viewport.getBoundingClientRect().bottom - image.getBoundingClientRect().bottom;
+        })(),
+      };
+    });
+
+    expect(geometry.scrollWidth).toBe(1400);
+    expect(geometry.main.width).toBe(1200);
+    expect(geometry.header.height).toBe(1081);
+    expect(geometry.hero).toEqual({ width: 1200, height: 543 });
+    expect(geometry.summary).toEqual({ width: 760, height: 255 });
+    expect(geometry.stripTextAlignment).toBe(0);
+    expect(geometry.stripRightEdge).toBe(0);
+    expect(geometry.stripLeftEdge).toBe(0);
+    expect(geometry.stripShadowRoom).toBe(36);
+    await expect(page.locator('.screen-mockup img')).toHaveCount(35);
+  });
+
+  test('mockup presentations scroll locally and expose arrow navigation when needed', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(new URL('/lakku.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+
+    const presentation = page.locator('.case-mockups').nth(1);
+    const viewport = presentation.locator('.case-mockups__viewport');
+    const next = presentation.getByRole('button', { name: 'Show next mockups' });
+
+    await expect(viewport).toHaveAttribute('role', 'region');
+    await expect(viewport).toHaveCSS('overflow-x', 'auto');
+    await expect(next).toBeVisible();
+    await expect(next).toHaveCSS('opacity', '0');
+    await expect(presentation.getByRole('button', { name: 'Show previous mockups' })).toHaveCount(0);
+
+    const dimensions = await viewport.evaluate((element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+      scrollLeft: element.scrollLeft,
+    }));
+
+    expect(dimensions.scrollWidth).toBeGreaterThan(dimensions.clientWidth);
+    await next.click({ force: true });
+    await expect
+      .poll(() => viewport.evaluate((element) => element.scrollLeft))
+      .toBeGreaterThan(0);
+  });
+
+  test('the final mockup aligns with the right edge of the text column', async ({ page }) => {
+    await page.setViewportSize({ width: 1400, height: 1000 });
+    await page.goto(new URL('/lakku.html', baseUrl).href, { waitUntil: 'domcontentloaded' });
+
+    const presentation = page.locator('.case-mockups--strip').first();
+    const viewport = presentation.locator('.case-mockups__viewport');
+
+    await viewport.evaluate((element) => {
+      element.scrollLeft = element.scrollWidth;
+    });
+
+    const alignment = await presentation.evaluate((element) => {
+      const text = document.querySelector('.case-content > p');
+      const mockups = element.querySelectorAll('img');
+      const lastMockup = mockups[mockups.length - 1];
+
+      return lastMockup.getBoundingClientRect().right - text.getBoundingClientRect().right;
+    });
+
+    expect(alignment).toBe(0);
   });
 });
 

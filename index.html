@@ -17,7 +17,7 @@
     <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml" sizes="any" />
     <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=3" />
     <script src="theme.js"></script>
     <script type="text/javascript">
       (function(c, l, a, r, i, t, y) {
@@ -73,7 +73,7 @@
           download
           data-analytics="portfolio-cta"
         >
-          <img src="assets/icons/file.svg" alt="" />
+          <span class="nav-item__icon nav-item__icon--file" aria-hidden="true"></span>
           <span class="nav-item__label">Resume</span>
         </a>
         <a
@@ -81,7 +81,7 @@
           href="mailto:denis.vic.matveev@gmail.com"
           data-analytics="contact-link"
         >
-          <img src="assets/icons/mail.svg" alt="" />
+          <span class="nav-item__icon nav-item__icon--mail" aria-hidden="true"></span>
           <span class="nav-item__label">Contact</span>
         </a>
       </nav>
@@ -104,13 +104,15 @@
 
         <div class="case-grid">
           <article class="case-card">
-            <div class="case-card__visual case-card__visual--lakku" aria-hidden="true">
-              <img src="assets/projects/lakku-thumbnail@2x.png" alt="" />
-            </div>
-            <div class="case-card__copy">
-              <h3>Lakku.ai — Building an AI marketing platform for Indonesian small businesses</h3>
-              <p>Product case · UX research · AI creation tools · Mobile</p>
-            </div>
+            <a class="case-card__link" href="lakku.html" aria-label="Read the Lakku.ai case study">
+              <div class="case-card__visual case-card__visual--lakku" aria-hidden="true">
+                <img src="assets/projects/lakku-thumbnail@2x.png" alt="" />
+              </div>
+              <div class="case-card__copy">
+                <h3>Lakku.ai — Building an AI marketing platform for Indonesian small businesses</h3>
+                <p>Product case · UX research · AI creation tools · Mobile</p>
+              </div>
+            </a>
           </article>
 
           <article class="case-card">
@@ -139,10 +141,10 @@
             data-analytics="portfolio-link"
           >
             <span class="archive-link__previews" aria-hidden="true">
-              <img src="assets/projects/archive-preview@2x.png" alt="" />
+              <img src="assets/projects/archive-preview@2x.png?v=3" alt="" />
             </span>
             <span>More archive work on Behance</span>
-            <img class="archive-link__icon" src="assets/icons/share.svg" alt="" />
+            <span class="archive-link__icon" aria-hidden="true"></span>
           </a>
         </div>
       </section>

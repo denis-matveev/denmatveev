@@ -7,6 +7,7 @@
   --color-semantics-bg-page: var(--color-primitives-beige-300);
   --color-semantics-bg-accent: var(--color-semantics-general-accent);
   --color-semantics-bg-container-prominent: var(--color-primitives-neutral-0);
+  --color-semantics-bg-container-shallow: var(--color-primitives-beige-75);
   --color-semantics-bg-transparent: transparent;
   --color-semantics-text-primary: var(--color-primitives-neutral-300);
   --color-semantics-text-secondary: var(--color-primitives-neutral-200);
@@ -33,6 +34,7 @@
   --color-semantics-bg-page: var(--color-primitives-beige-1000);
   --color-semantics-bg-accent: var(--color-semantics-general-accent);
   --color-semantics-bg-container-prominent: var(--color-primitives-beige-900);
+  --color-semantics-bg-container-shallow: var(--color-primitives-beige-900);
   --color-semantics-bg-transparent: transparent;
   --color-semantics-text-primary: var(--color-primitives-neutral-0);
   --color-semantics-text-secondary: var(--color-primitives-neutral-75);
