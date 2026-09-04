@@ -61,11 +61,12 @@ test.describe('homepage smoke and links', () => {
     expect(response?.ok()).toBeTruthy();
 
     await expect(page.getByRole('heading', { level: 1, name: /Denis Matveev/i })).toBeVisible();
-    await expect(page.getByText(/Product & UX\/UI Designer/i)).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Resume' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Portfolio' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Contact' })).toBeVisible();
-    await expect(page.getByText('Updated portfolio is coming soon…')).toBeVisible();
+    await expect(page.getByText(/product designer with 10\+ years/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Resume', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'More archive work on Behance' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Contact', exact: true })).toBeVisible();
+    await expect(page.getByText(/Lakku\.ai — Building an AI marketing platform/i)).toBeVisible();
+    await expect(page.getByText(/CrossCom — Modernizing an internal company network/i)).toBeVisible();
 
     expect(jsErrors).toEqual([]);
     expect(
@@ -79,17 +80,64 @@ test.describe('homepage smoke and links', () => {
   test('links and actions work as expected', async ({ page }) => {
     await openHome(page);
 
-    const resume = page.getByRole('link', { name: 'Resume' });
+    const resume = page.getByRole('link', { name: 'Resume', exact: true });
     await expect(resume).toHaveAttribute('href', 'assets/CV_Denis_Matveev.pdf');
     await expect(resume).toHaveAttribute('download', '');
 
-    const portfolio = page.getByRole('link', { name: 'Portfolio' });
+    const portfolio = page.getByRole('link', { name: 'More archive work on Behance' });
     await expect(portfolio).toHaveAttribute('href', 'https://www.behance.net/denmatveev');
     await expect(portfolio).toHaveAttribute('target', '_blank');
     await expect(portfolio).toHaveAttribute('rel', /noreferrer/);
 
-    const contact = page.getByRole('link', { name: 'Contact' });
+    const contact = page.getByRole('link', { name: 'Contact', exact: true });
     await expect(contact).toHaveAttribute('href', 'mailto:denis.vic.matveev@gmail.com');
+
+    const logo = page.getByRole('link', { name: 'Denis Matveev — home' });
+    await expect(logo).toHaveAttribute('href', '/');
+
+    const linkedIn = page.getByRole('link', { name: 'LinkedIn' });
+    await expect(linkedIn).toHaveAttribute('href', 'https://www.linkedin.com/in/denmatveev/');
+    await expect(linkedIn).toHaveAttribute('target', '_blank');
+    await expect(linkedIn).toHaveAttribute('rel', /noreferrer/);
+  });
+
+  test('menu items match the Figma selected, hover and pressed states', async ({ page }) => {
+    await openHome(page);
+
+    const selected = page.locator('.nav-item--active');
+    const resume = page.getByRole('link', { name: 'Resume', exact: true });
+
+    await expect
+      .poll(() =>
+        selected.evaluate((element) => {
+          const indicator = window.getComputedStyle(element, '::after');
+          return {
+            backgroundColor: indicator.backgroundColor,
+            height: indicator.height,
+          };
+        }),
+      )
+      .toEqual({
+        backgroundColor: 'rgb(52, 110, 23)',
+        height: '2px',
+      });
+
+    await resume.hover();
+    await expect
+      .poll(() => resume.evaluate((element) => window.getComputedStyle(element).backgroundColor))
+      .toBe('rgb(246, 246, 245)');
+
+    const box = await resume.boundingBox();
+    if (!box) {
+      throw new Error('Resume menu item is not visible');
+    }
+
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await expect
+      .poll(() => resume.evaluate((element) => window.getComputedStyle(element).backgroundColor))
+      .toBe('rgb(255, 255, 255)');
+    await page.mouse.up();
   });
 });
 
@@ -104,7 +152,10 @@ test.describe('homepage assets and accessibility', () => {
 
     const expectedResources = [
       '/styles.css',
-      '/assets/portrait.png',
+      '/assets/hero-portrait@2x.png',
+      '/assets/projects/lakku-thumbnail@2x.png',
+      '/assets/projects/crosscom-thumbnail@2x.png',
+      '/assets/projects/archive-preview@2x.png',
     ].map((assetPath) => new URL(assetPath, baseUrl).href);
 
     for (const resourceUrl of expectedResources) {
@@ -121,36 +172,41 @@ test.describe('homepage assets and accessibility', () => {
 
     await expect(page.locator('h1')).toHaveCount(1);
 
-    const resume = page.getByRole('link', { name: 'Resume' });
-    const portfolio = page.getByRole('link', { name: 'Portfolio' });
-    const contact = page.getByRole('link', { name: 'Contact' });
+    const resume = page.getByRole('link', { name: 'Resume', exact: true });
+    const portfolio = page.getByRole('link', { name: 'More archive work on Behance' });
+    const contact = page.getByRole('link', { name: 'Contact', exact: true });
 
     await resume.focus();
     await expect(resume).toBeFocused();
 
     if (page.context().browser()?.browserType().name() !== 'webkit') {
       await page.keyboard.press('Tab');
-      await expect(portfolio).toBeFocused();
-      await page.keyboard.press('Tab');
       await expect(contact).toBeFocused();
+      await page.keyboard.press('Tab');
+      await expect(portfolio).toBeFocused();
     }
 
-    await expect(page.locator('img[alt=""]')).toHaveCount(1);
-    await expect(page.locator('.hero-logo__mark')).toHaveCount(1);
-    await expect(page.locator('svg.hero-logo__mark')).toHaveCount(1);
+    await expect(page.locator('.intro__image')).toHaveCount(1);
+    await expect(page.locator('.case-card')).toHaveCount(2);
 
-    const heroMark = page.locator('.hero-logo__mark');
+    const heroMark = page.locator('.wordmark');
     await expect
       .poll(async () =>
         heroMark.evaluate((element) => ({
-          tagName: element.tagName,
           color: window.getComputedStyle(element).color,
         })),
       )
       .toEqual({
-        tagName: 'svg',
         color: 'rgb(52, 110, 23)',
       });
+
+    await expect
+      .poll(() =>
+        page
+          .locator('.footer__wordmark')
+          .evaluate((element) => window.getComputedStyle(element).color),
+      )
+      .toBe('rgb(63, 77, 57)');
 
     const axeResults = await new AxeBuilder({ page }).analyze();
     expect(axeResults.violations).toEqual([]);
@@ -162,15 +218,15 @@ test.describe('homepage analytics and responsive layout', () => {
     await openHome(page);
 
     await expect(page.locator('script[src="analytics.js"]')).toHaveCount(1);
-    await expect(page.getByRole('link', { name: 'Resume' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Resume', exact: true })).toHaveAttribute(
       'data-analytics',
       'portfolio-cta',
     );
-    await expect(page.getByRole('link', { name: 'Portfolio' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'More archive work on Behance' })).toHaveAttribute(
       'data-analytics',
       'portfolio-link',
     );
-    await expect(page.getByRole('link', { name: 'Contact' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Contact', exact: true })).toHaveAttribute(
       'data-analytics',
       'contact-link',
     );
@@ -179,9 +235,9 @@ test.describe('homepage analytics and responsive layout', () => {
   test('CTA, portfolio and contact clicks send GA4 custom events into dataLayer', async ({ page }) => {
     await openHome(page);
 
-    await page.getByRole('link', { name: 'Resume' }).click();
-    await page.getByRole('link', { name: 'Portfolio' }).click();
-    await page.getByRole('link', { name: 'Contact' }).evaluate((link) => {
+    await page.getByRole('link', { name: 'Resume', exact: true }).click();
+    await page.getByRole('link', { name: 'More archive work on Behance' }).click();
+    await page.getByRole('link', { name: 'Contact', exact: true }).evaluate((link) => {
       link.addEventListener(
         'click',
         (event) => {
@@ -190,7 +246,7 @@ test.describe('homepage analytics and responsive layout', () => {
         { capture: true },
       );
     });
-    await page.getByRole('link', { name: 'Contact' }).click();
+    await page.getByRole('link', { name: 'Contact', exact: true }).click();
 
     const analyticsEvents = await readAnalyticsEvents(page, [
       'portfolio_cta_click',
@@ -204,7 +260,7 @@ test.describe('homepage analytics and responsive layout', () => {
           name: 'portfolio_cta_click',
           params: expect.objectContaining({
             page_path: '/',
-            page_title: 'Denis Matveev | Portfolio',
+            page_title: 'Denis Matveev | Product Designer',
             link_url: expect.stringContaining('/assets/CV_Denis_Matveev.pdf'),
             link_text: 'Resume',
             section_name: 'hero',
@@ -214,17 +270,17 @@ test.describe('homepage analytics and responsive layout', () => {
           name: 'portfolio_click',
           params: expect.objectContaining({
             page_path: '/',
-            page_title: 'Denis Matveev | Portfolio',
+            page_title: 'Denis Matveev | Product Designer',
             link_url: 'https://www.behance.net/denmatveev',
-            link_text: 'Portfolio',
-            section_name: 'hero',
+            link_text: 'More archive work on Behance',
+            section_name: 'works',
           }),
         }),
         expect.objectContaining({
           name: 'contact_click',
           params: expect.objectContaining({
             page_path: '/',
-            page_title: 'Denis Matveev | Portfolio',
+            page_title: 'Denis Matveev | Product Designer',
             link_url: 'mailto:denis.vic.matveev@gmail.com',
             link_text: 'Contact',
             contact_type: 'email',
@@ -254,7 +310,7 @@ test.describe('homepage analytics and responsive layout', () => {
             name: 'scroll_50',
             params: expect.objectContaining({
               page_path: '/',
-              page_title: 'Denis Matveev | Portfolio',
+              page_title: 'Denis Matveev | Product Designer',
               percent_scrolled: 50,
             }),
           }),
@@ -262,7 +318,7 @@ test.describe('homepage analytics and responsive layout', () => {
             name: 'scroll_90',
             params: expect.objectContaining({
               page_path: '/',
-              page_title: 'Denis Matveev | Portfolio',
+              page_title: 'Denis Matveev | Product Designer',
               percent_scrolled: 90,
             }),
           }),
@@ -277,7 +333,7 @@ test.describe('homepage analytics and responsive layout', () => {
           name: 'scroll_50',
           params: expect.objectContaining({
             page_path: '/',
-            page_title: 'Denis Matveev | Portfolio',
+            page_title: 'Denis Matveev | Product Designer',
             percent_scrolled: 50,
           }),
         }),
@@ -285,7 +341,7 @@ test.describe('homepage analytics and responsive layout', () => {
           name: 'scroll_90',
           params: expect.objectContaining({
             page_path: '/',
-            page_title: 'Denis Matveev | Portfolio',
+            page_title: 'Denis Matveev | Product Designer',
             percent_scrolled: 90,
           }),
         }),
@@ -318,7 +374,7 @@ test.describe('homepage analytics and responsive layout', () => {
           name: 'qualified_visit',
           params: expect.objectContaining({
             page_path: '/',
-            page_title: 'Denis Matveev | Portfolio',
+            page_title: 'Denis Matveev | Product Designer',
             qualified_reason: expect.stringMatching(/scroll_50|scroll_90/),
             engagement_time_bucket: '10_to_29s',
           }),
@@ -333,7 +389,16 @@ test.describe('homepage analytics and responsive layout', () => {
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(scrollWidth).toBeLessThanOrEqual(viewportWidth);
 
-    await expect(page.locator('.hero-portfolio__inner')).toBeVisible();
+    await expect(page.locator('.intro')).toBeVisible();
+
+    const topbarBottom = await page
+      .locator('.topbar')
+      .evaluate((element) => element.getBoundingClientRect().bottom);
+    const contentTop = await page
+      .locator('.page-content')
+      .evaluate((element) => element.getBoundingClientRect().top);
+
+    expect(contentTop - topbarBottom).toBe(10);
   });
 
   test('mobile layout keeps actions separated and avoids horizontal scroll', async ({ page }) => {
@@ -343,7 +408,7 @@ test.describe('homepage analytics and responsive layout', () => {
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
     expect(scrollWidth).toBeLessThanOrEqual(390);
 
-    const boxes = await page.locator('.hero-action').evaluateAll((elements) =>
+    const boxes = await page.locator('.nav-item').evaluateAll((elements) =>
       elements.map((element) => {
         const rect = element.getBoundingClientRect();
         return {
