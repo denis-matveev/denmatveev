@@ -237,6 +237,21 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform-origin: center;
+  transition: transform 220ms ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .case-card__link:hover .case-card__visual > img,
+  .case-card__link:focus-visible .case-card__visual > img {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-card__visual > img {
+    transition: none;
+  }
 }
 
 .case-card__copy {
