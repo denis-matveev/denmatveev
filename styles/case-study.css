@@ -66,6 +66,43 @@
   object-fit: cover;
 }
 
+.case-media--ihairium-overview {
+  height: 798px;
+}
+
+.case-media--ihairium-assessment {
+  height: 190px;
+}
+
+.case-media--ihairium-video {
+  width: 760px;
+  height: 366px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.case-media--ihairium-model {
+  width: 760px;
+  height: 481px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.case-media--ihairium-journeys {
+  width: 760px;
+  height: 741px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.case-media--ihairium-overview img,
+.case-media--ihairium-assessment img,
+.case-media--ihairium-video img,
+.case-media--ihairium-model img,
+.case-media--ihairium-journeys img {
+  object-fit: contain;
+}
+
 .case-summary-wrap {
   display: flex;
   justify-content: center;
@@ -790,6 +827,26 @@
 
   .case-media--comparison > div {
     aspect-ratio: 4096 / 2528;
+  }
+
+  .case-media--ihairium-overview > div {
+    aspect-ratio: 4096 / 2566;
+  }
+
+  .case-media--ihairium-assessment > div {
+    aspect-ratio: 4096 / 458;
+  }
+
+  .case-media--ihairium-video > div {
+    aspect-ratio: 4008 / 1624;
+  }
+
+  .case-media--ihairium-model > div {
+    aspect-ratio: 3158 / 1768;
+  }
+
+  .case-media--ihairium-journeys > div {
+    aspect-ratio: 3600 / 3226;
   }
 
   .case-mockups--three .case-mockups__track {
