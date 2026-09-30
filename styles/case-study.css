@@ -913,7 +913,6 @@
   user-select: none;
   -webkit-user-drag: none;
   transform-origin: center;
-  will-change: transform;
 }
 
 .media-viewer__image--animate {

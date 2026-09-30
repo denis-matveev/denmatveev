@@ -121,7 +121,7 @@
   function updateTransform(animate) {
     viewerImage.classList.toggle('media-viewer__image--animate', Boolean(animate));
     viewerImage.style.transform =
-      'translate3d(' + (panX + dragX) + 'px, ' + (panY + dismissY) + 'px, 0) scale(' + scale + ')';
+      'translate(' + (panX + dragX) + 'px, ' + (panY + dismissY) + 'px) scale(' + scale + ')';
     zoomValue.textContent = Math.round(scale * 100) + '%';
   }
 
