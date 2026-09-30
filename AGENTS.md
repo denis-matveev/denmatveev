@@ -17,6 +17,14 @@
 - The shared `Callout` component uses `bg/container-prominent`, a 4px gap, 16px vertical and 24px horizontal padding, and an 8px radius.
 - The `Callout` label uses the 16px/23px semibold body style with `text/accent`; its body uses the 24px/28px regular button style with `text/primary`.
 
+# Case-study project navigation rules
+
+- Every new case-study page must include the shared previous/next project controls at the end of its main content, before the footer: the `.case-projects` navigation and `case-projects.js`.
+- When adding, removing, or reordering a case, update the Selected work cards on the homepage, which are the source of truth for navigation order, project titles, links, and thumbnail assets. Verify that the controls on the new case and its neighboring cases reflect the updated order.
+- Reuse the homepage thumbnail images and their cropping, including image positioning; do not show text embedded below a thumbnail's preview area.
+- Hide the corresponding card when no previous or next project exists, and stretch the remaining card across the full navigation width. Hide the navigation when neither exists.
+- Keep these controls shared across all case-study pages, with the same styling, accessible links, and responsive behavior; do not create page-specific implementations.
+
 # Mockup presentation rules
 
 - The `mockup presentation` component may extend beyond the viewport when its mockups exceed the available width.
