@@ -176,6 +176,18 @@
   height: 224px;
 }
 
+.intro__image--dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .intro__image {
+  display: none;
+}
+
+:root[data-theme="dark"] .intro__image--dark {
+  display: block;
+}
+
 .intro__title {
   flex: 1;
   color: var(--color-semantics-text-primary);
