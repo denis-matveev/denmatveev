@@ -368,10 +368,10 @@
       } else if (deltaX > 0 && currentIndex > 0) {
         showImage(currentIndex - 1);
       }
-    } else if (scale === 1 && Math.abs(deltaX) < 8 && Math.abs(deltaY) < 8) {
+    } else if (Math.abs(deltaX) < 8 && Math.abs(deltaY) < 8) {
       var now = Date.now();
       if (now - lastTap < 300) {
-        setScale(2, true);
+        setScale(scale > 1 ? 1 : 2, true);
         lastTap = 0;
       } else {
         lastTap = now;
