@@ -1,128 +1,16 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lakku’s video generation | Denis Matveev</title>
-    <meta name="description" content="Improving video-style discovery and redesigning how people choose video models in Lakku." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Karla:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml" sizes="any" />
-    <link rel="icon" href="favicon.png" type="image/png" sizes="any" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <link rel="stylesheet" href="styles.css?v=5" />
-    <link rel="stylesheet" href="styles/case-study.css?v=16" />
-    <script src="theme.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page moved — Denis Matveev</title>
+    <link rel="canonical" href="lakku-video/" />
+    <script>
+      window.location.replace("lakku-video/" + window.location.search + window.location.hash);
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=lakku-video/" /></noscript>
   </head>
-  <body class="case-page">
-    <header class="topbar">
-      <a class="wordmark" href="/" aria-label="Denis Matveev — home"><span>Denis</span><span>Matveev</span></a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu"><span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
-      <nav id="primary-navigation" class="topbar__nav" aria-label="Primary navigation">
-        <a class="nav-item nav-item--active" href="/" aria-current="page"><span class="nav-item__label">Works</span></a>
-        <a class="nav-item" href="about.html"><span class="nav-item__label">About</span></a>
-        <a class="nav-item" href="assets/CV_Denis_Matveev.pdf" download data-analytics="portfolio-cta"><span class="nav-item__icon nav-item__icon--file" aria-hidden="true"></span><span class="nav-item__label">Resume</span></a>
-        <a class="nav-item" href="mailto:denis.vic.matveev@gmail.com" data-analytics="contact-link"><span class="nav-item__icon nav-item__icon--mail" aria-hidden="true"></span><span class="nav-item__label">Contact</span></a>
-      </nav>
-    </header>
-
-    <main class="case-main">
-      <header class="case-header">
-        <div class="case-heading"><h1>Lakku’s video generation</h1><p>Improving video-style discovery and redesigning how people choose video models</p></div>
-        <ul class="case-tags" aria-label="Project tags"><li>ai</li><li>b2b</li><li>mobile</li><li>product analytics</li><li>user research</li></ul>
-        <img class="case-hero-image" src="assets/projects/lakku-video/hero@2x.png" alt="Bold Fizzy Soda can in an AI-generated product video scene" />
-        <div class="case-summary-wrap"><section class="case-summary case-summary--compact" aria-label="Case study summary">
-          <div class="case-summary__copy"><p>I worked on different parts of <a href="lakku.html">Lakku.ai</a>, an AI marketing platform for small businesses. This case focuses on one of them: video generation. It covers an update that increased the use of video styles, followed by research and a redesign of model selection.</p></div>
-          <dl class="case-facts"><div><dt>Role</dt><dd>Product Designer</dd></div><div><dt>Duration</dt><dd>May–June 2026</dd></div><div><dt>Team</dt><dd>9 people</dd></div><div><dt>Website</dt><dd><a href="https://lakku.ai" target="_blank" rel="noreferrer">Lakku.ai</a></dd></div></dl>
-        </section></div>
-      </header>
-      <article class="case-content">
-        <h2>PART I</h2>
-        <h2>Lakku’s new feature</h2>
-        <p>Lakku.ai is an AI marketing platform for Indonesian small businesses. It started by generating ad images from sellers’ product photos. Later users asked for a way to create videos too.</p>
-        <p>The stakeholders put together the first video generation flow quickly so the team could launch and test the idea.</p>
-        <figure class="case-mockups case-mockups--overflow-off"><div class="case-mockups__track"><figure class="screen-mockup"><figcaption>Initial Create video flow</figcaption><img src="assets/projects/lakku-video/imgPhone3@2x.png" alt="" loading="lazy" /></figure></div></figure>
-        <p>The screen had a prompt field and familiar settings such as duration, resolution, and sound. It also offered a choice of video models with different capabilities and credit costs.</p>
-        <p>Video styles were another new part of the flow: preset camera movements and visual effects that could help users turn their ideas into video ads. Tapping a style played a preview with a sample person or object.</p>
-        <figure class="case-mockups case-mockups--overflow-off"><div class="case-mockups__track"><figure class="screen-mockup"><figcaption>Video styles</figcaption><img src="assets/projects/lakku-video/phone-02@2x.png" alt="" loading="lazy" /></figure><figure class="screen-mockup"><figcaption>Video models</figcaption><img src="assets/projects/lakku-video/imgPhone2@2x.png" alt="" loading="lazy" /></figure></div></figure>
-
-        <h2>The problem</h2>
-        <p>The early data showed a clear pattern: people rarely used video styles and almost always kept the default model:</p>
-        <figure class="case-media case-media--lakku-video-chart"><div><img src="assets/projects/lakku-video/imgContent@2x.png" alt="Distribution of video generations by selected model and style before the redesign" loading="lazy" /></div><figcaption>Distribution of video generations by selected model and style before the redesign</figcaption></figure>
-        <aside class="case-callout"><span>Defaults were dominating:</span><strong>Only 6.72% of videos were generated with a style, and just 2.60% — with a non-default model.</strong></aside>
-        <p>This could lead to the following problems:</p>
-        <ul class="case-list"><li>users skipped video styles that might have inspired their video ideas when they were unsure what to create. I believe this could decrease video conversion rate in some cases;</li><li>some styles use different video models, most costing more credits than the default Seedance 1.5, so users ended up spending fewer credits than they could have;</li><li>after changing a style, the form silently switched the model too. Non-default models often cost more, so users might be unpleasantly surprised by a higher generation fee. Without knowing why the price increased, they might just give up generating.</li></ul>
-
-        <h2>Making styles easier to discover</h2>
-        <p>I researched two ways of making styles more visible.</p>
-        <p>The first one added quick access to style selection directly into the familiar video creation workflow. I changed the copy from “No video style” to “Choose style &gt;” to make it more actionable and placed 3 styles upfront to show the potential value. Their previews played automatically to capture users’ attention.</p>
-        <figure class="case-media case-media--lakku-video-tall"><div class="case-media__motion"><img src="assets/projects/lakku-video/content-flow-preview@2x.png" alt="Updated create video screen beside the video style selector" loading="lazy" /><video autoplay muted loop playsinline preload="metadata" poster="assets/projects/lakku-video/content-flow-preview@2x.png" aria-hidden="true"><source src="assets/projects/lakku-video/create-video-flow.mp4" type="video/mp4" /></video></div><figcaption>Refreshing the familiar workflow</figcaption></figure>
-        <p>The second approach was built around a carousel: the user could browse more options and select the effect directly from the visual previews.</p>
-        <figure class="case-media case-media--lakku-video-tall"><div><img src="assets/projects/lakku-video/imgContent1@2x.png" alt="Carousel concept for browsing styles" loading="lazy" /></div><figcaption>Carousel approach</figcaption></figure>
-        <p>The carousel reduced the number of steps needed to select a style, showcasing them all upfront. But made the choice complicated — after scrolling, the chosen style would move out of view, so it was necessary to design a persistent display of the selection, a way to return to it, and a connection to the model and generation cost. Otherwise, the user could lose track of which style was currently active and what exactly would change as a result.</p>
-        <p>The team selected the first approach. It made the styles prominent, and kept the video creation familiar and clear.</p>
-        <p>To make the style–model link clearer, I suggested showing which non-default model a style uses. If the style cost more, the flow would warn users. If several models were available, it would ask them to choose one:</p>
-        <figure class="case-media case-media--lakku-video-wide"><div><img src="assets/projects/lakku-video/imgContent2@2x.png" alt="Style selection with model and credit cost" loading="lazy" /></div><figcaption>Showing the model and credit cost when choosing a style</figcaption></figure>
-
-        <h2>First results</h2>
-        <p>After a month we checked the analytics:</p>
-        <figure class="case-media case-media--lakku-video-results"><div><img src="assets/projects/lakku-video/imgContent3@2x.png" alt="Chart of video style usage across 1,421 generations" loading="lazy" /></div><figcaption>Video style usage, 1,421 generations</figcaption></figure>
-        <p>In this period 230 of 1,421 video generations used a style (16.19%). In April it was 204 of 3,034 (6.72%).</p>
-        <aside class="case-callout"><span>Outcome</span><strong>The share of video generations with a style was 2.4× higher.</strong></aside>
-        <p>At the same time the usage of video models besides Seedance 1.5 decreased from 2.60% to 1.76%. This was not the main goal of the update, but I decided to look even deeper.</p>
-
-        <h2>PART II</h2>
-        <h2>Digging for more</h2>
-        <p>I asked myself: Why don’t people change the model for their videos?</p>
-        <p>Then I realized that the right question was: Why should they change it at all?</p>
-        <p>Every video model affects three main aspects: generation quality &amp; accuracy, cost, and length. But do our users truly understand that they can adjust these factors and that they depend on the selected model? Does our UI explain this connection?</p>
-        <figure class="case-mockups case-mockups--overflow-off"><div class="case-mockups__track"><figure class="screen-mockup"><figcaption>Original video creation screen</figcaption><img src="assets/projects/lakku-video/imgPhone4@2x.png" alt="" loading="lazy" /></figure><figure class="screen-mockup"><figcaption>Original model selector</figcaption><img src="assets/projects/lakku-video/imgPhone5@2x.png" alt="" loading="lazy" /></figure></div></figure>
-        <p>To find out, I ran two small first-click tests. One asked where people would go to improve video quality, the other asked how they would spend fewer credits. I followed each task with questions about what they thought the model selector did.</p>
-        <section class="case-question" aria-label="Better quality first-click test questions"><p><strong>You want the video to look better and higher quality. Where would you tap first?</strong></p><ol><li>Why did you click here?</li><li>What do you think the "Choose model" section is for?</li><li>What do you think will change if you select a different model?</li><li>In what situation would you change the model?</li></ol></section>
-        <figure class="case-media case-media--lakku-video-test"><div><img src="assets/projects/lakku-video/imgContent4@2x.png" alt="First-click test results for improving video quality" loading="lazy" /></div><figcaption>Better quality test results</figcaption></figure>
-        <p>In the first-click test, all 6 participants chose 480p resolution to improve video quality. No one started by selecting a model. In subsequent responses, some participants correctly identified the block's purpose, but expectations from changing the model varied — from quality and smoothness to sound, lip-sync, and visual style.</p>
-        <p>This revealed an issue not only with the visibility of the model selection but also with the clarity of its value.</p>
-        <p>Next test group:</p>
-        <section class="case-question" aria-label="Lower cost first-click test questions"><p><strong>You want to spend fewer credits. Where will you click?</strong></p><ol><li>Why did you click here?</li><li>What do you think the "Choose model" section is for?</li><li>What do you think will change if you select a different model?</li><li>In what situation would you change the model?</li></ol></section>
-        <figure class="case-media case-media--lakku-video-test"><div><img src="assets/projects/lakku-video/imgContent5@2x.png" alt="First-click test results for reducing generation cost" loading="lazy" /></div><figcaption>Price test results</figcaption></figure>
-        <p>I checked whether users understand how to reduce the cost of video generation — 6 participants searched for a solution in different parts of the screen: among effects, resolution, duration, and credit information. In responses about model selection, there was a similar spread: some associated it with capabilities and generation cost, while one participant understood "model" as the person who would appear in the video.</p>
-        <aside class="case-callout"><span>Both tests showed that</span><strong>the connection between the video model, its capabilities, and the price is not clear enough.</strong></aside>
-
-        <h2>Making video models easier to choose</h2>
-        <p>So the term “Video model” appeared to be technical and confusing for Indonesian users. They don’t understand how a model relates to quality or price.</p>
-        <p>I proposed calling the setting “Video quality” to give people a more familiar starting point. Instead of showing technical model names, I presented the options as Recommended, Balanced, High, Premium, Advanced, and Draft. I also added the credit cost and short feature tags to help them understand the differences before choosing.</p>
-        <p>I kept the model names for power users, but made them secondary.</p>
-        <figure class="case-mockups case-mockups--overflow-off"><div class="case-mockups__track"><figure class="screen-mockup"><figcaption>“Video quality” on Create video</figcaption><img src="assets/projects/lakku-video/imgPhone6@2x.png" alt="" loading="lazy" /></figure><figure class="screen-mockup"><figcaption>Models as quality options</figcaption><img src="assets/projects/lakku-video/imgPhone7@2x.png" alt="" loading="lazy" /></figure></div></figure>
-
-        <h2>Adding relevant video styles</h2>
-        <p>Another way to increase the usage of non-default models was to add attractive video styles associated with more expensive models.</p>
-        <p>I noticed that despite having fancy morph style FX, our users in 99.1% generations with a style chose simple camera effects. My first though was that our business audience was looking a style that could make their product look better in a video ad. They didn’t want fun effects, they wanted something relevant for a product ad.</p>
-        <p>I decided to research the Indonesian video advertisement market to identify popular and common effects. After watching over 40 videos, I identified patterns and grouped them:</p>
-        <figure class="case-media case-media--lakku-video-wide"><div><img src="assets/projects/lakku-video/imgContent6@2x.png" alt="Patterns in Indonesian product video ads" loading="lazy" /></div><figcaption>Patterns I found in Indonesian product video ads</figcaption></figure>
-        <p>Seven patterns repeated all the time: hands interacting with a product, effect overlays, slow rotation, pouring, morphing, glow, and slow zoom. Building all seven would take too long, so we started with two:</p>
-        <ul class="case-list"><li>product promo — combines light zoom and shimmering effect;</li><li>product zoom — repeats the slow zoom pattern.</li></ul>
-        <p>I highlighted the new styles by placing their samples on the "Choose Style" banner. Additionally, I grouped all styles to help users quickly understand their differences and purposes.</p>
-        <figure class="case-mockups case-mockups--overflow-off"><div class="case-mockups__track">
-          <figure class="screen-mockup"><figcaption>Grouped styles</figcaption><img src="assets/projects/lakku-video/imgPhone8@2x.png" alt="" loading="lazy" /></figure>
-          <figure class="screen-mockup"><figcaption>Product promo style</figcaption><div class="screen-mockup__motion"><img src="assets/projects/lakku-video/product-promo.jpg" alt="" loading="lazy" /><video autoplay muted loop playsinline preload="metadata" poster="assets/projects/lakku-video/product-promo.jpg" aria-hidden="true"><source src="assets/projects/lakku-video/product-promo.mp4" type="video/mp4" /></video></div></figure>
-          <figure class="screen-mockup"><figcaption>Product zoom style</figcaption><div class="screen-mockup__motion"><img src="assets/projects/lakku-video/product-zoom.jpg" alt="" loading="lazy" /><video autoplay muted loop playsinline preload="metadata" poster="assets/projects/lakku-video/product-zoom.jpg" aria-hidden="true"><source src="assets/projects/lakku-video/product-zoom.mp4" type="video/mp4" /></video></div></figure>
-        </div></figure>
-
-        <h2>Outcome</h2>
-        <p>We implemented the clearer model selector and the new product-focused styles. Unfortunately, Lakku paused further R&amp;D, so we couldn’t collect enough data to evaluate whether these changes increased the use of non-default models or credit spending.</p>
-        <p>The first part of this work had a measurable result: the share of video generations with a style rose from 6.72% to 16.19%. For the second part, the outcome is the research and the implemented design, not a measured change in behaviour.</p>
-        <p>This project reminded me that making an option visible is only part of the job. People also need to understand what they gain by choosing it — and what it will cost.</p>
-      </article>
-    </main>
-    <footer class="footer" data-section-name="footer">
-      <a class="footer__wordmark" href="/" aria-label="Denis Matveev — home"><span>Denis</span><span>Matveev</span></a>
-      <div class="footer__links"><a href="https://www.linkedin.com/in/denmatveev/" target="_blank" rel="noreferrer" data-analytics="contact-link">LinkedIn</a><a href="assets/CV_Denis_Matveev.pdf" download data-analytics="portfolio-cta">Download resume</a><a href="mailto:denis.vic.matveev@gmail.com" data-analytics="contact-link">denis.vic.matveev@gmail.com</a></div>
-      <p>© 2026 Denis Matveev</p>
-    </footer>
-    <script src="analytics.js"></script>
-    <script src="navigation.js"></script>
-    <script src="mockup-presentation.js?v=2"></script>
-    <script src="media-viewer.js?v=4"></script>
+  <body>
+    <p>This page has moved. <a href="lakku-video/">Continue to the page.</a></p>
   </body>
 </html>
