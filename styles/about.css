@@ -1,0 +1,87 @@
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-space-24);
+  max-width: var(--sizes-size-max-content);
+  padding: var(--sizes-space-24);
+}
+
+.about-block {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sizes-space-36);
+}
+
+.about-block__illustration {
+  position: relative;
+  flex: 0 0 183px;
+  width: 183px;
+}
+
+.about-block__illustration--portrait {
+  height: 176px;
+}
+
+.about-block__vector {
+  display: block;
+  overflow: visible;
+  color: var(--color-semantics-icon-secondary);
+}
+
+.about-block__illustration--portrait .about-block__vector {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  max-width: none;
+}
+
+.about-block__copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sizes-space-16);
+  min-width: 0;
+  font-size: var(--typography-font-size-body-lg);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: 26px;
+}
+
+.about-title {
+  font-family: var(--typography-font-family-display);
+  font-size: 48px;
+  font-weight: var(--typography-font-weight-regular);
+  font-variation-settings: "YEAR" 1979;
+  line-height: 70px;
+}
+
+.about-lead {
+  font-family: var(--typography-styles-title-family);
+  font-size: var(--typography-styles-title-size);
+  font-weight: var(--typography-styles-title-weight);
+  line-height: var(--typography-styles-title-line-height);
+}
+
+.about-content + .footer {
+  margin-top: 10px;
+}
+
+@media (max-width: 640px) {
+  .about-content {
+    gap: var(--sizes-space-36);
+    padding: var(--sizes-space-16);
+  }
+
+  .about-block {
+    flex-direction: column;
+    gap: var(--sizes-space-16);
+  }
+
+  .about-block__illustration {
+    flex-basis: auto;
+  }
+
+  .about-title {
+    font-size: 32px;
+    line-height: 42px;
+  }
+}
