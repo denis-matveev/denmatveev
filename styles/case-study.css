@@ -124,6 +124,7 @@
 .case-summary__copy {
   display: flex;
   flex-direction: column;
+  align-self: start;
   justify-content: center;
   gap: var(--sizes-space-16);
   font-size: 18px;
@@ -209,6 +210,28 @@
   line-height: 26px;
 }
 
+.case-question {
+  width: 760px;
+  margin: 0 auto;
+  color: var(--color-semantics-text-primary);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.case-question p,
+.case-question ol {
+  margin: 0;
+}
+
+.case-question ol {
+  padding-left: 30px;
+}
+
+.case-question strong {
+  font-weight: 700;
+}
+
 .case-list {
   margin-top: 0;
   margin-bottom: 0;
@@ -261,6 +284,64 @@
 .case-media img {
   width: 100%;
   height: 100%;
+}
+
+.case-media__motion {
+  position: relative;
+}
+
+.case-media__motion img,
+.case-media__motion video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.case-media__motion video {
+  pointer-events: none;
+}
+
+.case-media--lakku-video-chart,
+.case-media--lakku-video-tall,
+.case-media--lakku-video-results,
+.case-media--lakku-video-test {
+  width: 760px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.case-media--lakku-video-chart {
+  height: 426px;
+}
+
+.case-media--lakku-video-tall {
+  height: 703px;
+}
+
+.case-media--lakku-video-wide {
+  height: 596px;
+}
+
+.case-media--lakku-video-results {
+  height: 504px;
+}
+
+.case-media--lakku-video-results > div {
+  background: #191b1f;
+}
+
+.case-media--lakku-video-test {
+  height: 659px;
+}
+
+.case-media--lakku-video-chart img,
+.case-media--lakku-video-tall img,
+.case-media--lakku-video-wide img,
+.case-media--lakku-video-results img,
+.case-media--lakku-video-test img {
+  object-fit: contain;
 }
 
 .case-media figcaption,
@@ -453,6 +534,11 @@
   gap: 32px;
 }
 
+.case-mockups--overflow-off .case-mockups__track {
+  justify-content: center;
+  gap: 32px;
+}
+
 .case-mockups--strip .case-mockups__track {
   gap: 64px;
   padding-left: max(0px, calc((100vw - var(--case-content-width)) / 2));
@@ -479,6 +565,27 @@
   object-fit: cover;
   border-radius: calc(var(--sizes-radius-8) * 2);
   box-shadow: 0 12px 24px rgb(0 0 0 / 10%);
+}
+
+.screen-mockup__motion {
+  position: relative;
+  width: 250px;
+  height: 486px;
+  flex: 0 0 486px;
+}
+
+.screen-mockup__motion img,
+.screen-mockup__motion video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--sizes-radius-8) * 2);
+}
+
+.screen-mockup__motion video {
+  pointer-events: none;
 }
 
 .case-mockups--desktop {
@@ -788,6 +895,10 @@
     width: var(--case-content-width);
   }
 
+  .case-question {
+    width: var(--case-content-width);
+  }
+
   .case-media {
     width: calc(100% - 48px);
     height: auto;
@@ -849,10 +960,35 @@
     aspect-ratio: 3600 / 3226;
   }
 
+  .case-media--lakku-video-chart > div {
+    aspect-ratio: 760 / 369;
+  }
+
+  .case-media--lakku-video-tall > div {
+    aspect-ratio: 760 / 646;
+  }
+
+  .case-media--lakku-video-wide > div {
+    aspect-ratio: 1200 / 529;
+  }
+
+  .case-media--lakku-video-results > div {
+    aspect-ratio: 760 / 447;
+  }
+
+  .case-media--lakku-video-test > div {
+    aspect-ratio: 760 / 602;
+  }
+
   .case-mockups--three .case-mockups__track {
     justify-content: flex-start;
     padding-right: max(24px, calc((100vw - var(--case-content-width)) / 2));
     padding-left: max(24px, calc((100vw - var(--case-content-width)) / 2));
+  }
+
+  .case-mockups--overflow-off .case-mockups__track {
+    padding-right: var(--sizes-space-24);
+    padding-left: var(--sizes-space-24);
   }
 
   .case-mockups--strip .case-mockups__track {
@@ -927,6 +1063,11 @@
     line-height: 24px;
   }
 
+  .case-question {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
   .case-callout strong {
     font-size: 20px;
     line-height: 24px;
@@ -952,6 +1093,11 @@
   .case-mockups--three .case-mockups__track,
   .case-mockups--strip .case-mockups__track {
     gap: var(--sizes-space-24);
+    padding-right: var(--sizes-space-16);
+    padding-left: var(--sizes-space-16);
+  }
+
+  .case-mockups--overflow-off .case-mockups__track {
     padding-right: var(--sizes-space-16);
     padding-left: var(--sizes-space-16);
   }

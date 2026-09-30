@@ -22,8 +22,9 @@
 - The `mockup presentation` component may extend beyond the viewport when its mockups exceed the available width.
 - Preserve horizontal scrolling for the component, including touch and trackpad gestures.
 - Treat mobile and desktop screen layouts as size variants of the same component. Keep the scrolling, controls, alignment, overflow, accessibility, and mobile viewer behavior shared; only instance dimensions and content may differ.
-- At the initial scroll position, align the left edge of the first mockup with the left edge of the text content column.
-- Provide enough trailing scroll space for the right edge of the final mockup to align with the right edge of the text content column at the end of the scroll range.
+- Match the Figma `Overflow` property: when `Off`, center the mockup group within the content area; when `On`, enable the overflowing presentation.
+- With `Overflow=On`, align the left edge of the first mockup with the left edge of the text content column at the initial scroll position.
+- With `Overflow=On`, provide enough trailing scroll space for the right edge of the final mockup to align with the right edge of the text content column at the end of the scroll range.
 - Keep mockup shadows fully visible within the component's vertical overflow area; do not clip them at the bottom or sides.
 - Provide previous/left and next/right navigation arrows whenever content is available in the corresponding scroll direction.
 - Show navigation arrows only while the presentation is hovered or contains keyboard focus. Hide the left arrow at the initial scroll position and the right arrow at the end of the scroll range.
