@@ -39,6 +39,16 @@
         link.className = "case-projects__card";
         link.href = project.url.href;
         link.rel = direction === "Previous" ? "prev" : "next";
+        link.addEventListener("click", function () {
+          if (typeof window.trackEvent !== "function") return;
+          window.trackEvent(direction === "Previous" ? "prev_case_click" : "next_case_click", {
+            page_path: window.location.pathname,
+            page_title: document.title,
+            link_url: project.url.href,
+            link_text: direction + " case: " + project.title,
+            section_name: "case_navigation"
+          });
+        });
         var image = document.createElement("img");
         image.className = "case-projects__image";
         if (project.topAligned) image.classList.add("case-projects__image--top");

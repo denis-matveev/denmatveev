@@ -123,7 +123,7 @@
     var link = event.currentTarget;
 
     registerInteraction();
-    trackEvent("portfolio_cta_click", Object.assign({}, getPageParams(), {
+    trackEvent("cv_click", Object.assign({}, getPageParams(), {
       link_url: normalizeUrl(link.getAttribute("href")),
       link_text: getLinkText(link),
       section_name: getSectionName(link)
@@ -132,26 +132,69 @@
 
   function handleContactClick(event) {
     var link = event.currentTarget;
+    var contactType = getContactType(link);
+    var eventName = contactType === "email" ? "email_click"
+      : contactType === "linkedin" ? "linkedin_click"
+      : "contact_click";
 
     registerInteraction();
-    trackEvent("contact_click", Object.assign({}, getPageParams(), {
+    trackEvent(eventName, Object.assign({}, getPageParams(), {
       link_url: normalizeUrl(link.getAttribute("href")),
       link_text: getLinkText(link),
-      contact_type: getContactType(link),
+      contact_type: contactType,
       section_name: getSectionName(link)
     }));
-    registerQualifiedReason("contact_click");
+    registerQualifiedReason(eventName);
   }
 
   function handlePortfolioClick(event) {
     var link = event.currentTarget;
 
     registerInteraction();
-    trackEvent("portfolio_click", Object.assign({}, getPageParams(), {
+    trackEvent("behance_click", Object.assign({}, getPageParams(), {
       link_url: normalizeUrl(link.getAttribute("href")),
       link_text: getLinkText(link),
       section_name: getSectionName(link)
     }));
+  }
+
+  function handleCaseOpenClick(event) {
+    var link = event.currentTarget;
+
+    registerInteraction();
+    trackEvent("case_open_click", Object.assign({}, getPageParams(), {
+      link_url: normalizeUrl(link.getAttribute("href")),
+      link_text: getLinkText(link),
+      case_path: new URL(link.getAttribute("href"), window.location.href).pathname,
+      section_name: getSectionName(link)
+    }));
+  }
+
+  function initCaseOutcomeTracking() {
+    var outcome = document.querySelector('[data-analytics="case-outcome"]');
+    if (!outcome || typeof window.IntersectionObserver !== "function") return;
+
+    var outcomeVisible = false;
+    var sent = false;
+    function maybeTrackOutcome() {
+      if (sent || !outcomeVisible || document.visibilityState === "hidden") return;
+      sent = true;
+      trackEvent("case_outcome_view", Object.assign({}, getPageParams(), {
+        case_path: window.location.pathname,
+        section_name: "outcome"
+      }));
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", maybeTrackOutcome);
+    }
+
+    var observer = new window.IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        outcomeVisible = entry.isIntersecting && entry.intersectionRatio >= 0.5;
+        maybeTrackOutcome();
+      });
+    }, { threshold: 0.5 });
+    document.addEventListener("visibilitychange", maybeTrackOutcome);
+    observer.observe(outcome);
   }
 
   function getScrollPercent() {
@@ -221,6 +264,11 @@
     contactLinks.forEach(function(link) {
       link.addEventListener("click", handleContactClick);
     });
+
+    document.querySelectorAll(".case-card__link").forEach(function(link) {
+      link.addEventListener("click", handleCaseOpenClick);
+    });
+    initCaseOutcomeTracking();
 
     window.addEventListener("scroll", onScroll, { passive: true });
 
