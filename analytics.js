@@ -1,4 +1,7 @@
 (function() {
+  var hostname = window.location.hostname;
+  if (hostname !== "denmatveev.com" && hostname !== "www.denmatveev.com") return;
+
   var analyticsConfig = window.__portfolioAnalyticsConfig || {};
   var qualifiedVisitDelayMs = typeof analyticsConfig.qualifiedVisitDelayMs === "number"
     ? analyticsConfig.qualifiedVisitDelayMs
