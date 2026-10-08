@@ -252,13 +252,13 @@
   }
 
   function initAnalytics() {
-    var portfolioCta = document.querySelector('[data-analytics="portfolio-cta"]');
+    var portfolioCtas = document.querySelectorAll('[data-analytics="portfolio-cta"]');
     var portfolioLinks = document.querySelectorAll('[data-analytics="portfolio-link"]');
     var contactLinks = document.querySelectorAll('[data-analytics="contact-link"]');
 
-    if (portfolioCta) {
-      portfolioCta.addEventListener("click", handlePortfolioCtaClick);
-    }
+    portfolioCtas.forEach(function(link) {
+      link.addEventListener("click", handlePortfolioCtaClick);
+    });
 
     portfolioLinks.forEach(function(link) {
       link.addEventListener("click", handlePortfolioClick);
