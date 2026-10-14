@@ -43,6 +43,7 @@ function buildTokensCss(data) {
     ...Object.entries(data.radius).map(([name, value]) => `${tokenName('sizes', 'radius', name)}: ${value};`),
     '',
     `${tokenName('sizes', 'size', 'max-content')}: ${data.size['max-content']};`,
+    `${tokenName('sizes', 'size', 'max-content-text')}: ${data.size['max-content-text']};`,
     `${tokenName('sizes', 'size', 'max-page')}: ${data.size['max-page']};`,
     `${tokenName('sizes', 'size', 'logo-width')}: ${data.size['logo-width'].desktop};`,
     `${tokenName('sizes', 'size', 'logo-mark-width')}: ${data.size['logo-mark-width'].desktop};`,

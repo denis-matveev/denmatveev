@@ -16,6 +16,17 @@
 - Keep content and layout-specific sizing outside the shared component's visual contract whenever possible.
 - The shared `Callout` component uses `bg/container-prominent`, a 4px gap, 16px vertical and 24px horizontal padding, and an 8px radius.
 - The `Callout` label uses the 16px/23px semibold body style with `text/accent`; its body uses the 24px/28px regular button style with `text/primary`.
+- When the shared `Factoid` component's font sizes decrease, decrease each text style's line-height proportionally, preserving its desktop Figma ratio. Use unitless line-height rather than fixed pixel line-height overrides on mobile.
+- Scale the `Factoid` component's internal label/value gap with the label font size using `em` units. Keep spacing between separate factoids outside this internal component rule.
+
+# Case-study analytics rules
+
+- Every case-study page loads `google-analytics.js` in the head and the shared `analytics.js` after its content, plus the same Clarity project bootstrap as the other pages. Keep one installation of each tracker per page.
+- Preserve the production-domain restriction in Google Analytics and its shared event handlers; local previews must not send Google Analytics events.
+- Mark Resume links with `data-analytics="portfolio-cta"`, contact links with `data-analytics="contact-link"`, and the results block with `data-analytics="case-outcome"`.
+- Label shared header and footer regions with `data-section-name="header"` and `data-section-name="footer"` so click events identify their location.
+- Keep project-open tracking on homepage `.case-card__link` links and previous/next tracking in `case-projects.js`; redirects to merged cases must preserve query parameters and must not install a second set of trackers.
+- When shared styles or their imported token files change, update their versioned URLs on every affected page.
 
 # Case-study project navigation rules
 

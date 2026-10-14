@@ -1,0 +1,114 @@
+/* Shared Figma Mockup component: 1330:5756.
+ * Canvas dimensions and protected content span are instance layout data.
+ * Background, clipping and radius are the same for every instance.
+ */
+.case-media.mockup {
+  width: 100%;
+  max-width: var(--media-canvas-width);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.mockup__viewport {
+  overflow: hidden;
+  border-radius: var(--sizes-radius-32);
+  background: var(--color-semantics-bg-container-shallow);
+}
+
+.mockup__canvas {
+  position: relative;
+}
+
+.mockup__canvas > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The hero shares the fit mechanism without becoming a Mockup instance. */
+.case-media.case-media--fit {
+  max-width: var(--media-canvas-width);
+  margin-inline: auto;
+}
+
+.mockup__viewport,
+.case-media__fit {
+  --media-fit-inset: var(--sizes-space-24);
+  position: relative;
+}
+
+/* The canvas leaves normal flow after fitting. The viewport must retain its
+ * measured height rather than shrink under the base Media's flex: 1 rule.
+ */
+.case-media > .mockup__viewport,
+.case-media > .case-media__fit {
+  flex: none;
+}
+
+.mockup__viewport[data-fit-ready],
+.case-media__fit[data-fit-ready] {
+  height: var(--media-render-height);
+}
+
+.mockup__viewport[data-fit-ready] > .mockup__canvas,
+.case-media__fit[data-fit-ready] > .case-media__canvas {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--media-canvas-width);
+  height: var(--media-canvas-height);
+  max-width: none;
+  transform: translateX(-50%) scale(var(--media-scale));
+  transform-origin: top center;
+}
+
+.mockup__viewport:focus-within,
+.case-media__fit:focus-within {
+  outline: 2px solid var(--color-semantics-text-accent);
+  outline-offset: 3px;
+}
+
+/* Theme-aware portfolio captions stay on the same canvas as the screens. */
+.mockup__label {
+  position: absolute;
+  left: var(--media-label-left);
+  top: var(--media-label-top, auto);
+  bottom: var(--media-label-bottom, auto);
+  width: var(--media-label-width);
+  color: var(--color-semantics-text-secondary);
+  font-family: var(--typography-font-family-text);
+  font-size: var(--typography-font-size-body-lg);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.mockup__screen {
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+  overflow: hidden;
+  border-radius: var(--screen-radius-x, 0) / var(--screen-radius-y, 0);
+  -webkit-mask-image: var(--screen-mask, none);
+  mask-image: var(--screen-mask, none);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.mockup__screen[data-ready] {
+  opacity: 1;
+}
+
+.mockup__screen video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

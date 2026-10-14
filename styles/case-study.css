@@ -81,7 +81,7 @@
 
 .case-main {
   --case-page-width: 1200px;
-  --case-content-width: var(--sizes-size-max-content);
+  --case-content-width: var(--sizes-size-max-content-text);
 
   width: min(100%, var(--case-page-width));
   margin: 0 auto;

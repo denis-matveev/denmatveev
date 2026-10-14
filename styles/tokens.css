@@ -16,10 +16,14 @@
   --sizes-space-66: 66px;
 
   --sizes-radius-8: 8px;
+  --sizes-radius-16: 16px;
+  --sizes-radius-24: 24px;
+  --sizes-radius-32: 32px;
   --sizes-radius-pill: 999px;
 
-  --sizes-size-max-content: 760px;
-  --sizes-size-max-page: 1024px;
+  --sizes-size-max-content: 1400px;
+  --sizes-size-max-content-text: 760px;
+  --sizes-size-max-page: 1260px;
   --sizes-size-logo-width: 218px;
   --sizes-size-logo-mark-width: 218px;
   --sizes-size-logo-mark-height: 158px;

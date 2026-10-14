@@ -17,8 +17,10 @@
     <link rel="icon" href="../favicon.svg?v=2" type="image/svg+xml" sizes="any" />
     <link rel="icon" href="../favicon.png" type="image/png" sizes="any" />
     <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
-    <link rel="stylesheet" href="../styles.css?v=7" />
-    <link rel="stylesheet" href="../styles/case-study.css?v=22" />
+    <link rel="stylesheet" href="../styles.css?v=8" />
+    <link rel="stylesheet" href="../styles/case-study.css?v=30" />
+    <link rel="stylesheet" href="../styles/case-editorial.css?v=3" />
+    <link rel="stylesheet" href="../styles/mockup.css?v=2" />
     <script src="../theme.js"></script>
     <script type="text/javascript">
       (function(c, l, a, r, i, t, y) {
@@ -35,7 +37,7 @@
     <script src="../google-analytics.js"></script>
   </head>
   <body class="case-page">
-    <header class="topbar">
+    <header class="topbar" data-section-name="header">
       <a class="wordmark" href="/" aria-label="Denis Matveev — home">
         <span>Denis</span>
         <span>Matveev</span>
@@ -80,501 +82,133 @@
       </nav>
     </header>
 
-    <main class="case-main">
-      <header class="case-header">
-        <div class="case-heading">
+    <main class="case-editorial">
+      <header class="case-editorial-header">
+        <div class="case-editorial-heading">
           <h1>Lakku.ai</h1>
-          <p>Building an AI marketing platform for Indonesian small businesses.</p>
+          <p>Lakku is an AI marketing platform for small businesses in Indonesia. It turns product photos into advertising images, videos and marketplace content. I joined when the team had an early technical prototype and helped develop the product through launch and later iterations.</p>
+          <dl class="case-editorial-facts">
+            <div><dt>Duration</dt><dd>2024–2026</dd></div>
+            <div><dt>Role</dt><dd>Product Designer</dd></div>
+            <div><dt>Team</dt><dd>9 people</dd></div>
+          </dl>
         </div>
-
-        <ul class="case-tags" aria-label="Project tags">
-          <li>b2b</li>
-          <li>b2c</li>
-          <li>ai</li>
-          <li>product advertising</li>
-          <li>user interviews</li>
-          <li>cross-platform</li>
-        </ul>
-
-        <img
-          class="case-hero-image"
-          src="../assets/projects/lakku/hero@2x.png"
-          alt="Lakku.ai presented at an Indonesian small-business event"
-        />
-
-        <div class="case-summary-wrap">
-          <section class="case-summary" aria-label="Case study summary">
-            <div class="case-summary__copy">
-              <p>
-                Lakku is an AI marketing product for small and medium-sized businesses in
-                Indonesia. It helps business owners create product images, videos, and other
-                marketing content without professional photography or advanced AI skills.
-              </p>
-              <p>
-                I joined the project at an early stage, when the team had a basic technical
-                prototype. Over the next two years, I helped turn the initial idea into a working
-                product. I also adapted the design when we learned that the first product structure
-                was too complex for users.
-              </p>
-            </div>
-            <dl class="case-facts">
-              <div><dt>Role</dt><dd>Product Designer</dd></div>
-              <div><dt>Duration</dt><dd>2024–2026</dd></div>
-              <div><dt>Team</dt><dd>9 people</dd></div>
-              <div>
-                <dt>Website</dt>
-                <dd>
-                  <a href="https://lakku.ai" target="_blank" rel="noreferrer">Lakku.ai</a>
-                </dd>
-              </div>
-            </dl>
-          </section>
-        </div>
+        <figure class="case-media case-media--panel case-media--fit" style="--media-canvas-width: 1400px; --media-canvas-height: 700px;">
+          <div class="case-media__fit" data-fit-span="856.839"><div class="case-media__canvas"><img src="../assets/projects/lakku/story/hero@2x.png" width="2800" height="1400" alt="Lakku’s Create AI content menu on a phone held against a sunlit tropical background" fetchpriority="high" /></div></div>
+        </figure>
       </header>
 
-      <article class="case-content">
-        <h2>The product</h2>
-        <p>The first idea behind Lakku was simple.</p>
-        <p>
-          A business owner uploads a photo of a product. Lakku detects the product category and
-          suggests suitable scenes. The user selects a scene, changes the settings, and generates
-          several advertising images.
-        </p>
-
-        <figure class="case-mockups case-mockups--three">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Product</figcaption><img src="../assets/projects/lakku/phone-01@2x.png" alt="" /></figure>
-            <figure class="screen-mockup"><figcaption>Scene</figcaption><img src="../assets/projects/lakku/phone-02@2x.png" alt="" /></figure>
-            <figure class="screen-mockup"><figcaption>Result</figcaption><img src="../assets/projects/lakku/phone-03@2x.png" alt="" /></figure>
+      <article class="case-editorial-content" aria-label="Lakku case study">
+        <section class="case-section" aria-labelledby="contribution-title">
+          <div class="case-layout case-layout--aside">
+            <div class="case-copy">
+              <h2 id="contribution-title">My contribution</h2>
+              <p>As the sole product designer, I worked across user research, product architecture and interface design. I took part in user interviews, synthesized findings, ran first-click tests and analyzed product usage to identify friction and test design assumptions. I translated that evidence into simpler creation flows, then reviewed post-release data to assess the changes.</p>
+            </div>
+            <dl class="case-metrics" data-analytics="case-outcome">
+              <div><dt>Share of videos using a style</dt><dd>6.72% → 16.19%</dd></div>
+              <div><dt>Share of content from Product Images</dt><dd>67% → 72%</dd></div>
+            </dl>
           </div>
-        </figure>
+        </section>
 
-        <p>The product later grew into a larger set of AI marketing tools. Users can now create:</p>
-        <ul class="case-list">
-          <li>product images;</li>
-          <li>videos from images;</li>
-          <li>images from text prompts;</li>
-          <li>marketplace packs with images and descriptions;</li>
-          <li>AI influencer videos;</li>
-          <li>UGC-style videos with AI avatars;</li>
-          <li>other types of marketing content.</li>
-        </ul>
-
-        <h2>The problem</h2>
-        <p>
-          Indonesia has more than 20 million small and medium-sized businesses. Many of them need
-          good product photos for online sales and social media.
-        </p>
-        <p>
-          Before accessible AI tools, a small business often had to hire a photographer and send
-          the product to them. This process could be slow and expensive. The result did not always
-          meet the business owner’s expectations. In this case, the product had to be photographed
-          again.
-        </p>
-        <p>
-          AI could make this process faster and cheaper. However, many existing AI tools were too
-          complex for our target audience. Users had to understand prompts, models, settings, and
-          other technical details.
-        </p>
-        <p>
-          We wanted to make this process more accessible. A user should be able to upload a product,
-          select a suitable visual direction, and get a useful result without learning how
-          professional AI tools work.
-        </p>
-        <aside class="case-callout">
-          <span>Key product promise</span>
-          <strong>Make professional product advertising accessible to small businesses without requiring AI expertise</strong>
-        </aside>
-
-        <h2>My role</h2>
-        <p>
-          I was the only Product designer on Lakku throughout the project. The brand and logo were
-          created by other specialists, but I was responsible for the product design.
-        </p>
-        <p>My work included:</p>
-        <ul class="case-list">
-          <li>turning stakeholder ideas into product scenarios;</li>
-          <li>creating the user story map;</li>
-          <li>designing the information architecture;</li>
-          <li>working on end-to-end user flows;</li>
-          <li>designing the mobile interface;</li>
-          <li>creating prototypes;</li>
-          <li>taking part in user interviews;</li>
-          <li>helping synthesize research findings;</li>
-          <li>preparing designs for development;</li>
-          <li>working with frontend developers during implementation;</li>
-          <li>reviewing implemented designs with QA.</li>
-        </ul>
-        <p>
-          The CTO was responsible for the main strategic direction. I worked most closely with the
-          Product Manager on individual features and daily tasks.
-        </p>
-
-        <h2>Turning an idea into a product</h2>
-        <p>
-          When I joined, the team already had a basic prototype that could perform a simple AI
-          generation. There was also an initial list of features and requirements.
-        </p>
-        <p>
-          The idea was ambitious. Lakku was not only an image generator. The team also wanted to
-          create a product catalog, a social feed, a reward system, and tools for users who wanted
-          to become AI talents.
-        </p>
-        <p>Before designing individual screens, we needed to understand how all these parts should work together.</p>
-        <p>
-          I worked with the CTO and PM to turn the initial requirements into a large user story map,
-          an information architecture, and a set of user flows. These artifacts helped us divide the
-          product into smaller scenarios and understand the dependencies between them.
-        </p>
-
-        <figure class="case-media case-media--architecture">
-          <div><img src="../assets/projects/lakku/content-01@2x.png" alt="Information architecture diagram" loading="lazy" /></div>
-          <figcaption>Information Architecture</figcaption>
-        </figure>
-
-        <p>
-          The user story map also became a practical roadmap for the team. It helped the stakeholders
-          and developers see what we needed to build first and what could be added later.
-        </p>
-
-        <figure class="case-media case-media--story-map">
-          <div><img src="../assets/projects/lakku/content-02@2x.png" alt="Part of the Lakku user story map" loading="lazy" /></div>
-          <figcaption>A part of the User Story Map</figcaption>
-        </figure>
-
-        <h2>Research in Jakarta</h2>
-        <p>
-          The CTO and I traveled to Jakarta to learn more about local users. Over several days, we
-          spoke with regular online shoppers, small business owners, and content creators.
-        </p>
-        <p>
-          We recorded the conversations and later used AI tools to transcribe and analyze them. The
-          CTO and I added our own observations and combined the findings.
-        </p>
-        <p>We wanted to understand:</p>
-        <ul class="case-list">
-          <li>how small businesses created advertising content;</li>
-          <li>what problems they had with product photography;</li>
-          <li>how people shopped online;</li>
-          <li>what made them trust or distrust a seller;</li>
-          <li>how they understood AI;</li>
-          <li>what they thought about the Lakku prototype;</li>
-          <li>how they reacted to the name and visual direction.</li>
-        </ul>
-
-        <figure class="case-media case-media--research">
-          <div><img src="../assets/projects/lakku/content-03@2x.png" alt="Research participants showing products during interviews in Jakarta" loading="lazy" /></div>
-          <figcaption>Research participants showing us their products during interviews in Jakarta</figcaption>
-        </figure>
-
-        <h2>What we learned</h2>
-        <p>The interviews helped us understand several important things.</p>
-        <p>
-          Many small businesses did not have their own marketing teams. They often hired
-          photographers and models when they needed product content.
-        </p>
-        <p>
-          Most participants knew little about AI. At the same time, almost everyone knew or had used
-          Canva. This showed us that the interface had to be simple and familiar.
-        </p>
-        <p>We also learned that:</p>
-        <ul class="case-list">
-          <li>reviews with photos and videos were important;</li>
-          <li>users paid attention to price, discounts, and free delivery;</li>
-          <li>many participants wanted to start their own business;</li>
-          <li>practical rewards were more attractive than abstract points;</li>
-          <li>many shopping journeys started with search;</li>
-          <li>the name Lakku was generally understood in a positive way.</li>
-        </ul>
-
-        <figure class="case-media case-media--insights">
-          <div><img src="../assets/projects/lakku/content-04@2x.png" alt="Insights synthesized from the Jakarta interviews" loading="lazy" /></div>
-          <figcaption>Insights from the interviews</figcaption>
-        </figure>
-
-        <h2>How research influenced the product</h2>
-        <p>The research affected several product decisions.</p>
-
-        <h3>Seller catalogs</h3>
-        <p>
-          Many small businesses did not have a proper online catalog. We decided to let sellers
-          create product listings in Lakku and collect them in a public profile.
-        </p>
-        <p>
-          Sellers could share a web link to their catalog on social media. People who did not have
-          Lakku could open the catalog in a browser and see a link to download the app.
-        </p>
-        <p>
-          We also discussed adding prices and turning the catalog into a marketplace. The catalog
-          was implemented, but the full marketplace was not.
-        </p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Feed</figcaption><img src="../assets/projects/lakku/phone-04@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Product details</figcaption><img src="../assets/projects/lakku/phone-05@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Seller profile</figcaption><img src="../assets/projects/lakku/phone-06@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Seller catalog</figcaption><img src="../assets/projects/lakku/phone-07@2x.png" alt="" loading="lazy" /></figure>
+        <section class="case-section" aria-labelledby="overview-title">
+          <div class="case-layout case-layout--media-first">
+            <div class="case-copy">
+              <h2 id="overview-title">How Lakku works</h2>
+              <p>The core flow starts with a product photo. Users upload an image, choose a scene, adjust the settings and generate visuals for their ads or online listings. They can then review the results, save them or try another variation.</p>
+              <p>Image generation was the starting point. We later added video generation and other AI tools. As the product grew, new challenges emerged: making creation easier to reach, helping people choose the right tool, and explaining how styles and model choices affect video quality and cost.</p>
+            </div>
+            <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 678px; --media-canvas-height: 700px;">
+              <div class="mockup__viewport" data-fit-span="368">
+                <div class="mockup__canvas">
+                  <img src="../assets/projects/lakku/story/overview@2x.png?v=4" width="1356" height="1400" alt="The core creation flow: select a product photo, choose a scene and generate visuals" loading="lazy" />
+                  <span class="mockup__screen" style="--screen-left: 30.218964971%; --screen-top: 7.347626%; --screen-width: 42.448425%; --screen-height: 87.914690%; --screen-mask: url('../assets/projects/lakku/story/core-screen-mask.svg');" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="metadata" tabindex="-1">
+                      <source src="../assets/projects/lakku/story/lakku-core-flow.mp4" type="video/mp4" />
+                    </video>
+                  </span>
+                </div>
+              </div>
+            </figure>
           </div>
-        </figure>
+        </section>
 
-        <h3>A simpler approach to AI</h3>
-        <p>
-          The interviews confirmed that many users were not comfortable with AI tools. We needed to
-          hide unnecessary technical details and explain the process clearly.
-        </p>
-        <p>
-          The team had also considered adding tokens to the product. We decided to move this idea to
-          a later stage because cryptocurrency would add another unfamiliar concept.
-        </p>
-
-        <h3>Trust and realistic images</h3>
-        <p>
-          We treated product consistency as an important requirement for AI generation. The generated
-          image should improve the presentation without changing the real product.
-        </p>
-        <p>
-          We also discussed verifying the social media links that sellers added to their profiles.
-          This could help users avoid fake accounts.
-        </p>
-
-        <h3>Search and rewards</h3>
-        <p>
-          Because many users started shopping with search, we implemented semantic search. It could
-          find related products instead of only matching the exact words in a query.
-        </p>
-        <p>We also moved the reward concept towards discounts, promotions, and other practical benefits.</p>
-
-        <h2>The first product structure</h2>
-        <p>The first version of Lakku had two types of users.</p>
-        <p>
-          A regular user could browse the feed, save images, receive rewards, and manage a profile.
-          We also planned a Talents feature, where users could create AI avatars and allow businesses
-          to use them in advertising. This feature was not completed.
-        </p>
-        <p>A regular user could become a seller from the profile. Seller mode had a different navigation structure.</p>
-        <p>The switch was designed to feel simple, but the two roles still created two different ways to use the product.</p>
-
-        <h3>Creating a product</h3>
-        <p>Before generating advertising images, a seller had to create a product.</p>
-        <p>
-          The seller uploaded product photos, added a description, selected a category, and chose
-          whether the product should be published or hidden.
-        </p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Products</figcaption><img src="../assets/projects/lakku/phone-08@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Create new product</figcaption><img src="../assets/projects/lakku/phone-09@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Add product details</figcaption><img src="../assets/projects/lakku/phone-10@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Product created</figcaption><img src="../assets/projects/lakku/phone-11@2x.png" alt="" loading="lazy" /></figure>
+        <section id="create-menu" class="case-section" aria-labelledby="create-title">
+          <div class="case-layout case-layout--aside case-layout--compact">
+            <div class="case-copy">
+              <h2 id="create-title">Help people choose the right tool</h2>
+              <p>Users confused ready-made product scenes with prompt-based image creation. I replaced abstract illustrations with examples of each tool's output and clarified the descriptions. A first-click comparison gave an early positive signal, usage after release shifted towards Product Images.</p>
+            </div>
           </div>
-        </figure>
+          <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 1400px; --media-canvas-height: 700px;">
+            <div class="mockup__viewport" data-fit-span="630"><div class="mockup__canvas"><img src="../assets/projects/lakku/story/create-menu@2x.png?v=5" width="2800" height="1400" alt="Before and after: the Create menu replaces abstract icons with output examples and clearer tool descriptions" loading="lazy" /><span class="mockup__label" style="--media-label-left: 27.500000000%; --media-label-top: 4.428571429%; --media-label-width: 19.642857143%;" aria-hidden="true">Before</span><span class="mockup__label" style="--media-label-left: 52.857142857%; --media-label-top: 4.428571429%; --media-label-width: 19.589414324%;" aria-hidden="true">After</span></div></div>
+          </figure>
+        </section>
 
-        <h3>Generating images</h3>
-        <p>The first concept divided scenes into three groups:</p>
-        <ul class="case-list">
-          <li>Suggested scenes for the product category;</li>
-          <li>Discover for other styles and trends;</li>
-          <li>Faved for saved scenes.</li>
-        </ul>
-        <p>We later simplified this structure and showed suitable scenes together with search.</p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Product</figcaption><img src="../assets/projects/lakku/phone-12@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Choose scene</figcaption><img src="../assets/projects/lakku/phone-13@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Customize scene</figcaption><img src="../assets/projects/lakku/phone-14@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Result</figcaption><img src="../assets/projects/lakku/phone-15@2x.png" alt="" loading="lazy" /></figure>
+        <section id="video-styles" class="case-section" aria-labelledby="styles-title">
+          <div class="case-layout">
+            <div class="case-copy">
+              <h2 id="styles-title">Make video styles easy to discover</h2>
+              <p>Only 6.72% of video generations used a style. I added a clearer entry point and live previews inside the existing creation flow. In the subsequent measurement period, 16.19% used a style.</p>
+            </div>
+            <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 678px; --media-canvas-height: 700px;">
+              <div class="mockup__viewport" data-fit-span="418">
+                <div class="mockup__canvas">
+                  <img src="../assets/projects/lakku/story/video-styles@2x.png?v=4" width="1356" height="1400" alt="Video style discovery with a prominent Choose style entry point and live previews" loading="lazy" />
+                  <span class="mockup__screen" style="--screen-left: 19.174041298%; --screen-top: 11.285714%; --screen-width: 61.504425%; --screen-height: 127.428571%; --screen-radius-x: 8.406%; --screen-radius-y: 3.930%;" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="metadata" tabindex="-1">
+                      <source src="../assets/projects/lakku/story/video-styles.mp4" type="video/mp4" />
+                    </video>
+                  </span>
+                </div>
+              </div>
+            </figure>
           </div>
-        </figure>
+        </section>
 
-        <p>
-          After selecting a scene, the user could change the style, lighting, background, aspect
-          ratio, number of images, and other settings. Scenes with people also included options such
-          as gender, age, and nationality.
-        </p>
-        <p>Published images became part of the product catalog and could also appear in the public feed.</p>
-
-        <h2>Designing the MVP under time limits</h2>
-        <p>
-          Our main limitation was time. The team wanted to release a working cross-platform MVP as
-          quickly as possible. The application was built with React Native.
-        </p>
-        <p>I decided not to create a design system from the beginning. Instead, I used Google Material as the base.</p>
-        <p>
-          I kept the standard components, interaction patterns, Roboto font, and Material Icons. The
-          main visual customization was the color palette, with green as the primary color and gold
-          as the secondary color.
-        </p>
-        <p>
-          This helped me work faster and gave the developers familiar components. It also helped us
-          keep the interface consistent while the product was changing.
-        </p>
-        <p>
-          The first interface was functional, but later the team felt that it looked too neutral and
-          dry. I updated the colors, added gradients, and applied a softer gradient style to the
-          illustrations and icons.
-        </p>
-        <p>
-          We called this visual direction “Techno”. It works in both the light and dark themes. The
-          basic components, typography, and states stayed the same, so we could change the visual
-          character without rebuilding the full design system.
-        </p>
-
-        <figure class="case-media case-media--comparison">
-          <div><img src="../assets/projects/lakku/content-05@2x.png" alt="Comparison of the Material MVP and Techno interface" loading="lazy" /></div>
-          <figcaption>Material MVP vs Techno UI</figcaption>
-        </figure>
-
-        <h2>What we learned after launch</h2>
-        <p>
-          A release-ready version was completed in early spring 2025. The team originally planned a
-          larger marketing campaign, but the available budget was not enough for a safe large-scale
-          launch.
-        </p>
-        <p>
-          We released the product with more limited promotion. People started using the application,
-          and the team collected feedback through support requests, tests, surveys, Google Analytics,
-          and Grafana.
-        </p>
-        <p>
-          The team saw that the transition from a regular user to a seller was weak. Users did not
-          always understand why the application had two roles or how they could start creating
-          images. The catalog was also not used as much as expected.
-        </p>
-        <aside class="case-callout">
-          <span>We formed a hypothesis:</span>
-          <strong>The path to the main value of Lakku was too long</strong>
-        </aside>
-        <p>
-          To create one image, a user first had to understand the seller role, create a seller
-          profile, create a product, and then find the generation tool inside the product. The product
-          was asking users to understand our business model before they could try its main feature.
-        </p>
-
-        <h2>Simplifying the architecture</h2>
-        <p>The team decided to gradually remove the separate seller role and focus the product on content creation.</p>
-        <p>The old flow looked like this:</p>
-        <p>Seller profile &gt; Catalog &gt; Product &gt; Create images &gt; Drafts &gt; Publish</p>
-        <p>The new flow became:</p>
-        <p>Create &gt; Select an AI tool &gt; Generate &gt; Creations &gt; Optional post</p>
-        <p>
-          We added a central Create action to the main navigation. A user could upload a product
-          image directly, and Lakku could detect its category and suggest suitable scenes.
-        </p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>New Create menu</figcaption><img src="../assets/projects/lakku/phone-16@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Upload a product image</figcaption><img src="../assets/projects/lakku/phone-17@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Analyzing</figcaption><img src="../assets/projects/lakku/phone-18@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Choose scene</figcaption><img src="../assets/projects/lakku/phone-13@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Review creations</figcaption><img src="../assets/projects/lakku/phone-19@2x.png" alt="" loading="lazy" /></figure>
+        <section id="video-quality" class="case-section" aria-labelledby="quality-title">
+          <div class="case-layout case-layout--aside case-layout--compact">
+            <div class="case-copy">
+              <h2 id="quality-title">Explain quality and cost</h2>
+              <p>Small first-click tests revealed that people did not clearly connect video models with quality or cost.</p>
+              <p>I presented models as understandable quality options, with capability labels and credit costs. The update shipped, but its effect could not be measured before further development paused.</p>
+            </div>
           </div>
-        </figure>
+          <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 1400px; --media-canvas-height: 700px;">
+            <div class="mockup__viewport" data-fit-span="1090"><div class="mockup__canvas"><img src="../assets/projects/lakku/story/video-quality@2x.png?v=5" width="2800" height="1400" alt="Before and after: technical model names become quality options with capabilities and credit costs" loading="lazy" /><span class="mockup__label" style="--media-label-left: 22.535714286%; --media-label-top: 4.428571429%; --media-label-width: 4.142857143%;" aria-hidden="true">Before</span><span class="mockup__label" style="--media-label-left: 48.428571429%; --media-label-top: 4.428571429%; --media-label-width: 3.142857143%;" aria-hidden="true">After</span></div></div>
+          </figure>
+        </section>
 
-        <p>
-          The results were saved in a separate Creations section. Generated content stayed private
-          until the user decided to create a public post.
-        </p>
-        <p>This also separated two different user intentions:</p>
-        <ul class="case-list">
-          <li>creating and managing AI content;</li>
-          <li>publishing content for other people.</li>
-        </ul>
-        <p>
-          The new structure also made it easier to add other AI tools, such as videos, Marketplace
-          Packs, Marketing Assistant, and AI Influencer Video.
-        </p>
-
-        <h2>Growing into a marketing toolkit</h2>
-        <p>
-          Once content creation was no longer tied to a seller profile or product catalog, we could
-          organize Lakku around specific marketing tasks.
-        </p>
-        <p>
-          The central Create screen became an entry point to a growing set of AI tools. Some tools
-          generated content directly, while others helped users prepare their products for promotion
-          and online sales.
-        </p>
-
-        <h3>Marketing assistant</h3>
-        <p>
-          Marketing Assistant analyzes a product photo and scores its product clarity, visual appeal,
-          composition, attention hook, and promotion readiness.
-        </p>
-        <p>
-          It explains what could be improved, recommends suitable marketing channels, and helps the
-          user generate a stronger promotional image.
-        </p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Start an analysis</figcaption><img src="../assets/projects/lakku/phone-20@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Upload a product image</figcaption><img src="../assets/projects/lakku/phone-21@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Review the readiness score</figcaption><img src="../assets/projects/lakku/phone-22@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>See improvement suggestions</figcaption><img src="../assets/projects/lakku/phone-23@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Compare generated results</figcaption><img src="../assets/projects/lakku/phone-24@2x.png" alt="" loading="lazy" /></figure>
+        <section id="marketing" class="case-section case-section--gallery" aria-labelledby="marketing-title">
+          <div class="case-layout case-layout--media-first">
+            <div class="case-copy">
+              <h2 id="marketing-title">From generation to marketing</h2>
+              <p>Adding video expanded Lakku’s capabilities, but image and video generation alone were not enough to stand out among competing AI tools. The team decided to focus more closely on the marketing tasks of small businesses.</p>
+              <p>My task was to translate this direction into practical product flows. I designed tools for evaluating product photos, preparing marketplace content and creating AI influencer ads — helping sellers move from generating visuals to preparing materials for promotion.</p>
+            </div>
+            <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 678px; --media-canvas-height: 700px;">
+              <div class="mockup__viewport" data-fit-span="290">
+                <div class="mockup__canvas">
+                  <img src="../assets/projects/lakku/story/marketing-tools@2x.png?v=4" width="1356" height="1400" alt="The expanded Create menu offers Product images, Video, Marketplace pack and AI influencer video" loading="lazy" />
+                  <span class="mockup__screen" style="--screen-left: 28.613569%; --screen-top: 8.428571%; --screen-width: 42.772861%; --screen-height: 83.142857%; --screen-radius-x: 8.275862%; --screen-radius-y: 4.123711%;" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="metadata" tabindex="-1">
+                      <source src="../assets/projects/lakku/story/marketplace-pack.mp4" type="video/mp4" />
+                    </video>
+                  </span>
+                </div>
+              </div>
+            </figure>
           </div>
-        </figure>
-
-        <h3>Marketplace pack</h3>
-        <p>
-          Marketplace Pack turns one product photo into a set of materials for online selling. It
-          generates cover images, styled product images, image ads, an SEO title, and descriptions
-          adapted for marketplaces such as Tokopedia and Shopee.
-        </p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Start a marketplace pack</figcaption><img src="../assets/projects/lakku/phone-25@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Upload a product image</figcaption><img src="../assets/projects/lakku/phone-26@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Review product details</figcaption><img src="../assets/projects/lakku/phone-27@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Review generated images</figcaption><img src="../assets/projects/lakku/phone-28@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Copy marketplace content</figcaption><img src="../assets/projects/lakku/phone-29@2x.png" alt="" loading="lazy" /></figure>
+          <div class="case-layout">
+            <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 678px; --media-canvas-height: 700px;">
+              <div class="mockup__viewport" data-fit-span="360"><div class="mockup__canvas"><img src="../assets/projects/lakku/story/ai-influencer@2x.png?v=4" width="1356" height="1400" alt="AI influencer selection with character previews and filters" loading="lazy" /></div></div>
+            </figure>
+            <figure class="case-media mockup" data-figma-component="1330:5756" style="--media-canvas-width: 678px; --media-canvas-height: 700px;">
+              <div class="mockup__viewport" data-fit-span="380"><div class="mockup__canvas"><img src="../assets/projects/lakku/story/photo-readiness@2x.png?v=4" width="1356" height="1400" alt="Readiness score for a product photo, with ratings for product clarity, visual appeal, composition, attention hook and promotion readiness" loading="lazy" /></div></div>
+            </figure>
           </div>
-        </figure>
-
-        <h3>AI influencer video</h3>
-        <p>
-          AI Influencer Video helps a business create a creator-style advertisement without hiring
-          an actor or recording a studio video.
-        </p>
-        <p>
-          The user adds a product, selects an AI influencer, reviews the generated script and closing
-          text, and creates a short promotional video.
-        </p>
-
-        <figure class="case-mockups case-mockups--strip">
-          <div class="case-mockups__track">
-            <figure class="screen-mockup"><figcaption>Add product details</figcaption><img src="../assets/projects/lakku/phone-30@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Select an AI influencer</figcaption><img src="../assets/projects/lakku/phone-31@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Set up the video</figcaption><img src="../assets/projects/lakku/phone-32@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Review the script</figcaption><img src="../assets/projects/lakku/phone-33@2x.png" alt="" loading="lazy" /></figure>
-            <figure class="screen-mockup"><figcaption>Watch the generated video</figcaption><img src="../assets/projects/lakku/phone-34@2x.png" alt="" loading="lazy" /></figure>
-          </div>
-        </figure>
-
-        <h2 data-analytics="case-outcome">Outcome</h2>
-        <p>Lakku moved from a basic technical prototype to a released product with real users and active subscriptions.</p>
-        <p>
-          The team tested different monetization approaches. At first, users could buy fixed credit
-          packages. Later, the product moved towards a subscription model.
-        </p>
-        <p>
-          The product is still running, but active development and marketing are currently paused.
-          The reasons for the limited growth are not fully clear. Price, market choice, positioning,
-          acquisition costs, and product complexity are possible explanations, but we did not
-          complete enough research to confirm one main reason.
-        </p>
-        <p>
-          For this reason, I do not present Lakku as a simple success story. It was a long product
-          process with research, difficult decisions, unsuccessful assumptions, and several major changes.
-        </p>
-
-        <h2>Visit Lakku</h2>
-        <p><a class="case-external-link" href="https://lakku.ai" target="_blank" rel="noreferrer">Visit Lakku.ai</a></p>
+        </section>
       </article>
 
       <nav class="case-projects" aria-label="Adjacent projects" hidden></nav>
@@ -594,6 +228,7 @@
     <script src="../navigation.js"></script>
     <script src="../case-projects.js?v=2"></script>
     <script src="../mockup-presentation.js?v=2"></script>
+    <script src="../mockup.js?v=1"></script>
     <script src="../media-viewer.js?v=6"></script>
   </body>
 </html>
