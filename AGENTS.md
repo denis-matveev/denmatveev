@@ -18,6 +18,7 @@
 - The `Callout` label uses the 16px/23px semibold body style with `text/accent`; its body uses the 24px/28px regular button style with `text/primary`.
 - When the shared `Factoid` component's font sizes decrease, decrease each text style's line-height proportionally, preserving its desktop Figma ratio. Use unitless line-height rather than fixed pixel line-height overrides on mobile.
 - Scale the `Factoid` component's internal label/value gap with the label font size using `em` units. Keep spacing between separate factoids outside this internal component rule.
+- The shared `Factoid` component (Figma `256:132`) uses `space/4` between label and value at its native 20px label size: `0.2em`, scaling to 3.2px with a 16px mobile label.
 
 # Case-study analytics rules
 

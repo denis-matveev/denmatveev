@@ -20,7 +20,8 @@ The implementation uses plain HTML and shared CSS layouts in
   Header typography continues to use the shared Karla and Climate Crisis tokens.
 - Header Factoid line-height and internal label/value spacing scale with the
   corresponding font sizes. Unitless line-height retains the desktop ratios;
-  the internal gap is 0.4em of the label size (8px desktop, 6.4px mobile).
+  the internal gap follows Figma Factoid 256:132's `space/4`: 0.2em of the label
+  size (4px desktop, 3.2px mobile).
 - `size/max-content-text` (760px) remains separate from the image-led page width.
   Existing prose-based cases, About, and adjacent-project controls use this token.
 
