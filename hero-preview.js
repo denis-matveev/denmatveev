@@ -55,6 +55,14 @@
 
     switcher.addEventListener('click', function () {
       requestedTheme = requestedTheme === 'light' ? 'dark' : 'light';
+      if (typeof window.trackEvent === 'function') {
+        window.trackEvent('hero_theme_toggle', {
+          page_path: window.location.pathname,
+          page_title: document.title,
+          section_name: 'hero',
+          theme: requestedTheme
+        });
+      }
       selectTheme(requestedTheme);
     });
     switcher.hidden = false;
