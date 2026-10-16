@@ -10,9 +10,24 @@ All composed Figma artwork is flattened at 2× in `assets/projects/crosscom/stor
 Mockup backgrounds are transparent so the shared theme controls their surface.
 The comparison's Before/After captions are HTML on the original Figma canvas.
 
+## Hero theme preview
+
+The Hero image has an independent light/dark selector implemented by
+`hero-preview.js` and `styles/hero-preview.css`. The dark reference is
+[Figma 1392:132213](https://www.figma.com/design/EMlp0khGCyR9K2I8mvk0Ay/Official-Portfolio?node-id=1392-132213).
+Both flattened 2× images omit the baked selector; one accessible switch with 44px icon regions reproduces
+Figma's 96 × 52 selector with the original 24px sun and moon icons. Clicking
+anywhere on the pill toggles the theme; Enter and Space work as well. The alternate
+image is preloaded, and a failed load preserves the visible artwork. Selection
+changes only this image and its controls, without writing the page theme or
+local storage. The shared mobile viewer reads the image's current source so it
+opens the selected version.
+The Hero image scales at its full 2:1 aspect ratio, filling the panel in both
+themes; its switch remains a 96 × 52px touch target at small viewport widths.
+
 | Media | Native canvas | Protected span | Source instance suffix |
 | --- | --- | --- | --- |
-| Hero | 1400 × 700 | 1328 | 1306:72701 |
+| Hero | 1400 × 700 | Full image | 1306:72701 |
 | Before/after | 1400 × 700 | 1340 | 1351:54122 |
 | Core flow | 1400 × 780 | 984 | 1356:92595 |
 | AI help | 678 × 700 | 592 | 1377:49720 |

@@ -14,7 +14,6 @@
 
     return {
       image: image,
-      src: image.currentSrc || image.src,
       alt: image.alt,
       caption: caption ? caption.textContent.trim() : image.alt,
     };
@@ -33,7 +32,6 @@
 
       return {
         image: image,
-        src: image.currentSrc || image.src,
         alt: image.alt || label,
         caption: label,
       };
@@ -170,7 +168,8 @@
   function showImage(index) {
     currentIndex = clamp(index, 0, viewerItems.length - 1);
     resetImage();
-    viewerImage.src = viewerItems[currentIndex].src;
+    // Hero artwork can change after the viewer's image sequence is created.
+    viewerImage.src = viewerItems[currentIndex].image.currentSrc || viewerItems[currentIndex].image.src;
     viewerImage.alt = viewerItems[currentIndex].alt;
     caption.textContent = viewerItems[currentIndex].caption;
     position.textContent = currentIndex + 1 + ' / ' + viewerItems.length;

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../styles/case-study.css?v=30" />
     <link rel="stylesheet" href="../styles/case-editorial.css?v=4" />
     <link rel="stylesheet" href="../styles/mockup.css?v=2" />
+    <link rel="stylesheet" href="../styles/hero-preview.css?v=2" />
     <script src="../theme.js"></script>
     <script type="text/javascript">
       (function(c, l, a, r, i, t, y) {
@@ -93,12 +94,21 @@
             <div><dt>Team</dt><dd>4 people</dd></div>
           </dl>
         </div>
-        <figure class="case-media case-media--panel case-media--fit" style="--media-canvas-width: 1400px; --media-canvas-height: 700px;">
-          <div class="case-media__fit" data-fit-span="1328">
+        <figure class="case-media case-media--panel case-media--fit hero-preview" data-hero-preview data-hero-theme="light" data-light-src="../assets/projects/crosscom/story/hero@2x.png?v=3" data-dark-src="../assets/projects/crosscom/story/hero-dark@2x.png" style="--media-canvas-width: 1400px; --media-canvas-height: 700px;">
+          <div class="case-media__fit">
             <div class="case-media__canvas">
-              <img src="../assets/projects/crosscom/story/hero@2x.png" width="2800" height="1400" alt="CrossCom’s redesigned feed on a MacBook and iPhone" fetchpriority="high" />
+              <img id="crosscom-hero-image" data-hero-image src="../assets/projects/crosscom/story/hero@2x.png?v=3" width="2800" height="1400" alt="CrossCom’s redesigned feed on a MacBook and iPhone" fetchpriority="high" />
             </div>
           </div>
+          <button class="hero-preview__switcher" type="button" role="switch" aria-label="Dark hero preview" aria-checked="false" aria-controls="crosscom-hero-image" hidden>
+            <span class="hero-preview__option hero-preview__option--light" aria-hidden="true">
+              <span class="hero-preview__icon hero-preview__icon--sun"></span>
+            </span>
+            <span class="hero-preview__option hero-preview__option--dark" aria-hidden="true">
+              <span class="hero-preview__icon hero-preview__icon--moon"></span>
+            </span>
+          </button>
+          <p class="hero-preview__status" role="status" aria-live="polite"></p>
         </figure>
       </header>
 
@@ -279,6 +289,7 @@
     <script src="../case-projects.js?v=2"></script>
     <script src="../mockup-presentation.js?v=2"></script>
     <script src="../mockup.js?v=1"></script>
-    <script src="../media-viewer.js?v=6"></script>
+    <script src="../hero-preview.js?v=2"></script>
+    <script src="../media-viewer.js?v=7"></script>
   </body>
 </html>

@@ -1,0 +1,91 @@
+/* Local theme selection for a case-study Hero image. */
+.hero-preview {
+  --hero-preview-selected-surface: var(--color-primitives-neutral-0);
+  --hero-preview-icon: var(--color-primitives-neutral-200);
+  --hero-preview-selected-icon: var(--color-primitives-neutral-300);
+
+  position: relative;
+}
+
+.hero-preview[data-hero-theme="dark"] {
+  --hero-preview-selected-surface: var(--color-primitives-beige-900);
+  --hero-preview-icon: var(--color-primitives-neutral-50);
+  --hero-preview-selected-icon: var(--color-primitives-neutral-0);
+}
+
+.hero-preview > .hero-preview__switcher {
+  position: absolute;
+  top: var(--sizes-space-24);
+  right: var(--sizes-space-24);
+  display: flex;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  padding: var(--sizes-space-4);
+  border-radius: var(--sizes-radius-pill);
+  background: rgb(255 255 255 / 50%);
+}
+
+.hero-preview > .hero-preview__switcher[hidden] {
+  display: none;
+}
+
+.hero-preview__option {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: var(--sizes-radius-pill);
+  background: transparent;
+  color: var(--hero-preview-icon);
+}
+
+.hero-preview[data-hero-theme="light"] .hero-preview__option--light,
+.hero-preview[data-hero-theme="dark"] .hero-preview__option--dark {
+  background: var(--hero-preview-selected-surface);
+  color: var(--hero-preview-selected-icon);
+}
+
+.hero-preview__switcher:hover {
+  opacity: 0.85;
+}
+
+.hero-preview__switcher:focus-visible {
+  outline: 2px solid var(--hero-preview-selected-icon);
+  outline-offset: 2px;
+}
+
+.hero-preview__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: currentColor;
+  -webkit-mask: var(--hero-preview-icon-asset) center / 24px 24px no-repeat;
+  mask: var(--hero-preview-icon-asset) center / 24px 24px no-repeat;
+}
+
+.hero-preview__icon--sun {
+  --hero-preview-icon-asset: url("../assets/icons/untitled-ui/sun.svg");
+}
+
+.hero-preview__icon--moon {
+  --hero-preview-icon-asset: url("../assets/icons/untitled-ui/moon.svg");
+}
+
+.hero-preview__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .hero-preview > .hero-preview__switcher {
+    top: var(--sizes-space-12);
+    right: var(--sizes-space-12);
+  }
+}
