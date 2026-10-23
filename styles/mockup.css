@@ -84,6 +84,17 @@
   pointer-events: none;
 }
 
+/* iHairium’s exported mockups contain a legacy raster copy of each label. */
+.case-page--ihairium .mockup__label {
+  box-sizing: border-box;
+  display: grid;
+  min-height: 28px;
+  padding: 2px var(--sizes-space-4);
+  place-items: center;
+  z-index: 1;
+  background: var(--color-semantics-bg-container-shallow);
+}
+
 .mockup__screen {
   position: absolute;
   left: var(--screen-left);
