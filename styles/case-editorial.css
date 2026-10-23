@@ -73,7 +73,7 @@
 .case-editorial-content {
   display: flex;
   flex-direction: column;
-  gap: var(--sizes-space-16);
+  gap: var(--sizes-space-0);
 }
 
 .case-section {
